@@ -8,7 +8,7 @@ const year = new Date().getFullYear();
     <div class="brand">
       <Wordmark tone="light" />
       <p class="tag">{site.tagline}</p>
-      <p class="about">A hands-on marketing agency based in {site.city}, {site.regionName}, serving {site.serviceArea}. Remote work available where it makes sense.</p>
+      <p class="about">A local digital marketing agency based in {site.city}, {site.regionName}, specializing in digital advertising and social media content for businesses in {site.serviceArea}.</p>
       <a class="btn btn-primary" href="/contact" data-track="cta_footer">{cta.primary}</a>
     </div>
 
@@ -16,7 +16,6 @@ const year = new Date().getFullYear();
       <h2 class="col-title">Services</h2>
       <ul>
         {services.map((s) => <li><a href={`/services#${s.id}`}>{s.name}</a></li>)}
-        <li><a href="/real-estate-marketing">Real estate marketing</a></li>
       </ul>
     </nav>
 

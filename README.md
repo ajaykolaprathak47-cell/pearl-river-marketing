@@ -1,14 +1,14 @@
 # Pearl River Marketing website
 
-Marketing site for Pearl River Marketing (Picayune, MS). Built with [Astro](https://astro.build): every page is static HTML, and one serverless function (`/api/consultation`) handles the consultation form on Vercel.
+Marketing site for Pearl River Marketing (Picayune, MS), a digital marketing agency with exactly two services: digital advertising (Facebook & Instagram) and social media content creation & posting. Built with [Astro](https://astro.build): every page is static HTML, and one serverless function (`/api/consultation`) handles the consultation form on Vercel.
 
 ## Pages
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Home: what/who/where hero, problems, audiences, services, why us, 3 steps, demo plan, FAQ |
-| `/services` | Per service: the problem, what's included, who it's for, how it works, what we need, quote button |
-| `/real-estate-marketing` | Agents vs brokerages, listing plan (demo), Fair Housing and housing-ad rules |
+| `/` | Home: hero, problems, the two services, who we help, why us, 3 steps, demo plan, FAQ |
+| `/services` | The two core services (Digital Advertising; Social Media Content Creation & Posting): problem, what's included, who it's for, how it works, what we need, notes, quote button |
+| `/real-estate-marketing` | An example of how the two services work for real estate agents (not a separate service), demo listing plan, Fair Housing rules |
 | `/about` | Owner card (fills in from `owner` in `site.ts`) and how we work |
 | `/contact` | Consultation form: validation, spam protection, duplicate-send protection, success and error states |
 | `/privacy`, `/terms` | **Drafts**, marked noindex and left out of the sitemap until reviewed |
@@ -36,7 +36,7 @@ All business details live in `src/data/site.ts`. Only verified facts go there; `
 - `owner`: name, photo, bio for the About page
 - `site.sameAs`: social profile URLs
 - `cta`: button wording, changed once for the whole site
-- `services[].status`: set `'limited'` on anything you aren't ready to take on
+- `services`: the two core services. Their ids also drive the contact form options (see `SERVICE_OPTIONS` in `src/lib/consultation.ts`; a test checks the two stay in sync)
 
 Never add a street address, hours, ratings or coordinates unless they are real.
 

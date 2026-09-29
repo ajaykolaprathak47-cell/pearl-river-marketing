@@ -5,13 +5,13 @@ import { SERVICE_OPTIONS, LIMITS } from '../lib/consultation';
 import { site, cta } from '../data/site';
 ---
 <Base
-  title="Get a Free Consultation in Picayune, MS"
-  description={`Request a free consultation or website quote from ${site.name} in Picayune, MS. Tell us about your business, or call or text ${site.phone.display}.`}
+  title="Get a Free Marketing Consultation"
+  description={`Request a free marketing consultation or an advertising or social media quote from ${site.name} in Picayune, MS. Or call or text ${site.phone.display}.`}
 >
   <PageHero
     eyebrow="Contact"
-    title="Get a free consultation."
-    lede="Tell us about your business and what you need, whether that's a new website, more calls from ads, or both. We'll review it and reach out to set up a short conversation. No cost, no obligation."
+    title="Get a free marketing consultation."
+    lede="Tell us about your business and whether you're interested in advertising, social media content or both. We'll review it and reach out to set up a short conversation, or send a quote if you already know what you need. No cost, no obligation."
     showCta={false}
   >
     <p class="hero-phone">Prefer to talk? Call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
@@ -48,8 +48,8 @@ import { site, cta } from '../data/site';
               <p class="field-error" id="business-error"></p>
             </div>
             <div class="field">
-              <label for="website">Current website <span class="optional">(optional)</span></label>
-              <input id="website" name="website" type="text" autocomplete="url" inputmode="url" placeholder="yourbusiness.com" maxlength={LIMITS.website} aria-describedby="website-error" />
+              <label for="website">Website or Facebook page <span class="optional">(optional)</span></label>
+              <input id="website" name="website" type="text" autocomplete="url" inputmode="url" placeholder="facebook.com/yourbusiness" maxlength={LIMITS.website} aria-describedby="website-error" />
               <p class="field-error" id="website-error"></p>
             </div>
           </div>
@@ -124,7 +124,7 @@ import { site, cta } from '../data/site';
         <div class="next">
           <h2 class="side-title">What happens next</h2>
           <ol>
-            <li>We read your request and look at your current website, listings and local competition.</li>
+            <li>We read your request and look at your current Facebook and Instagram pages and your local competition.</li>
             <li>We reach out to set up a short call at a time that works for you.</li>
             <li>We give you an honest recommendation. If it's a fit, you get a written quote before any work starts.</li>
           </ol>
@@ -163,7 +163,7 @@ import { site, cta } from '../data/site';
   .hint { font-size: .87rem; color: var(--ink-soft); }
   .field-error { font-size: .9rem; color: var(--err); font-weight: 550; }
   .field-error:empty { display: none; }
-  .checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25rem 1rem; }
+  .checks { display: grid; grid-template-columns: 1fr; gap: .25rem; }
   .check { display: flex; gap: .65rem; align-items: flex-start; font-weight: 450; cursor: pointer; line-height: 1.4; padding-block: .45rem; }
   .check input { width: 1.25rem; height: 1.25rem; margin: 0; accent-color: var(--navy-800); flex: none; }
   .consent { font-size: .95rem; }
@@ -184,7 +184,7 @@ import { site, cta } from '../data/site';
   .status--success h2 { font-size: 1.6rem; color: var(--ok); }
 
   @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } .side { position: static; } }
-  @media (max-width: 600px) { .row, .checks { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { .row { grid-template-columns: 1fr; } }
 </style>
 
 <script>
@@ -202,7 +202,7 @@ import { site, cta } from '../data/site';
         ? crypto.randomUUID()
         : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}-${Math.random().toString(36).slice(2)}`;
 
-    // Preselect a service when arriving from a "Request a quote" link.
+    // Preselect a service when arriving from a service's quote link.
     const pre = new URLSearchParams(location.search).get('service');
     if (pre) {
       const box = form.querySelector<HTMLInputElement>(`input[name="services"][value="${CSS.escape(pre)}"]`);
@@ -215,7 +215,7 @@ import { site, cta } from '../data/site';
     const live = document.getElementById('form-live')!;
     const btn = document.getElementById('submit-btn') as HTMLButtonElement;
     const btnLabel = btn.querySelector('.btn-label')!;
-    const fieldIds: Record<string, string> = { services: 'svc-websites' };
+    const fieldIds: Record<string, string> = { services: 'svc-advertising' };
     let inFlight = false;
     let sent = false;
 

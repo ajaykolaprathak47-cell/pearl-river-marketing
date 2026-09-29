@@ -16,14 +16,14 @@ const personSchema = owner.name
   : [];
 ---
 <Base
-  title="About Pearl River Marketing | Local Marketing in Picayune, MS"
-  description="Pearl River Marketing is a locally owned, hands-on marketing agency in Picayune, Mississippi, helping small businesses and real estate professionals in Pearl River County and South Mississippi."
+  title="About Pearl River Marketing | Picayune, MS"
+  description="Pearl River Marketing is a locally owned digital marketing agency in Picayune, Mississippi, specializing in Facebook and Instagram advertising and social media content for small businesses."
   schema={personSchema}
 >
   <PageHero
     eyebrow="About"
-    title="A hands-on marketing partner, based in Picayune."
-    lede="Pearl River Marketing is a new, locally owned agency. We help small businesses and real estate professionals in Pearl River County and South Mississippi get found, look credible online, and see clearly what their marketing is doing."
+    title="A local digital marketing partner, based in Picayune."
+    lede="Pearl River Marketing is a new, locally owned agency that does two things: digital advertising and social media content. We help small businesses in Pearl River County and South Mississippi get noticed and stay visible online."
     showCta={false}
   />
 
@@ -34,15 +34,15 @@ const personSchema = owner.name
 
         <div class="prose">
           <h2>Why Pearl River Marketing</h2>
-          <p>A lot of local businesses have paid for a website or ads and come away unsure whether it worked. Reports are full of jargon, accounts are owned by someone else, and nobody explains what the money actually bought.</p>
-          <p>Pearl River Marketing was started to do this differently for businesses close to home: set things up properly, keep it simple, and be straight about what is working and what isn't.</p>
+          <p>Most local business owners know social media matters. The hard part is finding time to post consistently, and knowing whether money spent on "boosted" posts actually did anything.</p>
+          <p>Pearl River Marketing was started to take that off their plate for businesses close to home. We focus on just two services, advertising and social media content, so we can do them well, keep things simple, and be straight about what's working and what isn't.</p>
 
           <h2>How we work</h2>
           <ul>
             <li><strong>Clear communication.</strong> Answers in plain English, from the person doing the work.</li>
-            <li><strong>Transparent reporting.</strong> For ongoing work, a monthly summary of what was spent, what came in, and what we're changing.</li>
-            <li><strong>Practical systems.</strong> Websites, tracking and lead routing your team can actually use.</li>
-            <li><strong>Your accounts, your data.</strong> Your domain, website and ad accounts are set up in your business's name.</li>
+            <li><strong>You approve everything.</strong> No ad or post goes out on your pages without your OK.</li>
+            <li><strong>Transparent reporting.</strong> Clear reports on what was spent, what the ads did, and what we're changing.</li>
+            <li><strong>Your accounts, your content.</strong> Your pages and ad account stay in your business's name.</li>
             <li><strong>Honest recommendations.</strong> If something isn't worth your money yet, we'll say so.</li>
           </ul>
 
@@ -56,8 +56,8 @@ const personSchema = owner.name
         <dl>
           <div><dt>Based in</dt><dd>{site.city}, {site.regionName}</dd></div>
           <div><dt>Service area</dt><dd>{site.serviceArea}; remote work available</dd></div>
-          <div><dt>Services</dt><dd>Website design, Google Ads, Facebook & Instagram ads, Google Business Profile, landing pages, tracking & reporting</dd></div>
-          <div><dt>Who we serve</dt><dd>Contractors and home-service businesses, real estate agents and brokerages, local small businesses</dd></div>
+          <div><dt>Services</dt><dd>Digital advertising (Facebook & Instagram) and social media content creation & posting</dd></div>
+          <div><dt>Who we serve</dt><dd>Contractors and home-service businesses, real estate agents, and other local small businesses</dd></div>
           <div><dt>Phone</dt><dd><a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></dd></div>
           {site.email && <div><dt>Email</dt><dd><a href={`mailto:${site.email}`} data-track="email_click">{site.email}</a></dd></div>}
         </dl>
@@ -65,7 +65,7 @@ const personSchema = owner.name
     </div>
   </section>
 
-  <CtaBand track="cta_about_final" showWebsiteQuote />
+  <CtaBand track="cta_about_final" showQuote />
 </Base>
 
 <style>

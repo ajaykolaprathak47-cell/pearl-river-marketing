@@ -5,13 +5,8 @@
  */
 
 export const SERVICE_OPTIONS = [
-  { value: 'websites', label: 'Website design' },
-  { value: 'google-ads', label: 'Google Ads' },
-  { value: 'meta-ads', label: 'Facebook & Instagram ads' },
-  { value: 'landing-pages', label: 'Landing pages & lead generation' },
-  { value: 'local-seo', label: 'Local SEO & Google Business Profile' },
-  { value: 'reporting', label: 'Tracking & reporting' },
-  { value: 'real-estate', label: 'Real estate marketing' },
+  { value: 'advertising', label: 'Digital Advertising (Facebook & Instagram ads)' },
+  { value: 'social-media', label: 'Social Media Content Creation & Posting' },
   { value: 'not-sure', label: 'Not sure yet' },
 ] as const;
 
@@ -92,7 +87,7 @@ export function validate(input: ConsultationInput): FieldErrors {
 
   if (input.website) {
     if (input.website.length > LIMITS.website) e.website = 'Website address is too long.';
-    else if (!/^(https?:\/\/)?[^\s./]+(\.[^\s./]+)*\.[a-z]{2,}(\/\S*)?$/i.test(input.website)) e.website = 'Enter a valid website, like yourbusiness.com, or leave it blank.';
+    else if (!/^(https?:\/\/)?[^\s./]+(\.[^\s./]+)*\.[a-z]{2,}(\/\S*)?$/i.test(input.website)) e.website = 'Enter a valid web address, like facebook.com/yourbusiness, or leave it blank.';
   }
 
   if (input.services.length === 0) e.services = 'Choose at least one option. "Not sure yet" is fine.';

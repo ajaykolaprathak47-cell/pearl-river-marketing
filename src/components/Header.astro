@@ -19,7 +19,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + '/')
 
     <div class="actions">
       <a class="phone" href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a>
-      <a class="btn btn-primary cta" href="/contact" data-track="cta_header">{cta.primary}</a>
+      <a class="btn btn-primary cta" href="/contact" data-track="cta_header" aria-label={cta.primary}><span class="cta-full" aria-hidden="true">{cta.primary}</span><span class="cta-short" aria-hidden="true">{cta.short}</span></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
         <span class="visually-hidden">Open menu</span>
         <span class="bars" aria-hidden="true"></span>
@@ -63,6 +63,9 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + '/')
   .actions { display: flex; align-items: center; gap: 1rem; }
   .phone { font-weight: 600; font-size: .95rem; text-decoration: none; color: var(--navy-800); white-space: nowrap; font-variant-numeric: tabular-nums; }
   .cta { min-height: 2.75rem; padding: .6rem 1.1rem; font-size: .95rem; }
+  .cta { white-space: nowrap; }
+  .cta-short { display: none; }
+  @media (max-width: 1180px) { .cta-full { display: none; } .cta-short { display: inline; } }
 
   .menu-toggle {
     display: none; width: 2.75rem; height: 2.75rem; border: 1px solid var(--line); border-radius: var(--radius);

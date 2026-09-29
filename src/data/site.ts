@@ -9,7 +9,7 @@ export const site = {
   name: 'Pearl River Marketing',
   tagline: 'Turn Attention Into Growth.',
   description:
-    'Pearl River Marketing is a hands-on marketing agency in Picayune, Mississippi. We build websites, run Google and Facebook ads, and set up local search for small businesses and real estate professionals in Pearl River County and South Mississippi.',
+    'Pearl River Marketing is a local digital marketing agency in Picayune, Mississippi. We run Facebook and Instagram advertising and create and post social media content for small businesses in Pearl River County and South Mississippi.',
   city: 'Picayune',
   county: 'Pearl River County',
   region: 'MS',
@@ -29,7 +29,8 @@ export const site = {
   // Leave null unless you want a public street address. Never invent one.
   streetAddress: null as string | null,
 
-  // TO SUPPLY (optional): social profiles, e.g. 'https://www.facebook.com/...'
+  // TO SUPPLY (optional): your own Facebook and Instagram pages,
+  // e.g. 'https://www.facebook.com/...'. Recommended for a social media agency.
   sameAs: [] as string[],
 };
 
@@ -50,8 +51,9 @@ export const owner = {
 
 /** Calls to action. Change the wording here and it updates everywhere. */
 export const cta = {
-  primary: 'Get a Free Consultation',
-  website: 'Request a Website Quote',
+  primary: 'Get a Free Marketing Consultation',
+  short: 'Free Consultation',
+  quote: 'Request a Quote',
 } as const;
 
 export type ServiceStatus = 'available' | 'limited';
@@ -59,58 +61,44 @@ export type ServiceStatus = 'available' | 'limited';
 export interface Service {
   id: string;
   name: string;
+  /** One-line summary for cards. */
   short: string;
+  /** Short list for home page cards. */
+  highlights: string[];
   status: ServiceStatus;
   ctaLabel: string;
 }
 
 /**
- * Services shown on the home page, services page, footer and contact form.
- * Set `status: 'limited'` on anything you are not ready to take on yet; it will
- * show a "Limited availability" badge instead of being presented as fully open.
+ * The agency's two core services. These drive the home page, services page,
+ * footer, structured data and the contact form's options.
  */
 export const services: Service[] = [
   {
-    id: 'websites',
-    name: 'Website design',
-    short: 'Clear, fast, mobile-friendly websites that make it easy for customers to call you or request a quote.',
+    id: 'advertising',
+    name: 'Digital Advertising',
+    short: 'Facebook and Instagram ad campaigns that put your business in front of potential customers in your area.',
+    highlights: [
+      'Campaign setup and audience targeting',
+      'Ad images, graphics and copy',
+      'Ongoing monitoring and optimization',
+      'Plain-English performance reports',
+    ],
     status: 'available',
-    ctaLabel: cta.website,
+    ctaLabel: 'Request an Advertising Quote',
   },
   {
-    id: 'google-ads',
-    name: 'Google Ads management',
-    short: 'Search ads that put you in front of local people already looking for what you do.',
+    id: 'social-media',
+    name: 'Social Media Content Creation & Posting',
+    short: 'Professional posts, created and published on a consistent schedule, so your business stays visible on Facebook and Instagram.',
+    highlights: [
+      'Branded graphics and captions',
+      'Promotional posts for services and offers',
+      'A monthly content calendar',
+      'Scheduling and publishing approved posts',
+    ],
     status: 'available',
-    ctaLabel: cta.primary,
-  },
-  {
-    id: 'meta-ads',
-    name: 'Facebook & Instagram ads',
-    short: 'Ads and creative that reach people in your area while they scroll, for offers, seasons and listings.',
-    status: 'available',
-    ctaLabel: cta.primary,
-  },
-  {
-    id: 'local-seo',
-    name: 'Local SEO & Google Business Profile',
-    short: 'Profile setup and cleanup so you show up correctly in Google Maps and local searches.',
-    status: 'available',
-    ctaLabel: cta.primary,
-  },
-  {
-    id: 'landing-pages',
-    name: 'Landing pages & lead capture',
-    short: 'Focused pages built for one offer, with forms and click-to-call, so ad clicks turn into inquiries.',
-    status: 'available',
-    ctaLabel: cta.primary,
-  },
-  {
-    id: 'reporting',
-    name: 'Tracking & reporting',
-    short: 'Call and form tracking, plus a plain-English monthly report on what your marketing produced.',
-    status: 'available',
-    ctaLabel: cta.primary,
+    ctaLabel: 'Request a Social Media Quote',
   },
 ];
 
@@ -121,7 +109,7 @@ export const statusLabel: Record<ServiceStatus, string> = {
 
 export const nav = [
   { href: '/services', label: 'Services' },
-  { href: '/real-estate-marketing', label: 'Real Estate' },
+  { href: '/real-estate-marketing', label: 'For Real Estate' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ];

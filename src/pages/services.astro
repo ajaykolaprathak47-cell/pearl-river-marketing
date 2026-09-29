@@ -18,14 +18,14 @@ const serviceSchema = serviceDetails.map((s) => ({
 }));
 ---
 <Base
-  title="Website Design, Ads & Local SEO in Picayune, MS"
-  description="Website design, Google Ads, Facebook and Instagram ads, Google Business Profile, landing pages and reporting for small businesses in Picayune, Pearl River County and South Mississippi."
+  title="Advertising & Social Media Services"
+  description="Two services for local businesses in Picayune and South Mississippi: Facebook and Instagram advertising, and social media content creation and posting."
   schema={serviceSchema}
 >
   <PageHero
     eyebrow="Services"
-    title="Practical marketing for local businesses."
-    lede="A website that earns trust, ads that reach people nearby, and tracking that shows what came in. Each service below explains the problem it solves, what's included, who it's for, and how to request a quote."
+    title="Two services. Both built to get your business noticed."
+    lede="We specialize in digital advertising and social media content for local businesses. Below you'll find what each service includes, who it's for, how it works and how to request a quote."
     track="cta_services_hero"
   />
 
@@ -37,7 +37,7 @@ const serviceSchema = serviceDetails.map((s) => ({
 
   <section class="container expectations">
     <div class="notice">
-      <strong>About results:</strong> we don't guarantee leads, sales, rankings or return on ad spend. Results depend on your market, offer, budget, competition and how quickly new inquiries are followed up. We'll tell you plainly what we think is realistic before you spend anything.
+      <strong>Our focus:</strong> we offer these two services only. We don't offer website design, search engine optimization or other marketing services, so our full attention goes to your ads and your social media.
     </div>
   </section>
 
@@ -77,12 +77,29 @@ const serviceSchema = serviceDetails.map((s) => ({
             <h3 class="label">What we need from you</h3>
             <ul class="check-list">{s.youProvide.map((x) => <li>{x}</li>)}</ul>
           </div>
+          <div class="notes">
+            <h3 class="label">Good to know</h3>
+            {s.notes.map((n) => <p>{n}</p>)}
+          </div>
         </div>
       </div>
     </section>
   ))}
 
-  <CtaBand heading="Not sure which of these you need?" text="That's what the free consultation is for. Tell us about your business and goals, and we'll recommend where to start, including what not to spend money on yet." track="cta_services_final" showWebsiteQuote />
+  <section class="section together">
+    <div class="container together-inner">
+      <div class="section-head">
+        <span class="eyebrow">Better together</span>
+        <h2>Why many businesses use both</h2>
+      </div>
+      <div class="together-body">
+        <p>Ads reach new people. Regular posts give those people a reason to trust you when they click through to your page. When the two run together, your ads point to a page that looks active and professional.</p>
+        <p class="muted">You can start with either service and add the other later. We'll recommend what makes sense for your business in the consultation.</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand heading="Not sure where to start?" text="That's what the free consultation is for. Tell us about your business and goals, and we'll recommend whether advertising, social media content or both makes sense, including what not to spend money on yet." track="cta_services_final" showQuote />
 </Base>
 
 <style>
@@ -113,6 +130,13 @@ const serviceSchema = serviceDetails.map((s) => ({
     font-size: .8rem; font-weight: 700; background: var(--navy-800); color: var(--white); margin-top: .1rem;
   }
   .small { font-size: .9rem; }
+  .notes { display: grid; gap: .6rem; background: var(--gold-100); border-radius: var(--radius); padding: 1.1rem 1.25rem; font-size: .95rem; }
+  .notes .label { margin-bottom: .2rem; }
+  .together { border-top: 1px solid var(--line); }
+  .together-inner { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(1rem, 5vw, 4rem); align-items: start; }
+  .together-inner .section-head { margin-bottom: 0; }
+  .together-body { display: grid; gap: 1rem; font-size: 1.08rem; max-width: 40rem; }
+  @media (max-width: 800px) { .together-inner { grid-template-columns: 1fr; } }
   @media (max-width: 900px) {
     .service-grid { grid-template-columns: 1fr; }
     .service-intro { position: static; }

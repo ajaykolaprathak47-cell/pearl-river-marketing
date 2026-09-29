@@ -1,5 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
+import { services } from '../src/data/site';
 import {
+  SERVICE_OPTIONS,
   TEST_SENDER,
   buildEmail,
   handleSubmission,
@@ -15,7 +17,7 @@ const good = {
   business: 'Doe Roofing',
   phone: '(601) 555-0100',
   website: 'doeroofing.com',
-  services: ['websites', 'google-ads'],
+  services: ['advertising', 'social-media'],
   message: 'Looking for more roof repair calls.',
   consent: true,
   trap: '',
@@ -60,6 +62,23 @@ describe('validate', () => {
 
   it('rejects unknown services', () => {
     expect(validate(normalize({ ...good, services: ['hacking'] })).services).toBeTruthy();
+  });
+
+  it('rejects services the agency no longer offers', () => {
+    for (const old of ['websites', 'google-ads', 'local-seo', 'landing-pages', 'reporting', 'real-estate']) {
+      expect(validate(normalize({ ...good, services: [old] })).services).toBeTruthy();
+    }
+  });
+
+  it('accepts a Facebook page as the website field', () => {
+    expect(validate(normalize({ ...good, website: 'facebook.com/doeroofing' })).website).toBeUndefined();
+  });
+});
+
+describe('service options', () => {
+  it('offer exactly the two core services plus "not sure"', () => {
+    expect(SERVICE_OPTIONS.map((o) => o.value)).toEqual([...services.map((s) => s.id), 'not-sure']);
+    expect(services.map((s) => s.id)).toEqual(['advertising', 'social-media']);
   });
 });
 

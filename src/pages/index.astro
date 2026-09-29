@@ -8,19 +8,19 @@ import { services, statusLabel, site, cta } from '../data/site';
 import { homeFaq } from '../data/faq';
 ---
 <Base
-  title="Website Design & Marketing in Picayune, MS | Pearl River Marketing"
-  description="Pearl River Marketing builds websites, runs Google and Facebook ads, and sets up local search for small businesses and real estate professionals in Picayune, Pearl River County and South Mississippi."
+  title="Facebook Ads & Social Media in Picayune, MS"
+  description="Pearl River Marketing runs Facebook and Instagram ads and creates and posts social media content for small businesses in Picayune, Pearl River County and South Mississippi."
 >
   <!-- 1. What we do, for whom, where -->
   <section class="hero on-navy">
     <div class="container hero-grid">
       <div class="hero-copy">
         <p class="brandline reveal"><span>{site.tagline}</span></p>
-        <h1 class="reveal reveal-2">Websites and local ads that bring <em>South Mississippi businesses</em> more customers.</h1>
-        <p class="lede reveal reveal-3">We help contractors, home-service companies, real estate agents and other small businesses in Picayune and Pearl River County get found online, look credible, and turn visitors into calls and quote requests.</p>
+        <h1 class="reveal reveal-2">Facebook & Instagram ads and social media content for <em>South Mississippi businesses.</em></h1>
+        <p class="lede reveal reveal-3">We help local businesses in Picayune and Pearl River County get noticed online, with targeted digital advertising and consistent, professional posts that keep your business in front of the people nearby.</p>
         <div class="btn-row reveal reveal-3">
           <a class="btn btn-primary arrow" href="/contact" data-track="cta_hero">{cta.primary}</a>
-          <a class="btn btn-outline" href="/contact?service=websites" data-track="cta_hero_website">{cta.website}</a>
+          <a class="btn btn-outline" href="/services" data-track="cta_hero_services">See Our Two Services</a>
         </div>
         <p class="hero-note">Free, no-obligation consultation · Or call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
       </div>
@@ -29,42 +29,69 @@ import { homeFaq } from '../data/faq';
     <div class="container">
       <p class="area-strip">
         <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 18s6-5.2 6-10A6 6 0 0 0 4 8c0 4.8 6 10 6 10Z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="8" r="2.2" fill="currentColor"/></svg>
-        Based in {site.city}, {site.region}. Serving {site.serviceArea}, with remote work available.
+        Based in {site.city}, {site.region}. Serving {site.serviceArea}.
       </p>
     </div>
   </section>
 
   <!-- 2. The problems we solve -->
-  <section class="section problems-section">
+  <section class="section">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Sound familiar?</span>
-        <h2>Good at the work. Hard to find online.</h2>
-        <p class="lede">Most small businesses we talk to don't need more marketing jargon. They need one of these fixed.</p>
+        <h2>Great at the work. Quiet online.</h2>
+        <p class="lede">Most local business owners we talk to run into at least one of these.</p>
       </div>
       <ul class="problems">
         <li>
-          <h3>Customers can't find you</h3>
-          <p class="muted">You don't show up when people nearby search for your service, or your Google Business Profile is incomplete.</p>
+          <h3>Your page looks inactive</h3>
+          <p class="muted">The last post was months ago, so new customers can't tell if you're still open or busy.</p>
         </li>
         <li>
-          <h3>Your website isn't helping</h3>
-          <p class="muted">It's outdated, slow on phones, or makes people hunt for your number. Or you don't have one yet.</p>
+          <h3>No time to post</h3>
+          <p class="muted">You know you should be posting regularly, but running the business comes first.</p>
         </li>
         <li>
-          <h3>Calls come in waves</h3>
-          <p class="muted">Word of mouth is great, but it's unpredictable. You want a steadier flow of new inquiries.</p>
+          <h3>Boosted posts, little to show</h3>
+          <p class="muted">You've tried "boosting" a post or two and couldn't tell what it brought in.</p>
         </li>
         <li>
-          <h3>You can't tell what's working</h3>
-          <p class="muted">You've paid for ads or "boosted posts" before and still don't know what they brought in.</p>
+          <h3>Customers nearby don't know you</h3>
+          <p class="muted">Word of mouth is great, but it only reaches so far. You want to reach new people in your area.</p>
         </li>
       </ul>
     </div>
   </section>
 
-  <!-- 3. Who we help -->
+  <!-- 3. Services -->
   <section class="section section--paper">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What we do</span>
+        <h2>Two services, done well.</h2>
+        <p class="lede">We specialize in the two things that keep a local business visible on social media. Choose one or combine them.</p>
+      </div>
+      <div class="grid grid-2 svc-grid">
+        {services.map((s, i) => (
+          <article class="card svc">
+            {s.status === 'limited' && <span class="badge badge--limited">{statusLabel.limited}</span>}
+            <span class="svc-n">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{s.name}</h3>
+            <p class="muted">{s.short}</p>
+            <ul class="check-list">{s.highlights.map((h) => <li>{h}</li>)}</ul>
+            <div class="svc-actions">
+              <a class="btn btn-dark arrow" href={`/contact?service=${s.id}`} data-track={`cta_home_${s.id}`}>{s.ctaLabel}</a>
+              <a class="text-link arrow" href={`/services#${s.id}`}>What's included</a>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="spend-note">Ad spend is paid directly by you to Meta and is separate from our management fees.</p>
+    </div>
+  </section>
+
+  <!-- 4. Who we help -->
+  <section class="section">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Who we help</span>
@@ -73,43 +100,17 @@ import { homeFaq } from '../data/faq';
       <div class="grid grid-3 audiences">
         <div class="audience">
           <h3>Contractors & home services</h3>
-          <p class="muted">Roofing, HVAC, plumbing, landscaping, remodeling and other trades that live on phone calls, estimates and booked jobs.</p>
-          <a class="arrow text-link" href="/services">Services for local businesses</a>
+          <p class="muted">Roofing, HVAC, plumbing, landscaping, remodeling and other trades that want steady calls and a page that shows off their work.</p>
         </div>
         <div class="audience">
-          <h3>Real estate agents & brokerages</h3>
-          <p class="muted">Agent websites, listing promotion and buyer and seller lead capture, run within Fair Housing and platform housing-ad rules.</p>
-          <a class="arrow text-link" href="/real-estate-marketing">Real estate marketing</a>
+          <h3>Real estate agents</h3>
+          <p class="muted">Listing ads, open house promotion and regular posts that keep your name in front of local buyers and sellers.</p>
+          <a class="arrow text-link" href="/real-estate-marketing">How this works for real estate</a>
         </div>
         <div class="audience">
           <h3>Other small businesses</h3>
-          <p class="muted">Shops, clinics, restaurants and professional offices in Picayune, Pearl River County and nearby South Mississippi communities.</p>
-          <a class="arrow text-link" href="/contact">Tell us about your business</a>
+          <p class="muted">Shops, salons, restaurants, clinics and professional offices in Picayune, Pearl River County and nearby communities.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. Services -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">What we do</span>
-        <h2>Services</h2>
-        <p class="lede">A website that earns trust, ads that reach the right people, and tracking that shows what came in. Start with one piece or combine them.</p>
-      </div>
-      <div class="grid grid-3">
-        {services.map((s) => (
-          <a class="card" href={`/services#${s.id}`}>
-            {s.status === 'limited' && <span class="badge badge--limited">{statusLabel.limited}</span>}
-            <h3 class="card-title">{s.name}</h3>
-            <p class="muted">{s.short}</p>
-            <span class="arrow text-link" aria-hidden="true">What's included</span>
-          </a>
-        ))}
-      </div>
-      <div class="btn-row center">
-        <a class="btn btn-dark arrow" href="/services" data-track="cta_services_all">See all service details</a>
       </div>
     </div>
   </section>
@@ -125,19 +126,19 @@ import { homeFaq } from '../data/faq';
       <ul class="benefits">
         <li>
           <h3>Direct communication</h3>
-          <p>No hand-offs to an account manager. You talk to the person building your site and running your campaigns.</p>
+          <p>No hand-offs. You talk to the person creating your content and running your ads.</p>
         </li>
         <li>
           <h3>We know the area</h3>
-          <p>We're based in Pearl River County and can meet in person when that helps.</p>
+          <p>We're based in Pearl River County, so your posts and ads sound local, and we can meet in person.</p>
         </li>
         <li>
-          <h3>Plain-English reporting</h3>
-          <p>You'll know what was spent, what came in, and what we're changing next.</p>
+          <h3>You approve everything</h3>
+          <p>Nothing goes out on your pages until you've seen it and said yes.</p>
         </li>
         <li>
           <h3>You own everything</h3>
-          <p>Your website, domain, ad accounts and data are set up in your business's name and stay with you.</p>
+          <p>Your pages, ad account and content stay in your business's name.</p>
         </li>
       </ul>
     </div>
@@ -154,17 +155,17 @@ import { homeFaq } from '../data/faq';
         <li>
           <span class="step-n">1</span>
           <h3>Discover</h3>
-          <p class="muted">A free consultation. We learn your business, your best customers and your service area, look at your current website and competitors, and recommend where to start.</p>
+          <p class="muted">A free consultation. We learn your business, your customers and your goals, look at your current pages, and recommend where to start.</p>
         </li>
         <li>
           <span class="step-n">2</span>
-          <h3>Build</h3>
-          <p class="muted">After you approve a written quote, we build your website, campaigns and tracking in your accounts. You review everything before it goes live.</p>
+          <h3>Create</h3>
+          <p class="muted">After you approve a written quote, we plan your content calendar and ad campaigns and create the posts and ads for your approval.</p>
         </li>
         <li>
           <span class="step-n">3</span>
-          <h3>Optimize</h3>
-          <p class="muted">We keep improving what's working and cut what isn't. For ongoing work you get a clear monthly report and a short check-in call.</p>
+          <h3>Post & optimize</h3>
+          <p class="muted">We publish on schedule, monitor your ads, improve what's working, and report back in plain English.</p>
         </li>
       </ol>
       <div class="btn-row center">
@@ -178,8 +179,8 @@ import { homeFaq } from '../data/faq';
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Our work</span>
-        <h2>How we plan a campaign</h2>
-        <p class="lede">Pearl River Marketing is a new agency, so instead of borrowed logos or made-up numbers, here is a demonstration of how we plan the work. Real client projects will be added here, with permission, as they're completed.</p>
+        <h2>How we plan the work</h2>
+        <p class="lede">Pearl River Marketing is a new agency, so instead of borrowed logos or made-up numbers, here is a demonstration of how we'd plan ads and content for a local business. Real client examples will be added here, with permission, as they're completed.</p>
       </div>
       <SampleCampaign />
     </div>
@@ -197,7 +198,7 @@ import { homeFaq } from '../data/faq';
     </div>
   </section>
 
-  <CtaBand track="cta_home_final" showWebsiteQuote />
+  <CtaBand track="cta_home_final" showQuote />
 </Base>
 
 <style>
@@ -217,7 +218,7 @@ import { homeFaq } from '../data/faq';
     display: flex; align-items: center; gap: .75rem;
   }
   .brandline::before { content: ''; width: 2rem; height: 1px; background: var(--gold-500); }
-  .hero h1 { font-size: clamp(2.1rem, 1.4rem + 3.2vw, 3.5rem); max-width: 18ch; }
+  .hero h1 { font-size: clamp(2.1rem, 1.4rem + 3vw, 3.4rem); max-width: 19ch; }
   .hero h1 em { font-style: italic; color: var(--gold-500); }
   .hero-note { font-size: .92rem; color: #aebcce; }
   .hero-note a { font-weight: 650; white-space: nowrap; }
@@ -234,6 +235,14 @@ import { homeFaq } from '../data/faq';
   @media (max-width: 1000px) { .problems { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 560px) { .problems { grid-template-columns: 1fr; } }
 
+  .svc-grid { gap: var(--space-3); }
+  .svc { gap: 1rem; padding: clamp(1.5rem, 4vw, 2.5rem); border-top: 3px solid var(--gold-600); }
+  .svc-n { font-family: var(--font-display); color: var(--gold-700); font-size: 1.1rem; }
+  .svc h3 { font-size: clamp(1.5rem, 1.2rem + 1vw, 1.9rem); }
+  .svc .check-list { margin-block: .25rem .5rem; }
+  .svc-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: auto; }
+  .spend-note { margin-top: 1.5rem; font-size: .92rem; color: var(--ink-soft); }
+
   .audiences { gap: 0; border-top: 2px solid var(--navy-800); }
   .audience { padding: 1.75rem 1.5rem 0 0; display: grid; gap: .75rem; align-content: start; }
   .audience + .audience { padding-left: 1.5rem; border-left: 1px solid var(--line); }
@@ -242,8 +251,7 @@ import { homeFaq } from '../data/faq';
     .audience, .audience + .audience { padding: 1.5rem 0; border-left: 0; border-bottom: 1px solid var(--line); }
   }
 
-  .card-title { font-size: 1.35rem; }
-  .text-link { color: var(--gold-700); font-weight: 600; font-size: .95rem; text-decoration: none; display: inline-flex; gap: .4rem; margin-top: auto; }
+  .text-link { color: var(--gold-700); font-weight: 600; font-size: .95rem; text-decoration: none; display: inline-flex; gap: .4rem; }
   .center { justify-content: center; margin-top: var(--space-4); }
 
   .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); }

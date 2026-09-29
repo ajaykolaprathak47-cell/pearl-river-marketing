@@ -8,8 +8,8 @@ Everything that needs you, in order. Items marked **(required)** must be done be
 - [ ] **(required)** `owner.name`: your name as you want clients to see it.
 - [ ] `owner.photo` + `owner.photoAlt`: save a square photo as `public/owner.jpg`, then set `photo: '/owner.jpg'` and a short description like `'Jane Doe, owner of Pearl River Marketing'`.
 - [ ] `owner.bio`: 2–4 short paragraphs in your own words (why you started, how you work, your connection to the area). Only include facts you're comfortable standing behind.
-- [ ] `site.sameAs`: links to your Facebook page / Google Business Profile once they exist (optional).
-- [ ] Review each service's `status` in `services`. Set any you aren't ready to take on to `'limited'`.
+- [ ] `site.sameAs`: links to your own Facebook and Instagram pages. Recommended: as a social media agency, prospects will look for them.
+- [ ] Decide pricing (see section 8). The site intentionally shows no prices until you do.
 
 While the owner fields are empty, the About page shows a neutral "the owner" introduction. When you run the site locally (`npm run dev`), a dashed reminder box on the About page lists what's missing. It never appears on the live site.
 
@@ -63,7 +63,15 @@ While the owner fields are empty, the About page shows a neutral "the owner" int
 
 ## 7. After launch (recommended)
 
-- [ ] Create or claim your own Google Business Profile, then add its link to `site.sameAs`.
 - [ ] Submit your sitemap in Google Search Console (free).
 - [ ] If you ever add analytics (e.g. Google Analytics), update the Privacy Policy first and wire events in `src/lib/analytics.ts`.
 - [ ] Replace the demonstration examples with real client work, with written permission, as projects are completed.
+
+## 8. Business decisions still open
+
+The site shows no prices or packages. Decide these, then tell me and I can add a pricing section:
+- [ ] Monthly management fee for **Digital Advertising** (and any one-time setup fee).
+- [ ] What's in **Social Media Content & Posting**: posts per week or month, platforms (Facebook, Instagram), and price.
+- [ ] Whether you offer a discount or bundle when a client uses both services.
+- [ ] Contract terms: month-to-month or a minimum term.
+- [ ] Whether you'll reply to comments and messages on clients' pages. The site currently says this stays with the client unless agreed otherwise in writing.

@@ -4,14 +4,14 @@ interface Props {
   heading?: string;
   text?: string;
   track?: string;
-  /** Show "Request a Website Quote" as a second button. */
-  showWebsiteQuote?: boolean;
+  /** Show "Request a Quote" as a second button. */
+  showQuote?: boolean;
 }
 const {
-  heading = 'Ready to get more calls from local customers?',
-  text = "Get a free consultation. We'll look at your business, your website and your local competition, and give you an honest recommendation, even if that means starting small.",
+  heading = 'Ready to get your business noticed?',
+  text = "Get a free marketing consultation. We'll look at your business, your current Facebook and Instagram presence and your local competition, and give you an honest recommendation, even if that means starting small.",
   track = 'cta_band',
-  showWebsiteQuote = false,
+  showQuote = false,
 } = Astro.props;
 ---
 <section class="cta-band on-navy" aria-labelledby="cta-band-title">
@@ -23,8 +23,8 @@ const {
     <div class="actions">
       <div class="btn-row">
         <a class="btn btn-primary arrow" href="/contact" data-track={track}>{cta.primary}</a>
-        {showWebsiteQuote && (
-          <a class="btn btn-outline" href="/contact?service=websites" data-track={`${track}_website`}>{cta.website}</a>
+        {showQuote && (
+          <a class="btn btn-outline" href="/contact" data-track={`${track}_quote`}>{cta.quote}</a>
         )}
       </div>
       <p class="call">Or call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>

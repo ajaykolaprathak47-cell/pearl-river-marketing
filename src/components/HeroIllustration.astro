@@ -1,69 +1,79 @@
 ---
 /**
- * Illustration used in the home hero: a search ad leading to an inquiry.
+ * Illustration used in the home hero: a sponsored social post and a content calendar.
  * Every name in it is generic. It is labeled as an illustration, not client work.
  */
+const week = [
+  { d: 'Mon', t: 'Tip', on: true },
+  { d: 'Tue', t: '', on: false },
+  { d: 'Wed', t: 'Offer', on: true },
+  { d: 'Thu', t: '', on: false },
+  { d: 'Fri', t: 'Job photo', on: true },
+];
 ---
-<figure class="illus" aria-label="Illustration: a local search ad that leads to a new customer inquiry">
-  <div class="search">
-    <div class="query">
-      <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      <span>ac repair picayune ms</span>
+<figure class="illus" aria-label="Illustration: a sponsored Facebook post and a weekly posting schedule">
+  <div class="post">
+    <div class="post-head">
+      <span class="avatar" aria-hidden="true">YB</span>
+      <div>
+        <p class="biz">Your Business</p>
+        <p class="meta">Sponsored</p>
+      </div>
     </div>
-    <div class="ad">
-      <p class="sponsored">Sponsored · yourbusiness.com</p>
-      <p class="headline">Same-Week AC Repair in Picayune</p>
-      <p class="body">Local, licensed technicians. Call now or request a visit online.</p>
-      <div class="ext"><span>Request a Visit</span><span>Call Now</span></div>
+    <p class="copy">Summer AC tune-ups are booking now in Picayune. Send us a message to get on the schedule.</p>
+    <div class="photo" aria-hidden="true">
+      <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid slice">
+        <rect width="320" height="150" fill="#1a3252"/>
+        <circle cx="250" cy="42" r="22" fill="#c9a24a"/>
+        <path d="M0 115 Q80 80 160 110 T320 100 V150 H0Z" fill="#274a3a"/>
+        <rect x="60" y="62" width="70" height="52" rx="3" fill="#e6ebf2"/>
+        <path d="M52 66 L95 38 L138 66Z" fill="#c9a24a"/>
+        <rect x="84" y="86" width="20" height="28" fill="#10223a"/>
+      </svg>
+    </div>
+    <div class="cta-row">
+      <span>yourbusiness · Picayune, MS</span>
+      <span class="send">Send message</span>
     </div>
   </div>
 
-  <div class="flow" aria-hidden="true">
-    <span></span>
-  </div>
-
-  <div class="lead">
-    <p class="lead-title"><span class="dot"></span>New inquiry</p>
-    <dl>
-      <div><dt>Source</dt><dd>Google Search</dd></div>
-      <div><dt>Service</dt><dd>AC repair</dd></div>
-      <div><dt>Form</dt><dd>Request a Visit</dd></div>
-    </dl>
+  <div class="calendar">
+    <p class="cal-title">This week's posts</p>
+    <ul>
+      {week.map((w) => (
+        <li class:list={{ on: w.on }}>
+          <span class="day">{w.d}</span>
+          <span class="dot" aria-hidden="true"></span>
+          <span class="type">{w.t || '—'}</span>
+        </li>
+      ))}
+    </ul>
   </div>
   <figcaption>Illustration, not a client result</figcaption>
 </figure>
 
 <style>
-  .illus { margin: 0; display: grid; gap: 0; justify-items: stretch; max-width: 27rem; width: 100%; justify-self: end; }
-  .search, .lead {
-    background: var(--white); color: var(--ink); border-radius: 10px;
-    box-shadow: 0 20px 50px rgb(3 10 20 / 35%);
-  }
-  .search { padding: 1rem; display: grid; gap: .85rem; }
-  .query {
-    display: flex; align-items: center; gap: .6rem; border: 1px solid var(--line); border-radius: 999px;
-    padding: .55rem 1rem; font-size: .92rem; color: var(--ink-soft);
-  }
-  .query svg { width: 1rem; height: 1rem; color: var(--ink-soft); flex: none; }
-  .ad { display: grid; gap: .2rem; padding: .25rem .25rem .1rem; }
-  .sponsored { font-size: .75rem; color: var(--ink-soft); }
-  .headline { font-size: 1.12rem; color: #1a4fb5; font-weight: 500; }
-  .body { font-size: .88rem; color: var(--ink-soft); }
-  .ext { display: flex; gap: .5rem; margin-top: .5rem; flex-wrap: wrap; }
-  .ext span { font-size: .78rem; border: 1px solid var(--line); border-radius: 999px; padding: .2rem .7rem; color: #1a4fb5; }
-  .flow { height: 3.25rem; display: flex; justify-content: center; }
-  .flow span { width: 2px; height: 100%; background: linear-gradient(var(--gold-500), rgb(201 162 74 / 20%)); position: relative; }
-  .flow span::after {
-    content: ''; position: absolute; left: 50%; bottom: -2px; width: .6rem; height: .6rem; transform: translateX(-50%) rotate(45deg);
-    border-right: 2px solid var(--gold-500); border-bottom: 2px solid var(--gold-500);
-  }
-  .lead { padding: 1rem 1.25rem; width: 82%; justify-self: center; }
-  .lead-title { font-weight: 650; display: flex; align-items: center; gap: .5rem; font-size: .95rem; }
-  .dot { width: .55rem; height: .55rem; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px var(--ok-bg); }
-  dl { margin: .75rem 0 0; display: grid; gap: .35rem; }
-  dl div { display: flex; justify-content: space-between; gap: 1rem; font-size: .85rem; border-top: 1px solid var(--line); padding-top: .35rem; }
-  dt { color: var(--ink-soft); }
-  dd { margin: 0; font-weight: 550; }
+  .illus { margin: 0; display: grid; max-width: 25rem; width: 100%; justify-self: end; position: relative; }
+  .post, .calendar { background: var(--white); color: var(--ink); border-radius: 10px; box-shadow: 0 20px 50px rgb(3 10 20 / 35%); }
+  .post { padding: 1rem 1rem .9rem; display: grid; gap: .75rem; }
+  .post-head { display: flex; align-items: center; gap: .65rem; }
+  .avatar { width: 2.3rem; height: 2.3rem; border-radius: 50%; background: var(--navy-800); color: var(--gold-500); display: grid; place-items: center; font-size: .78rem; font-weight: 700; flex: none; }
+  .biz { font-weight: 650; font-size: .95rem; line-height: 1.2; }
+  .meta { font-size: .75rem; color: var(--ink-soft); }
+  .copy { font-size: .9rem; line-height: 1.45; }
+  .photo { border-radius: 6px; overflow: hidden; aspect-ratio: 32 / 15; max-width: 100%; }
+  .photo svg { width: 100%; height: 100%; }
+  .cta-row { display: flex; justify-content: space-between; align-items: center; gap: .75rem; font-size: .78rem; color: var(--ink-soft); }
+  .send { background: var(--navy-100); color: var(--navy-800); font-weight: 650; padding: .35rem .75rem; border-radius: 5px; white-space: nowrap; }
+  .calendar { padding: .9rem 1.1rem 1rem; width: 86%; justify-self: center; margin-top: -1rem; position: relative; }
+  .cal-title { font-weight: 650; font-size: .88rem; margin-bottom: .6rem; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .35rem; }
+  li { display: grid; justify-items: center; gap: .3rem; font-size: .7rem; color: var(--ink-soft); padding: .45rem .1rem; border-radius: 6px; background: var(--paper); }
+  li.on { background: var(--gold-100); color: var(--ink); }
+  .day { font-weight: 650; }
+  .dot { width: .45rem; height: .45rem; border-radius: 50%; background: var(--line); }
+  li.on .dot { background: var(--gold-600); }
+  .type { white-space: nowrap; }
   figcaption { margin-top: 1rem; text-align: center; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: #93a2b6; }
   @media (max-width: 900px) { .illus { justify-self: center; } }
 </style>
