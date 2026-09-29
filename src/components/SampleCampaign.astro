@@ -1,0 +1,58 @@
+---
+/**
+ * A sample campaign plan used as a transparent stand-in for portfolio work.
+ * It is a plan, not results: no performance numbers are shown.
+ * Replace with real, client-approved work once available.
+ */
+---
+<article class="sample" aria-labelledby="sample-title">
+  <header class="sample-head">
+    <div>
+      <span class="badge badge--sample">Demonstration</span>
+      <h3 id="sample-title">Sample plan: a local HVAC company</h3>
+      <p class="muted">This is a made-up business used to show how we plan a campaign. It is not a client, and it shows no results.</p>
+    </div>
+  </header>
+
+  <div class="parts">
+    <section>
+      <h4>The goal</h4>
+      <p>More booked service calls for AC repair and system replacement during summer, within a set monthly ad budget.</p>
+    </section>
+    <section>
+      <h4>Google Search</h4>
+      <ul class="check-list">
+        <li>Separate campaigns for repair and replacement</li>
+        <li>Location targeting around the service area</li>
+        <li>Call ads scheduled to business hours</li>
+        <li>Negative keywords for jobs, DIY and parts searches</li>
+      </ul>
+    </section>
+    <section>
+      <h4>Landing page</h4>
+      <ul class="check-list">
+        <li>One page per offer, with the phone number up top</li>
+        <li>Short "request a visit" form</li>
+        <li>Service area, licensing and warranty details the owner supplies</li>
+      </ul>
+    </section>
+    <section>
+      <h4>What gets measured</h4>
+      <ul class="check-list">
+        <li>Calls from ads and from the page</li>
+        <li>Form submissions</li>
+        <li>Cost per inquiry by campaign</li>
+        <li>Which inquiries turned into booked jobs (from the owner's records)</li>
+      </ul>
+    </section>
+  </div>
+</article>
+
+<style>
+  .sample { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .sample-head { padding: clamp(1.25rem, 3vw, 2rem); border-bottom: 1px solid var(--line); background: var(--paper); }
+  .sample-head div { display: grid; gap: .75rem; max-width: 42rem; }
+  .parts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+  .parts section { padding: clamp(1.25rem, 3vw, 1.75rem); display: grid; gap: .8rem; align-content: start; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-width: 0; }
+  .parts p, .parts li { font-size: .95rem; }
+</style>

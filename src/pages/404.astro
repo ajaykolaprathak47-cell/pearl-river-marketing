@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Page Not Found" description="The page you were looking for could not be found." noindex>
+  <section class="section">
+    <div class="container nf">
+      <span class="eyebrow">Error 404</span>
+      <h1>We could not find that page.</h1>
+      <p class="lede">It may have moved, or the link may be mistyped. These might help:</p>
+      <ul class="links">
+        <li><a class="arrow" href="/">Home</a></li>
+        <li><a class="arrow" href="/services">Services</a></li>
+        <li><a class="arrow" href="/real-estate-marketing">Real estate marketing</a></li>
+        <li><a class="arrow" href="/contact">Book a free consultation</a></li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf { display: grid; gap: 1.25rem; justify-items: start; padding-block: 2rem; }
+  .links { list-style: none; padding: 0; margin: 0; display: grid; gap: .7rem; }
+  .links a { font-weight: 600; text-decoration: none; display: inline-flex; gap: .5rem; }
+</style>

@@ -1,0 +1,28 @@
+---
+interface Props { eyebrow: string; title: string; lede: string; showCta?: boolean; track?: string }
+const { eyebrow, title, lede, showCta = true, track = 'cta_page_hero' } = Astro.props;
+---
+<section class="page-hero on-navy">
+  <div class="container inner">
+    <span class="eyebrow reveal">{eyebrow}</span>
+    <h1 class="reveal reveal-2">{title}</h1>
+    <p class="lede reveal reveal-3">{lede}</p>
+    {showCta && (
+      <div class="btn-row reveal reveal-3">
+        <a class="btn btn-primary arrow" href="/contact" data-track={track}>Book a Free Consultation</a>
+      </div>
+    )}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    background:
+      radial-gradient(50rem 24rem at 100% 120%, rgb(201 162 74 / 12%), transparent 60%),
+      linear-gradient(180deg, var(--navy-900), var(--navy-800));
+  }
+  .inner { display: grid; gap: 1.25rem; justify-items: start; }
+  h1 { max-width: 20ch; }
+</style>

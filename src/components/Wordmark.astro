@@ -1,0 +1,26 @@
+---
+interface Props { tone?: 'dark' | 'light' }
+const { tone = 'dark' } = Astro.props;
+---
+<span class:list={['wordmark', `wordmark--${tone}`]}>
+  <span class="wm-top">Pearl River</span>
+  <span class="wm-bottom">Marketing</span>
+</span>
+
+<style>
+  .wordmark { display: inline-flex; flex-direction: column; line-height: 1; gap: .3rem; }
+  .wm-top {
+    font-family: var(--font-display); font-size: 1.35rem; letter-spacing: .06em;
+    text-transform: uppercase; white-space: nowrap;
+  }
+  .wm-bottom {
+    font-family: var(--font-body); font-size: .62rem; font-weight: 650;
+    letter-spacing: .42em; text-transform: uppercase; white-space: nowrap;
+    display: flex; align-items: center; gap: .5rem;
+  }
+  .wm-bottom::before { content: ''; height: 1px; width: 1.1rem; background: currentColor; opacity: .7; }
+  .wordmark--dark .wm-top { color: var(--navy-800); }
+  .wordmark--dark .wm-bottom { color: var(--gold-700); }
+  .wordmark--light .wm-top { color: var(--white); }
+  .wordmark--light .wm-bottom { color: var(--gold-500); }
+</style>

@@ -1,0 +1,79 @@
+---
+import Wordmark from './Wordmark.astro';
+import { nav, services, site } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer on-navy">
+  <div class="container top">
+    <div class="brand">
+      <Wordmark tone="light" />
+      <p class="tag">{site.tagline}</p>
+      <p class="about">A hands-on marketing agency based in {site.city}, {site.regionName}, serving {site.serviceArea}. Remote work available where it makes sense.</p>
+      <a class="btn btn-primary" href="/contact" data-track="cta_footer">Book a Free Consultation</a>
+    </div>
+
+    <nav aria-label="Services">
+      <h2 class="col-title">Services</h2>
+      <ul>
+        {services.map((s) => <li><a href={`/services#${s.id}`}>{s.name}</a></li>)}
+        <li><a href="/real-estate-marketing">Real estate marketing</a></li>
+      </ul>
+    </nav>
+
+    <nav aria-label="Company">
+      <h2 class="col-title">Company</h2>
+      <ul>
+        <li><a href="/">Home</a></li>
+        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="col-title">Contact</h2>
+      <ul>
+        <li><a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></li>
+        {site.email && <li><a href={`mailto:${site.email}`} data-track="email_click">{site.email}</a></li>}
+        <li class="plain">{site.city}, {site.region}</li>
+      </ul>
+      <h2 class="col-title area-title">Service area</h2>
+      <p class="plain small">{site.serviceArea}.</p>
+    </div>
+  </div>
+
+  <div class="container bottom">
+    <p>© {year} {site.name}. All rights reserved.</p>
+    <ul>
+      <li><a href="/privacy">Privacy Policy</a></li>
+      <li><a href="/terms">Terms of Use</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--navy-900); padding-top: clamp(3rem, 7vw, 5rem); }
+  .top {
+    display: grid; gap: 2.5rem;
+    grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
+    padding-bottom: 3rem;
+  }
+  .brand { display: grid; gap: 1rem; justify-items: start; max-width: 24rem; }
+  .tag { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; color: var(--gold-500); }
+  .about, .small { color: #b8c4d4; font-size: .95rem; }
+  .col-title {
+    font-family: var(--font-body); font-size: .75rem; font-weight: 650; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--gold-500); margin-bottom: 1rem;
+  }
+  .area-title { margin-top: 1.75rem; }
+  ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
+  .site-footer a:not(.btn) { color: #dfe6ef; text-decoration: none; font-size: .95rem; }
+  .site-footer a:not(.btn):hover { color: var(--gold-500); text-decoration: underline; }
+  .plain { color: #b8c4d4; font-size: .95rem; }
+  .bottom {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;
+    border-top: 1px solid rgb(255 255 255 / 12%); padding-block: 1.5rem; font-size: .85rem; color: #93a2b6;
+  }
+  .bottom ul { display: flex; gap: 1.5rem; }
+  .bottom a:not(.btn) { font-size: .85rem; }
+  @media (max-width: 900px) { .top { grid-template-columns: repeat(2, minmax(0, 1fr)); } .brand { grid-column: 1 / -1; } }
+  @media (max-width: 520px) { .top { grid-template-columns: 1fr; } }
+</style>

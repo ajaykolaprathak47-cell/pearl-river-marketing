@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base
+  title="Privacy Policy"
+  description="How Pearl River Marketing collects and uses information submitted through this website."
+  noindex
+>
+  <section class="section">
+    <div class="container prose">
+      <p class="notice"><strong>Draft for review.</strong> This policy has not yet been reviewed by an attorney. Review and finalize it before the site is published.</p>
+      <h1>Privacy Policy</h1>
+      <p class="muted">Last updated: [date to be set when finalized]</p>
+
+      <p>This policy explains what information {site.name} ("we", "us") collects through this website, how we use it, and how to contact us about it.</p>
+
+      <h2>Information you give us</h2>
+      <p>When you submit the consultation form, we collect the details you enter:</p>
+      <ul>
+        <li>Your name and business name</li>
+        <li>Your email address</li>
+        <li>Your phone number and website, if you provide them</li>
+        <li>The services you are interested in and your approximate advertising budget</li>
+        <li>Your message</li>
+      </ul>
+      <p>If you call, text or email us, we receive the information you share in that conversation.</p>
+
+      <h2>How we use it</h2>
+      <p>We use this information to respond to your inquiry, schedule a consultation, prepare a recommendation or quote, and keep a record of our conversation. We do not sell your information, and we do not add you to a marketing email list.</p>
+
+      <h2>Service providers</h2>
+      <p>We use a small number of providers to run this website and deliver form submissions:</p>
+      <ul>
+        <li><strong>Website hosting</strong> (Vercel). Like most hosts, it processes technical data such as IP address and browser type to serve and secure the site.</li>
+        <li><strong>Email delivery</strong> (Resend). Form submissions are sent to our business inbox through this service.</li>
+      </ul>
+      <p>These providers process information on our behalf to provide their services.</p>
+
+      <h2>Cookies and analytics</h2>
+      <p>This website does not currently use analytics, advertising pixels or tracking cookies. Fonts are served from this website, not from a third party. If we add analytics or advertising tools in the future, we will update this policy first and ask for consent where required.</p>
+
+      <h2>How long we keep it</h2>
+      <p>We keep inquiry details for as long as needed to respond and, if you become a client, for the length of our working relationship and any period required for business records. [Retention period to be confirmed.]</p>
+
+      <h2>Your choices</h2>
+      <p>You can ask us what information we hold about you, ask us to correct it, or ask us to delete it, subject to any records we are required to keep.</p>
+
+      <h2>Children</h2>
+      <p>This website is intended for businesses and is not directed to children under 13. We do not knowingly collect information from children.</p>
+
+      <h2>Contact</h2>
+      <p>For privacy questions or requests, contact {site.name} in {site.city}, {site.regionName}, at <a href={`tel:${site.phone.e164}`}>{site.phone.display}</a>{site.email ? <>, or email <a href={`mailto:${site.email}`}>{site.email}</a></> : ' [business email to be added]'}.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .prose h1 { margin-block: 1.5rem .5rem; font-size: var(--step-3); }
+  .notice { margin-bottom: 1rem; }
+</style>

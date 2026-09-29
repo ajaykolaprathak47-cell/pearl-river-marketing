@@ -1,0 +1,298 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SERVICE_OPTIONS, BUDGET_OPTIONS } from '../lib/consultation';
+import { site } from '../data/site';
+---
+<Base
+  title="Book a Free Consultation"
+  description="Request a free marketing consultation with Pearl River Marketing in Picayune, MS. Tell us about your business and goals, or call 228-209-2431."
+>
+  <PageHero
+    eyebrow="Contact"
+    title="Book a free consultation."
+    lede="Tell us about your business and what you want more of. We will review it and get back to you to set up a short call. There is no cost and no obligation."
+    showCta={false}
+  />
+
+  <section class="section">
+    <div class="container contact-grid">
+      <aside class="side">
+        <div class="card side-card">
+          <h2 class="side-title">Prefer to talk?</h2>
+          <p class="muted">Call or text</p>
+          <p class="phone"><a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
+          {site.email && (
+            <p><a href={`mailto:${site.email}`} data-track="email_click">{site.email}</a></p>
+          )}
+          <p class="muted small">Based in {site.city}, {site.regionName}. Serving {site.serviceArea}.</p>
+        </div>
+        <div class="next">
+          <h2 class="side-title">What happens next</h2>
+          <ol>
+            <li>We read your request and look at your website and market.</li>
+            <li>We contact you to set up a short call at a time that suits you.</li>
+            <li>On the call we give you an honest recommendation and, if it makes sense, a written quote.</li>
+          </ol>
+        </div>
+      </aside>
+
+      <div class="form-wrap">
+        <form id="consult-form" novalidate aria-describedby="form-intro">
+          <p id="form-intro" class="muted small">Fields marked <span aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
+
+          <div class="error-summary" id="error-summary" tabindex="-1" hidden>
+            <h2>Please fix the following</h2>
+            <ul></ul>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="name">Your name <span aria-hidden="true">*</span></label>
+              <input id="name" name="name" type="text" autocomplete="name" required maxlength="100" aria-describedby="name-error" />
+              <p class="field-error" id="name-error"></p>
+            </div>
+            <div class="field">
+              <label for="business">Business name <span aria-hidden="true">*</span></label>
+              <input id="business" name="business" type="text" autocomplete="organization" required maxlength="150" aria-describedby="business-error" />
+              <p class="field-error" id="business-error"></p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="email">Email <span aria-hidden="true">*</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200" aria-describedby="email-error" />
+              <p class="field-error" id="email-error"></p>
+            </div>
+            <div class="field">
+              <label for="phone">Phone <span class="optional">(optional)</span></label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" aria-describedby="phone-error" />
+              <p class="field-error" id="phone-error"></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="website">Website <span class="optional">(optional)</span></label>
+            <input id="website" name="website" type="text" autocomplete="url" inputmode="url" placeholder="yourbusiness.com" maxlength="200" aria-describedby="website-error" />
+            <p class="field-error" id="website-error"></p>
+          </div>
+
+          <fieldset class="field" aria-describedby="services-error">
+            <legend>Services you are interested in <span aria-hidden="true">*</span></legend>
+            <div class="checks">
+              {SERVICE_OPTIONS.map((o) => (
+                <label class="check" for={`svc-${o.value}`}>
+                  <input type="checkbox" id={`svc-${o.value}`} name="services" value={o.value} />
+                  <span>{o.label}</span>
+                </label>
+              ))}
+            </div>
+            <p class="field-error" id="services-error"></p>
+          </fieldset>
+
+          <div class="field">
+            <label for="budget">Approximate monthly advertising budget <span aria-hidden="true">*</span></label>
+            <select id="budget" name="budget" required aria-describedby="budget-hint budget-error">
+              <option value="">Choose one</option>
+              {BUDGET_OPTIONS.map((o) => <option value={o.value}>{o.label}</option>)}
+            </select>
+            <p class="hint" id="budget-hint">Ad spend paid to Google or Meta, separate from management fees. A rough idea is fine.</p>
+            <p class="field-error" id="budget-error"></p>
+          </div>
+
+          <div class="field">
+            <label for="message">What would you like help with? <span aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" rows="6" required maxlength="3000" aria-describedby="message-hint message-error"></textarea>
+            <p class="hint" id="message-hint">What you sell, where your customers are, and what you want more of.</p>
+            <p class="field-error" id="message-error"></p>
+          </div>
+
+          <!-- Spam trap: hidden from people and assistive tech. -->
+          <div class="trap" aria-hidden="true">
+            <label for="company-fax">Leave this field empty</label>
+            <input id="company-fax" name="trap" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="startedAt" id="startedAt" value="" />
+
+          <div class="field">
+            <label class="check consent" for="consent">
+              <input type="checkbox" id="consent" name="consent" required aria-describedby="consent-error" />
+              <span>I agree that Pearl River Marketing may use the details I provide to respond to this inquiry, as described in the <a href="/privacy">Privacy Policy</a>. <span aria-hidden="true">*</span></span>
+            </label>
+            <p class="field-error" id="consent-error"></p>
+          </div>
+
+          <div class="submit-row">
+            <button class="btn btn-primary" type="submit" id="submit-btn" data-track="consultation_submit">
+              <span class="btn-label">Request My Free Consultation</span>
+            </button>
+            <p class="small muted">We do not add you to a mailing list.</p>
+          </div>
+
+          <div class="status status--error" id="form-error" role="alert" tabindex="-1" hidden></div>
+        </form>
+
+        <div class="status status--success" id="form-success" tabindex="-1" hidden>
+          <h2>Thank you. Your request was sent.</h2>
+          <p>We will review it and get back to you soon to set up a call. If it is urgent, call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-grid { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  .side { display: grid; gap: 2rem; position: sticky; top: 6rem; }
+  .side-card { background: var(--paper); gap: .5rem; }
+  .side-title { font-size: 1.35rem; margin-bottom: .25rem; }
+  .phone { font-size: 1.6rem; font-family: var(--font-display); }
+  .phone a { text-decoration: none; color: var(--navy-800); }
+  .next ol { margin: .75rem 0 0; padding-left: 1.2rem; display: grid; gap: .6rem; color: var(--ink-soft); }
+  .small { font-size: .9rem; }
+
+  form { display: grid; gap: 1.4rem; }
+  .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; }
+  .field { display: grid; gap: .4rem; min-width: 0; margin: 0; padding: 0; border: 0; }
+  label, legend { font-weight: 600; font-size: .95rem; padding: 0; }
+  legend { margin-bottom: .6rem; }
+  .optional { font-weight: 400; color: var(--ink-soft); }
+  input[type='text'], input[type='email'], input[type='tel'], select, textarea {
+    width: 100%; font: inherit; font-size: 1rem; color: var(--ink);
+    padding: .8rem .9rem; border: 1.5px solid #c5cedb; border-radius: var(--radius); background: var(--white);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--navy-700); box-shadow: 0 0 0 3px rgb(181 140 50 / 35%); }
+  [aria-invalid='true'] { border-color: var(--err) !important; }
+  textarea { resize: vertical; min-height: 8rem; }
+  .hint { font-size: .87rem; color: var(--ink-soft); }
+  .field-error { font-size: .9rem; color: var(--err); font-weight: 550; }
+  .field-error:empty { display: none; }
+  .checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem 1rem; }
+  .check { display: flex; gap: .65rem; align-items: flex-start; font-weight: 450; cursor: pointer; line-height: 1.4; }
+  .check input { width: 1.2rem; height: 1.2rem; margin: .1rem 0 0; accent-color: var(--navy-800); flex: none; }
+  .consent { font-size: .95rem; }
+  .trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+  .submit-row { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
+
+  .error-summary { border: 2px solid var(--err); border-radius: var(--radius); padding: 1rem 1.25rem; background: var(--err-bg); scroll-margin-top: 6rem; }
+  .error-summary h2 { font-family: var(--font-body); font-size: 1rem; font-weight: 700; color: var(--err); }
+  .error-summary ul { margin: .5rem 0 0; padding-left: 1.2rem; }
+  .error-summary a { color: var(--err); }
+  .status { border-radius: var(--radius); padding: 1.25rem 1.5rem; }
+  .status--error { background: var(--err-bg); border: 1px solid var(--err); color: var(--ink); }
+  .status--success { background: var(--ok-bg); border: 1px solid var(--ok); display: grid; gap: .6rem; }
+  .status--success[hidden], .status--error[hidden] { display: none; }
+  .status--success h2 { font-size: 1.6rem; color: var(--ok); }
+
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } .side { position: static; order: 2; } }
+  @media (max-width: 600px) { .row, .checks { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  import { normalize, validate, type FieldErrors } from '../lib/consultation';
+  import { site } from '../data/site';
+
+  const form = document.getElementById('consult-form') as HTMLFormElement | null;
+  if (form) {
+    const started = document.getElementById('startedAt') as HTMLInputElement;
+    started.value = String(Date.now());
+
+    // Preselect a service when arriving from a "Ask about ..." link.
+    const pre = new URLSearchParams(location.search).get('service');
+    if (pre) {
+      const box = form.querySelector<HTMLInputElement>(`input[name="services"][value="${CSS.escape(pre)}"]`);
+      if (box) box.checked = true;
+    }
+
+    const summary = document.getElementById('error-summary')!;
+    const errorBox = document.getElementById('form-error')!;
+    const success = document.getElementById('form-success')!;
+    const btn = document.getElementById('submit-btn') as HTMLButtonElement;
+    const btnLabel = btn.querySelector('.btn-label')!;
+    const fieldIds: Record<string, string> = { services: 'svc-google-ads' };
+
+    const collect = () => {
+      const fd = new FormData(form);
+      return {
+        name: fd.get('name'), business: fd.get('business'), email: fd.get('email'),
+        phone: fd.get('phone'), website: fd.get('website'), services: fd.getAll('services'),
+        budget: fd.get('budget'), message: fd.get('message'), consent: fd.get('consent') === 'on',
+        trap: fd.get('trap'), startedAt: Number(fd.get('startedAt')),
+      };
+    };
+
+    const clearErrors = () => {
+      form.querySelectorAll('[aria-invalid]').forEach((el) => el.removeAttribute('aria-invalid'));
+      form.querySelectorAll('.field-error').forEach((el) => (el.textContent = ''));
+      summary.hidden = true;
+      errorBox.hidden = true;
+    };
+
+    const showErrors = (errors: FieldErrors) => {
+      const list = summary.querySelector('ul')!;
+      list.innerHTML = '';
+      for (const [key, message] of Object.entries(errors)) {
+        const msgEl = document.getElementById(`${key}-error`);
+        if (msgEl) msgEl.textContent = message ?? '';
+        const inputId = fieldIds[key] ?? key;
+        const input = document.getElementById(inputId);
+        if (key !== 'services') input?.setAttribute('aria-invalid', 'true');
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `#${inputId}`;
+        a.textContent = message ?? '';
+        a.addEventListener('click', (e) => { e.preventDefault(); document.getElementById(inputId)?.focus(); });
+        li.append(a);
+        list.append(li);
+      }
+      summary.hidden = false;
+      summary.focus({ preventScroll: true });
+      summary.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    };
+
+    const showFailure = (html: string) => {
+      errorBox.innerHTML = html;
+      errorBox.hidden = false;
+      errorBox.focus();
+    };
+    const callLine = `<a href="tel:${site.phone.e164}">call or text ${site.phone.display}</a>`;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearErrors();
+      const data = collect();
+      const errors = validate(normalize(data));
+      if (Object.keys(errors).length) { showErrors(errors); return; }
+
+      btn.disabled = true;
+      btnLabel.textContent = 'Sending…';
+      try {
+        const res = await fetch('/api/consultation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const body = await res.json().catch(() => ({}));
+        if (res.ok && body.ok) {
+          form.hidden = true;
+          success.hidden = false;
+          success.focus();
+          return;
+        }
+        if (res.status === 400 && body.fieldErrors) { showErrors(body.fieldErrors); return; }
+        if (res.status === 503) {
+          showFailure(`<strong>Online requests are not switched on yet.</strong> Your details were not sent. Please ${callLine} and we will set up your consultation.`);
+          return;
+        }
+        showFailure(`<strong>Your request could not be sent.</strong> Nothing was lost on your side; your details are still in the form. Please try again in a minute, or ${callLine}.`);
+      } catch {
+        showFailure(`<strong>We could not reach the server.</strong> Check your connection and try again, or ${callLine}. Your details are still in the form.`);
+      } finally {
+        btn.disabled = false;
+        btnLabel.textContent = 'Request My Free Consultation';
+      }
+    });
+  }
+</script>

@@ -1,0 +1,35 @@
+---
+interface Props {
+  heading?: string;
+  text?: string;
+  track?: string;
+}
+const {
+  heading = 'Ready to see where your next customers can come from?',
+  text = 'Book a free consultation. We will look at your business, your market and what you are doing now, and give you an honest recommendation, even if that means starting small.',
+  track = 'cta_band',
+} = Astro.props;
+---
+<section class="cta-band on-navy" aria-labelledby="cta-band-title">
+  <div class="container inner">
+    <div class="copy">
+      <h2 id="cta-band-title">{heading}</h2>
+      <p class="lede">{text}</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-primary arrow" href="/contact" data-track={track}>Book a Free Consultation</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-band { padding-block: clamp(3.5rem, 8vw, 5.5rem); position: relative; overflow: hidden; }
+  .cta-band::before {
+    content: ''; position: absolute; inset: auto -10% -60% auto; width: 36rem; height: 36rem; border-radius: 50%;
+    border: 1px solid rgb(201 162 74 / 25%); box-shadow: 0 0 0 3rem rgb(201 162 74 / 4%);
+    pointer-events: none;
+  }
+  .inner { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: end; position: relative; }
+  .copy { display: grid; gap: 1rem; max-width: 42rem; }
+  @media (max-width: 760px) { .inner { grid-template-columns: 1fr; align-items: start; } }
+</style>

@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base
+  title="Terms of Use"
+  description="Terms for using the Pearl River Marketing website."
+  noindex
+>
+  <section class="section">
+    <div class="container prose">
+      <p class="notice"><strong>Draft for review.</strong> These terms have not yet been reviewed by an attorney. Review and finalize them before the site is published. They cover use of this website only; client work is governed by a separate written agreement.</p>
+      <h1>Terms of Use</h1>
+      <p class="muted">Last updated: [date to be set when finalized]</p>
+
+      <h2>About this website</h2>
+      <p>This website is operated by {site.name}, based in {site.city}, {site.regionName}. By using it, you agree to these terms.</p>
+
+      <h2>Information only</h2>
+      <p>Content on this site is general information about our services. It is not legal, financial or tax advice, and it is not an offer or a guarantee of any result. Advertising results depend on many factors outside our control, including your market, offer, budget, competition and follow-up.</p>
+
+      <h2>Sample and demonstration material</h2>
+      <p>Examples marked as samples, demonstrations or illustrations are created to show how we work. They do not represent real clients or real results.</p>
+
+      <h2>Services</h2>
+      <p>Any work we do for you is governed by a separate written proposal or agreement. Submitting the consultation form does not create a client relationship or any obligation for either party.</p>
+
+      <h2>Acceptable use</h2>
+      <p>Please do not misuse the site, including by submitting false information, attempting to disrupt it, or sending automated or spam submissions.</p>
+
+      <h2>Intellectual property</h2>
+      <p>The text, design and other content on this site belong to {site.name} unless otherwise noted. Trademarks such as Google, Facebook and Instagram belong to their owners; their mention does not imply endorsement or partnership.</p>
+
+      <h2>Links</h2>
+      <p>Links to other websites are provided for convenience. We are not responsible for their content.</p>
+
+      <h2>Limitation of liability</h2>
+      <p>[To be completed with professional review.]</p>
+
+      <h2>Governing law</h2>
+      <p>[To be completed with professional review.]</p>
+
+      <h2>Contact</h2>
+      <p>Questions about these terms: <a href={`tel:${site.phone.e164}`}>{site.phone.display}</a>.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .prose h1 { margin-block: 1.5rem .5rem; font-size: var(--step-3); }
+  .notice { margin-bottom: 1rem; }
+</style>

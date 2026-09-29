@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { serviceDetails } from '../data/serviceDetails';
+import { statusLabel } from '../data/site';
+
+const serviceSchema = serviceDetails.map((s) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: s.name,
+  description: s.summary,
+  provider: { '@type': 'ProfessionalService', name: 'Pearl River Marketing' },
+  areaServed: 'Pearl River County, Mississippi',
+}));
+---
+<Base
+  title="Marketing Services: Google Ads, Meta Ads & Landing Pages"
+  description="Google Ads management, Facebook and Instagram ads, landing pages, tracking and reporting for small businesses in Picayune and Pearl River County, MS."
+  schema={serviceSchema}
+>
+  <PageHero
+    eyebrow="Services"
+    title="Advertising that brings in inquiries, and reporting that shows it."
+    lede="Paid advertising is our core work. Landing pages, tracking and website support are there to make those ads pay off. Each service below explains who it is for, what is included, and what we need from you."
+    track="cta_services_hero"
+  />
+
+  <nav class="jump container" aria-label="Services on this page">
+    <ul>
+      {serviceDetails.map((s) => <li><a href={`#${s.id}`}>{s.name}</a></li>)}
+    </ul>
+  </nav>
+
+  <section class="container expectations">
+    <div class="notice">
+      <strong>About results:</strong> we do not guarantee leads, sales, rankings or return on ad spend. Results depend on your market, offer, budget, competition and how quickly new inquiries are followed up. We will tell you plainly what we think is realistic before you spend anything.
+    </div>
+  </section>
+
+  {serviceDetails.map((s, i) => (
+    <section id={s.id} class:list={['section', 'service', { 'section--paper': i % 2 === 1 }]} aria-labelledby={`${s.id}-title`}>
+      <div class="container service-grid">
+        <div class="service-intro">
+          <span class:list={['badge', `badge--${s.status}`]}>{statusLabel[s.status]}</span>
+          <h2 id={`${s.id}-title`}>{s.name}</h2>
+          <p class="lede">{s.summary}</p>
+          <div class="who">
+            <h3 class="label">Who it is for</h3>
+            <p>{s.whoFor}</p>
+          </div>
+          {s.status === 'limited' && (
+            <p class="muted small">We are taking a limited number of these projects while this service grows. Ask about it in your consultation.</p>
+          )}
+          <a class="btn btn-dark arrow" href={`/contact?service=${s.id}`} data-track={`cta_service_${s.id}`}>Ask about {s.name.toLowerCase()}</a>
+        </div>
+        <div class="service-body">
+          <div>
+            <h3 class="label">What is included</h3>
+            <ul class="check-list">{s.included.map((x) => <li>{x}</li>)}</ul>
+          </div>
+          <div>
+            <h3 class="label">How it works</h3>
+            <ol class="how">{s.howItWorks.map((x) => <li>{x}</li>)}</ol>
+          </div>
+          <div>
+            <h3 class="label">What we need from you</h3>
+            <ul class="check-list">{s.youProvide.map((x) => <li>{x}</li>)}</ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <CtaBand heading="Not sure which of these you need?" text="That is what the consultation is for. Tell us about your business and goals, and we will recommend where to start, including what not to spend money on yet." track="cta_services_final" />
+</Base>
+
+<style>
+  .jump { padding-block: 1.5rem .5rem; }
+  .jump ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+  .jump a {
+    display: inline-block; padding: .45rem .9rem; border: 1px solid var(--line); border-radius: 999px;
+    font-size: .9rem; text-decoration: none; color: var(--ink); transition: border-color .2s, color .2s;
+  }
+  .jump a:hover { border-color: var(--gold-600); color: var(--gold-700); }
+  .expectations { padding-block: 1rem 0; }
+  .service { scroll-margin-top: 5rem; }
+  .service-grid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+  .service-intro { display: grid; gap: 1.25rem; justify-items: start; position: sticky; top: 6rem; }
+  .service-body { display: grid; gap: 2.25rem; }
+  .label {
+    font-family: var(--font-body); font-size: .78rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--gold-700); margin-bottom: .85rem;
+  }
+  .who .label { margin-bottom: .4rem; }
+  .how { margin: 0; padding: 0; list-style: none; counter-reset: how; display: grid; gap: .8rem; }
+  .how li { counter-increment: how; display: grid; grid-template-columns: 2rem 1fr; gap: .5rem; }
+  .how li::before {
+    content: counter(how); width: 1.6rem; height: 1.6rem; border-radius: 50%; display: grid; place-items: center;
+    font-size: .8rem; font-weight: 700; background: var(--navy-800); color: var(--white); margin-top: .1rem;
+  }
+  .small { font-size: .9rem; }
+  @media (max-width: 900px) {
+    .service-grid { grid-template-columns: 1fr; }
+    .service-intro { position: static; }
+  }
+</style>
