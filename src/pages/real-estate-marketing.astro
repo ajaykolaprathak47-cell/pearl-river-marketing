@@ -3,99 +3,179 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Faq from '../components/Faq.astro';
+import { cta, site } from '../data/site';
 
 const reFaq = [
   {
     q: 'Can you target ads to specific neighborhoods or types of buyers?',
-    a: 'Only within the housing ad rules. On Facebook and Instagram, housing ads use a Special Ad Category that removes targeting by age, gender and ZIP code and requires a broader location radius. Google restricts similar targeting for housing ads in the US. We never try to include or exclude people based on race, color, religion, sex, disability, familial status or national origin, directly or through proxies.',
+    a: "Only within the housing ad rules. On Facebook and Instagram, housing ads run in a Special Ad Category that removes targeting by age, gender and ZIP code and requires a broader location radius. Google restricts similar targeting for housing ads in the US. We never try to include or exclude people based on race, color, religion, sex, disability, familial status or national origin, directly or through workarounds.",
   },
   {
     q: 'How many leads will I get?',
-    a: 'We cannot promise a number. Lead volume depends on your market, listings, price points, budget, competition and how quickly your agents respond. We will share what we think is realistic after reviewing your market, and report exactly what comes in.',
+    a: "We can't promise a number. Lead volume depends on your market, listings, price points, budget, competition and how quickly you respond. We'll share what we think is realistic after looking at your market, and report exactly what comes in.",
   },
   {
-    q: 'Do the leads go to one agent or the whole office?',
+    q: 'I already have a brokerage website. Do I need my own?',
+    a: "Not always. Many agents do well with a simple personal site that introduces them and captures seller and buyer inquiries, while listing search stays on the brokerage site or IDX provider. We'll look at what your brokerage allows and recommend the simplest setup that works.",
+  },
+  {
+    q: 'Do leads go to one agent or the whole office?',
     a: 'Your choice. We can route inquiries to a shared inbox, a specific agent, or your CRM, depending on the tools you already use.',
   },
   {
     q: 'Who approves the ads?',
-    a: 'Your broker or designated person approves every ad and landing page before it runs. Ads include the brokerage information your license rules require, and listing details come from you, not guesswork.',
+    a: 'You or your broker approve every ad and landing page before it runs. Ads include the brokerage information your license rules require, and listing details come from you.',
   },
 ];
 ---
 <Base
-  title="Real Estate Marketing for Brokerages & Agents in Mississippi"
-  description="Google Search and Facebook and Instagram ads, listing campaigns, landing pages and lead tracking for real estate brokerages and agents in Picayune and South Mississippi. Run within Fair Housing and platform housing-ad rules."
+  title="Real Estate Marketing in South Mississippi"
+  description="Agent websites, listing ads, seller and buyer lead capture and reporting for real estate agents and brokerages in Picayune, Pearl River County and South Mississippi. Run within Fair Housing and platform housing-ad rules."
 >
   <PageHero
     eyebrow="Real estate marketing"
-    title="Ads that bring buyer and seller inquiries to your brokerage."
-    lede="We run Google Search and Meta advertising for brokerages and agents in Picayune, Pearl River County and South Mississippi, with landing pages, lead capture and tracking so you can see what each campaign produced."
+    title="Marketing for South Mississippi real estate agents and brokerages."
+    lede="Agent websites, listing promotion, and buyer and seller lead capture for agents and brokerages in Picayune, Pearl River County and the surrounding area, with tracking so you can see what each campaign produced."
     track="cta_re_hero"
-  />
+  >
+    <p class="hero-phone">Call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
+  </PageHero>
 
+  <!-- Agents vs brokerages -->
   <section class="section">
-    <div class="container two-col">
+    <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Two platforms, two jobs</span>
-        <h2>Search catches demand. Social creates it.</h2>
+        <span class="eyebrow">Who it's for</span>
+        <h2>Different needs for agents and brokerages.</h2>
       </div>
       <div class="grid grid-2">
         <div class="card">
-          <h3>Google Search</h3>
-          <p class="muted">Reaches people actively searching, such as "homes for sale in Picayune" or "what is my house worth". Good for buyer inquiries, home valuation requests and protecting your brokerage name from competitor ads.</p>
+          <h3>Individual agents</h3>
+          <p class="muted">Build your own name, not just the brokerage's.</p>
+          <ul class="check-list">
+            <li>A simple personal website: who you are, the areas you work, and how to reach you</li>
+            <li>A "what's my home worth" page to capture seller inquiries</li>
+            <li>Facebook and Instagram promotion for your listings and open houses</li>
+            <li>A tidy Google Business Profile so people searching your name find you</li>
+          </ul>
         </div>
         <div class="card">
-          <h3>Facebook & Instagram</h3>
-          <p class="muted">Reaches people in the area before they start searching. Good for new listings, open houses, price changes and home valuation offers, using instant lead forms or a landing page.</p>
+          <h3>Brokerages</h3>
+          <p class="muted">Keep a steady flow of inquiries coming to the office and your agents.</p>
+          <ul class="check-list">
+            <li>Google Search ads for buyer and seller searches in your market</li>
+            <li>Ads that protect your brokerage name from competitor ads</li>
+            <li>Landing pages for valuation offers, featured listings and recruiting</li>
+            <li>Lead routing to agents or a shared inbox, with monthly reporting</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- The pieces -->
   <section class="section section--paper">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">What we set up</span>
-        <h2>The pieces of a real estate campaign</h2>
+        <h2>The pieces of a real estate marketing system</h2>
       </div>
       <div class="grid grid-2 pieces">
         <div>
-          <h3>Listing-specific campaigns</h3>
-          <p class="muted">Short campaigns for individual listings, open houses or price changes, using accurate details and photos you approve. Useful for sellers who want to see their home actively promoted.</p>
+          <h3>Google Search ads</h3>
+          <p class="muted">Reach people actively searching, such as "homes for sale in Picayune" or "sell my house". Good for buyer inquiries and home valuation requests.</p>
         </div>
         <div>
-          <h3>Landing pages</h3>
-          <p class="muted">Focused pages for a listing, a home valuation offer or a buyer consultation, each with one clear action and your brokerage details.</p>
+          <h3>Facebook & Instagram ads</h3>
+          <p class="muted">Reach people nearby before they start searching. Good for new listings, open houses and price changes, using instant lead forms or a landing page.</p>
         </div>
         <div>
-          <h3>Lead capture and routing</h3>
-          <p class="muted">Forms and call tracking that deliver each inquiry to the right person quickly, whether that is an agent, a shared inbox or your CRM.</p>
+          <h3>Listing campaigns</h3>
+          <p class="muted">Short campaigns for individual listings, using accurate details and photos you approve. Sellers can see their home being actively promoted.</p>
         </div>
         <div>
-          <h3>Tracking and reporting</h3>
-          <p class="muted">A monthly report showing spend, inquiries by campaign and source, cost per inquiry, and your notes on which leads turned into appointments.</p>
+          <h3>Landing pages & lead capture</h3>
+          <p class="muted">Focused pages for a listing, a home valuation or a buyer consultation, with one clear action and your brokerage details.</p>
+        </div>
+        <div>
+          <h3>Agent & brokerage websites</h3>
+          <p class="muted">Clean, mobile-friendly sites that introduce you and capture inquiries. Listing search can stay with your brokerage or IDX provider.</p>
+        </div>
+        <div>
+          <h3>Tracking & reporting</h3>
+          <p class="muted">A monthly report on spend, inquiries by campaign and source, and your notes on which leads turned into appointments.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Demonstration listing plan -->
   <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="badge badge--sample">Demonstration</span>
+        <h2>Sample plan: promoting a new listing</h2>
+        <p class="lede">This shows how we'd approach a listing launch. It is an example, not a client project, and it shows no results.</p>
+      </div>
+      <ol class="timeline">
+        <li>
+          <h3>Before it goes live</h3>
+          <p class="muted">Collect approved photos and details. Build a simple listing page with a "schedule a showing" form and your brokerage information.</p>
+        </li>
+        <li>
+          <h3>Listing week</h3>
+          <p class="muted">Run a Facebook and Instagram housing-category campaign around the property's area, with a short video or photo carousel.</p>
+        </li>
+        <li>
+          <h3>Open house</h3>
+          <p class="muted">Promote the open house date and time. Send inquiries to you right away so follow-up is fast.</p>
+        </li>
+        <li>
+          <h3>After</h3>
+          <p class="muted">Report views, clicks and inquiries to you and your seller, and note which inquiries became showings.</p>
+        </li>
+      </ol>
+      <div class="btn-row mid-cta">
+        <a class="btn btn-primary arrow" href="/contact?service=real-estate" data-track="cta_re_mid">{cta.primary}</a>
+        <a class="btn btn-outline" href="/contact?service=websites" data-track="cta_re_website">{cta.website}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fair Housing -->
+  <section class="section section--paper">
     <div class="container fh">
       <div class="section-head">
         <span class="eyebrow">Fair Housing</span>
         <h2>Every campaign follows Fair Housing and platform housing-ad rules.</h2>
-        <p class="lede">Property advertising has legal requirements that general business advertising does not. We build them into how we work from the start.</p>
+        <p class="lede">Property advertising has legal requirements that general business advertising doesn't. We build them into how we work from the start.</p>
       </div>
       <ul class="check-list rules">
         <li>Ads comply with the federal Fair Housing Act and applicable state and local rules. They never state or imply a preference, limitation or exclusion based on race, color, religion, sex, disability, familial status or national origin.</li>
         <li>Facebook and Instagram housing ads run in Meta's required housing Special Ad Category, which limits targeting options such as age, gender and ZIP code.</li>
         <li>Google housing ads follow Google's personalized advertising policies for housing, which restrict similar targeting.</li>
-        <li>We do not use targeting, exclusions or audience workarounds to reach or avoid any protected group.</li>
+        <li>We don't use targeting, exclusions or audience workarounds to reach or avoid any protected group.</li>
         <li>Property details, prices and claims come from you and are checked before ads run. No misleading claims.</li>
-        <li>Your broker approves each ad, and ads include the brokerage information your license rules require.</li>
+        <li>You or your broker approve each ad, and ads include the brokerage information your license rules require.</li>
       </ul>
-      <p class="muted small">This is a summary of how we work, not legal advice. Platform policies change; we follow the current version of each platform's housing ad rules.</p>
+      <p class="muted small">This is a summary of how we work, not legal advice. Platform policies change, and we follow the current version of each platform's housing ad rules.</p>
+    </div>
+  </section>
+
+  <!-- What we need -->
+  <section class="section">
+    <div class="container need">
+      <div class="section-head">
+        <span class="eyebrow">Getting started</span>
+        <h2>What we'll need from you</h2>
+      </div>
+      <ul class="check-list">
+        <li>The areas you work and the kind of clients you want more of</li>
+        <li>Your brokerage's advertising requirements and who approves ads</li>
+        <li>Approved listing photos and details for any listing campaigns</li>
+        <li>Access to your Facebook Page, Google Business Profile and any existing ad accounts, or permission to set them up in your name</li>
+        <li>Where inquiries should go: your phone, email or CRM</li>
+      </ul>
     </div>
   </section>
 
@@ -109,17 +189,28 @@ const reFaq = [
     </div>
   </section>
 
-  <CtaBand heading="Talk through your brokerage's marketing." text="Tell us about your market, listings and team. We will recommend a realistic starting point and explain what it would take to run it well." track="cta_re_final" />
+  <CtaBand heading="Talk through your real estate marketing." text="Tell us about your market, listings and goals. We'll recommend a realistic starting point and explain what it would take to run it well." track="cta_re_final" showWebsiteQuote />
 </Base>
 
 <style>
-  .two-col { display: grid; gap: 0; }
+  .hero-phone { color: #c8d3e2; }
+  .hero-phone a { font-weight: 650; white-space: nowrap; }
+  .card h3 { font-size: 1.45rem; }
+  .card .check-list { margin-top: .5rem; }
   .pieces { gap: 2.5rem 3rem; }
   .pieces > div { display: grid; gap: .6rem; padding-top: 1.25rem; border-top: 2px solid var(--navy-800); align-content: start; }
   .pieces h3 { font-size: 1.35rem; }
+  .timeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; counter-reset: tl; }
+  .timeline li { counter-increment: tl; display: grid; gap: .5rem; align-content: start; padding-top: 1.1rem; border-top: 2px solid var(--gold-600); }
+  .timeline h3 { font-size: 1.2rem; font-family: var(--font-body); font-weight: 650; }
+  .timeline h3::before { content: counter(tl) '. '; color: var(--gold-700); }
+  .mid-cta { margin-top: var(--space-4); }
   .fh { display: grid; gap: 1.5rem; }
   .rules { max-width: 48rem; gap: 1rem; }
+  .need .check-list { max-width: 48rem; }
   .small { font-size: .9rem; max-width: 48rem; }
   .faq-grid { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  @media (max-width: 1000px) { .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .timeline { grid-template-columns: 1fr; } }
   @media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; } }
 </style>

@@ -1,6 +1,6 @@
 ---
 import Wordmark from './Wordmark.astro';
-import { nav, services, site } from '../data/site';
+import { nav, services, site, cta } from '../data/site';
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer on-navy">
@@ -9,7 +9,7 @@ const year = new Date().getFullYear();
       <Wordmark tone="light" />
       <p class="tag">{site.tagline}</p>
       <p class="about">A hands-on marketing agency based in {site.city}, {site.regionName}, serving {site.serviceArea}. Remote work available where it makes sense.</p>
-      <a class="btn btn-primary" href="/contact" data-track="cta_footer">Book a Free Consultation</a>
+      <a class="btn btn-primary" href="/contact" data-track="cta_footer">{cta.primary}</a>
     </div>
 
     <nav aria-label="Services">

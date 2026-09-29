@@ -1,4 +1,5 @@
 ---
+import { cta } from '../data/site';
 interface Props { eyebrow: string; title: string; lede: string; showCta?: boolean; track?: string }
 const { eyebrow, title, lede, showCta = true, track = 'cta_page_hero' } = Astro.props;
 ---
@@ -9,7 +10,7 @@ const { eyebrow, title, lede, showCta = true, track = 'cta_page_hero' } = Astro.
     <p class="lede reveal reveal-3">{lede}</p>
     {showCta && (
       <div class="btn-row reveal reveal-3">
-        <a class="btn btn-primary arrow" href="/contact" data-track={track}>Book a Free Consultation</a>
+        <a class="btn btn-primary arrow" href="/contact" data-track={track}>{cta.primary}</a>
       </div>
     )}
     <slot />

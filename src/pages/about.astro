@@ -2,42 +2,53 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { site } from '../data/site';
+import OwnerCard from '../components/OwnerCard.astro';
+import { site, owner } from '../data/site';
+
+const personSchema = owner.name
+  ? [{
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: owner.name,
+      jobTitle: owner.title,
+      worksFor: { '@type': 'ProfessionalService', name: site.name },
+    }]
+  : [];
 ---
 <Base
-  title="About Pearl River Marketing | Picayune, MS"
-  description="Pearl River Marketing is a locally focused, hands-on marketing agency in Picayune, Mississippi, built on clear communication, transparent reporting and practical marketing systems."
+  title="About Pearl River Marketing | Local Marketing in Picayune, MS"
+  description="Pearl River Marketing is a locally owned, hands-on marketing agency in Picayune, Mississippi, helping small businesses and real estate professionals in Pearl River County and South Mississippi."
+  schema={personSchema}
 >
   <PageHero
     eyebrow="About"
     title="A hands-on marketing partner, based in Picayune."
-    lede="Pearl River Marketing is a new, locally focused agency. We help small businesses and real estate professionals in Pearl River County and South Mississippi get found, get contacted, and see clearly what their marketing is doing."
+    lede="Pearl River Marketing is a new, locally owned agency. We help small businesses and real estate professionals in Pearl River County and South Mississippi get found, look credible online, and see clearly what their marketing is doing."
     showCta={false}
   />
 
   <section class="section">
     <div class="container about-grid">
-      <div class="prose">
-        <h2>Why we started</h2>
-        <p>Many local businesses have tried advertising and come away unsure whether it worked. Reports are full of jargon, accounts are owned by someone else, and nobody explains what the money actually bought.</p>
-        <p>Pearl River Marketing was started to do this differently for businesses close to home: set things up properly, keep it simple, and be straight about what is working and what is not.</p>
+      <div class="main">
+        <OwnerCard />
 
-        <h2>Who you will work with</h2>
-        {site.ownerName ? (
-          <p>You will work directly with {site.ownerName}, who plans, builds and manages your campaigns.</p>
-        ) : (
-          <p>You will work directly with the owner, who plans, builds and manages your campaigns. No hand-offs to a junior account manager.</p>
-        )}
-        {!site.ownerName && <p class="placeholder">[Owner photo, name and short introduction to be added before launch.]</p>}
+        <div class="prose">
+          <h2>Why Pearl River Marketing</h2>
+          <p>A lot of local businesses have paid for a website or ads and come away unsure whether it worked. Reports are full of jargon, accounts are owned by someone else, and nobody explains what the money actually bought.</p>
+          <p>Pearl River Marketing was started to do this differently for businesses close to home: set things up properly, keep it simple, and be straight about what is working and what isn't.</p>
 
-        <h2>How we work</h2>
-        <ul>
-          <li><strong>Clear communication.</strong> You get answers in plain English, from the person doing the work.</li>
-          <li><strong>Transparent reporting.</strong> Every month: what was spent, what came in, and what we are changing.</li>
-          <li><strong>Practical systems.</strong> Tracking, landing pages and lead routing that your team can actually use.</li>
-          <li><strong>Your accounts, your data.</strong> Everything is set up in your business's name.</li>
-          <li><strong>Honest recommendations.</strong> If ads are not the right move yet, we will say so.</li>
-        </ul>
+          <h2>How we work</h2>
+          <ul>
+            <li><strong>Clear communication.</strong> Answers in plain English, from the person doing the work.</li>
+            <li><strong>Transparent reporting.</strong> For ongoing work, a monthly summary of what was spent, what came in, and what we're changing.</li>
+            <li><strong>Practical systems.</strong> Websites, tracking and lead routing your team can actually use.</li>
+            <li><strong>Your accounts, your data.</strong> Your domain, website and ad accounts are set up in your business's name.</li>
+            <li><strong>Honest recommendations.</strong> If something isn't worth your money yet, we'll say so.</li>
+          </ul>
+
+          <h2>A new agency, and upfront about it</h2>
+          <p>We're just getting started, so you won't find borrowed client logos or inflated numbers here. What you will get is careful work, direct attention and honest reporting. As we complete projects, we'll share real examples with our clients' permission.</p>
+        </div>
       </div>
 
       <aside class="facts card" aria-label="At a glance">
@@ -45,21 +56,21 @@ import { site } from '../data/site';
         <dl>
           <div><dt>Based in</dt><dd>{site.city}, {site.regionName}</dd></div>
           <div><dt>Service area</dt><dd>{site.serviceArea}; remote work available</dd></div>
-          <div><dt>Core services</dt><dd>Google Ads, Facebook & Instagram ads, landing pages, tracking & reporting</dd></div>
-          <div><dt>Who we serve</dt><dd>Local service businesses, real estate professionals, small businesses</dd></div>
+          <div><dt>Services</dt><dd>Website design, Google Ads, Facebook & Instagram ads, Google Business Profile, landing pages, tracking & reporting</dd></div>
+          <div><dt>Who we serve</dt><dd>Contractors and home-service businesses, real estate agents and brokerages, local small businesses</dd></div>
           <div><dt>Phone</dt><dd><a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></dd></div>
+          {site.email && <div><dt>Email</dt><dd><a href={`mailto:${site.email}`} data-track="email_click">{site.email}</a></dd></div>}
         </dl>
       </aside>
     </div>
   </section>
 
-  <CtaBand track="cta_about_final" />
+  <CtaBand track="cta_about_final" showWebsiteQuote />
 </Base>
 
 <style>
   .about-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, .8fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; }
-  .prose h2:first-child { margin-top: 0; }
-  .placeholder { color: var(--gold-700); font-style: italic; font-size: .95rem; }
+  .main { display: grid; gap: var(--space-4); }
   .facts { position: sticky; top: 6rem; background: var(--paper); }
   .facts-title { font-size: 1.4rem; }
   dl { margin: 0; display: grid; gap: 0; }

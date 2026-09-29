@@ -1,0 +1,60 @@
+---
+import { owner, site } from '../data/site';
+
+const displayName = owner.name ?? 'The owner';
+const initials = owner.name
+  ? owner.name.split(/\s+/).map((p) => p[0]).slice(0, 2).join('').toUpperCase()
+  : 'PR';
+const bio = owner.bio.length
+  ? owner.bio
+  : [
+      `${site.name} is owned and run locally in ${site.city}. When you work with us, you work directly with the owner, who plans, builds and manages your website and campaigns.`,
+      'No hand-offs to a junior account manager, and no call center. Just a direct line to the person doing the work.',
+    ];
+const missing = [
+  !owner.name && 'Your name (owner.name)',
+  !owner.photo && 'A photo of you, saved in /public (owner.photo and owner.photoAlt)',
+  !owner.bio.length && 'A short introduction in your own words, 2–4 paragraphs (owner.bio)',
+].filter(Boolean) as string[];
+// Shown only when running locally (npm run dev), never on the live site.
+const showReminder = import.meta.env.DEV && missing.length > 0;
+---
+<article class="owner card" aria-labelledby="owner-name">
+  <div class="portrait">
+    {owner.photo ? (
+      <img src={owner.photo} alt={owner.photoAlt ?? `${displayName}, ${owner.title} of ${site.name}`} width="320" height="320" loading="lazy" decoding="async" />
+    ) : (
+      <span class="monogram" aria-hidden="true">{initials}</span>
+    )}
+  </div>
+  <div class="text">
+    <p class="role">{owner.title}, {site.name}</p>
+    <h2 id="owner-name">{displayName}</h2>
+    {bio.map((p) => <p>{p}</p>)}
+    <p class="call">Call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
+  </div>
+</article>
+
+{showReminder && (
+  <aside class="reminder" aria-label="Developer reminder">
+    <strong>Before launch (only visible in local development):</strong> add these in <code>src/data/site.ts</code>:
+    <ul>{missing.map((m) => <li>{m}</li>)}</ul>
+  </aside>
+)}
+
+<style>
+  .owner { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: clamp(1.25rem, 4vw, 2.5rem); align-items: start; }
+  .portrait { aspect-ratio: 1; max-width: 100%; border-radius: var(--radius); overflow: hidden; background: var(--navy-800); display: grid; place-items: center; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; }
+  .monogram { font-family: var(--font-display); font-size: 3.2rem; color: var(--gold-500); letter-spacing: .06em; }
+  .text { display: grid; gap: .8rem; }
+  .role { font-size: .78rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-700); }
+  h2 { font-size: var(--step-2); }
+  .call a { font-weight: 650; }
+  .reminder {
+    margin-top: 1rem; border: 2px dashed var(--gold-600); background: var(--gold-100);
+    border-radius: var(--radius); padding: 1rem 1.25rem; font-size: .92rem;
+  }
+  .reminder ul { margin: .5rem 0 0; padding-left: 1.2rem; }
+  @media (max-width: 560px) { .owner { grid-template-columns: 1fr; } .portrait { width: 8rem; } }
+</style>

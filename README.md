@@ -6,15 +6,17 @@ Marketing site for Pearl River Marketing (Picayune, MS). Built with [Astro](http
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Home: hero, audiences, services, Discover/Build/Optimize, local partner, sample campaign plan, FAQ |
-| `/services` | One section per service: who it's for, what's included, how it works, what the client provides |
-| `/real-estate-marketing` | Brokerage/agent page with Fair Housing and housing-ad rules |
-| `/about` | Agency intro (owner details are placeholders) |
-| `/contact` | Consultation form with validation, spam protection, success and error states |
+| `/` | Home: what/who/where hero, problems, audiences, services, why us, 3 steps, demo plan, FAQ |
+| `/services` | Per service: the problem, what's included, who it's for, how it works, what we need, quote button |
+| `/real-estate-marketing` | Agents vs brokerages, listing plan (demo), Fair Housing and housing-ad rules |
+| `/about` | Owner card (fills in from `owner` in `site.ts`) and how we work |
+| `/contact` | Consultation form: validation, spam protection, duplicate-send protection, success and error states |
 | `/privacy`, `/terms` | **Drafts**, marked noindex and left out of the sitemap until reviewed |
 | `/404` | Not-found page |
 
 `docs/legacy-single-page.html` is the earlier one-page version, kept for reference.
+
+Step-by-step launch instructions: **LAUNCH.md**.
 
 ## Commands
 
@@ -28,12 +30,13 @@ npm run build    # production build (outputs .vercel/output for Vercel)
 
 ## Business facts
 
-All business details live in `src/data/site.ts`. Only verified facts go there; `null` fields are left off the site and out of the structured data. Update:
+All business details live in `src/data/site.ts`. Only verified facts go there; `null` fields are left off the site and out of the structured data. See **LAUNCH.md** for the full list of what to fill in.
 
-- `email` – business inbox (turns on mailto links and schema email)
-- `ownerName` – shows on the About page and removes the placeholder note
-- `sameAs` – social profile URLs
-- `services[].status` – switch "limited" services to "available" when ready
+- `site.email`: business inbox (turns on mailto links and schema email)
+- `owner`: name, photo, bio for the About page
+- `site.sameAs`: social profile URLs
+- `cta`: button wording, changed once for the whole site
+- `services[].status`: set `'limited'` on anything you aren't ready to take on
 
 Never add a street address, hours, ratings or coordinates unless they are real.
 
@@ -46,9 +49,9 @@ See `.env.example`. Set these in Vercel (Project → Settings → Environment Va
 | `PUBLIC_SITE_URL` | Canonical URLs, Open Graph, sitemap (your real domain) |
 | `RESEND_API_KEY` | Sending form submissions by email |
 | `CONTACT_TO_EMAIL` | Inbox that receives requests |
-| `CONTACT_FROM_EMAIL` | Sender on a domain verified in Resend |
+| `CONTACT_FROM_EMAIL` | Sender on a domain verified in Resend (if empty, Resend's test sender is used, which only delivers to your Resend account email) |
 
-Until the three email variables are set, the form returns a clear "online requests are not switched on yet, please call" message. Nothing is faked or silently dropped.
+The production domain is set **only** in `PUBLIC_SITE_URL`. Until `RESEND_API_KEY` and `CONTACT_TO_EMAIL` are set, the form shows a clear "online requests aren't switched on yet, please call" message. Nothing is faked or silently dropped. Each form view sends a unique id as a Resend `Idempotency-Key`, so a retried submission can't create a duplicate email.
 
 ## Analytics
 

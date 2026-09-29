@@ -1,45 +1,27 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import { SERVICE_OPTIONS, BUDGET_OPTIONS } from '../lib/consultation';
-import { site } from '../data/site';
+import { SERVICE_OPTIONS, LIMITS } from '../lib/consultation';
+import { site, cta } from '../data/site';
 ---
 <Base
-  title="Book a Free Consultation"
-  description="Request a free marketing consultation with Pearl River Marketing in Picayune, MS. Tell us about your business and goals, or call 228-209-2431."
+  title="Get a Free Consultation in Picayune, MS"
+  description={`Request a free consultation or website quote from ${site.name} in Picayune, MS. Tell us about your business, or call or text ${site.phone.display}.`}
 >
   <PageHero
     eyebrow="Contact"
-    title="Book a free consultation."
-    lede="Tell us about your business and what you want more of. We will review it and get back to you to set up a short call. There is no cost and no obligation."
+    title="Get a free consultation."
+    lede="Tell us about your business and what you need, whether that's a new website, more calls from ads, or both. We'll review it and reach out to set up a short conversation. No cost, no obligation."
     showCta={false}
-  />
+  >
+    <p class="hero-phone">Prefer to talk? Call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
+  </PageHero>
 
   <section class="section">
     <div class="container contact-grid">
-      <aside class="side">
-        <div class="card side-card">
-          <h2 class="side-title">Prefer to talk?</h2>
-          <p class="muted">Call or text</p>
-          <p class="phone"><a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
-          {site.email && (
-            <p><a href={`mailto:${site.email}`} data-track="email_click">{site.email}</a></p>
-          )}
-          <p class="muted small">Based in {site.city}, {site.regionName}. Serving {site.serviceArea}.</p>
-        </div>
-        <div class="next">
-          <h2 class="side-title">What happens next</h2>
-          <ol>
-            <li>We read your request and look at your website and market.</li>
-            <li>We contact you to set up a short call at a time that suits you.</li>
-            <li>On the call we give you an honest recommendation and, if it makes sense, a written quote.</li>
-          </ol>
-        </div>
-      </aside>
-
       <div class="form-wrap">
         <form id="consult-form" novalidate aria-describedby="form-intro">
-          <p id="form-intro" class="muted small">Fields marked <span aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
+          <p id="form-intro" class="muted small">Fields marked <span aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required. It takes about two minutes.</p>
 
           <div class="error-summary" id="error-summary" tabindex="-1" hidden>
             <h2>Please fix the following</h2>
@@ -49,37 +31,37 @@ import { site } from '../data/site';
           <div class="row">
             <div class="field">
               <label for="name">Your name <span aria-hidden="true">*</span></label>
-              <input id="name" name="name" type="text" autocomplete="name" required maxlength="100" aria-describedby="name-error" />
+              <input id="name" name="name" type="text" autocomplete="name" required maxlength={LIMITS.name} aria-describedby="name-error" />
               <p class="field-error" id="name-error"></p>
             </div>
             <div class="field">
-              <label for="business">Business name <span aria-hidden="true">*</span></label>
-              <input id="business" name="business" type="text" autocomplete="organization" required maxlength="150" aria-describedby="business-error" />
-              <p class="field-error" id="business-error"></p>
+              <label for="email">Email <span aria-hidden="true">*</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength={LIMITS.email} aria-describedby="email-error" />
+              <p class="field-error" id="email-error"></p>
             </div>
           </div>
 
           <div class="row">
             <div class="field">
-              <label for="email">Email <span aria-hidden="true">*</span></label>
-              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200" aria-describedby="email-error" />
-              <p class="field-error" id="email-error"></p>
+              <label for="business">Business name <span aria-hidden="true">*</span></label>
+              <input id="business" name="business" type="text" autocomplete="organization" required maxlength={LIMITS.business} aria-describedby="business-error" />
+              <p class="field-error" id="business-error"></p>
             </div>
             <div class="field">
-              <label for="phone">Phone <span class="optional">(optional)</span></label>
-              <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" aria-describedby="phone-error" />
-              <p class="field-error" id="phone-error"></p>
+              <label for="website">Current website <span class="optional">(optional)</span></label>
+              <input id="website" name="website" type="text" autocomplete="url" inputmode="url" placeholder="yourbusiness.com" maxlength={LIMITS.website} aria-describedby="website-error" />
+              <p class="field-error" id="website-error"></p>
             </div>
           </div>
 
           <div class="field">
-            <label for="website">Website <span class="optional">(optional)</span></label>
-            <input id="website" name="website" type="text" autocomplete="url" inputmode="url" placeholder="yourbusiness.com" maxlength="200" aria-describedby="website-error" />
-            <p class="field-error" id="website-error"></p>
+            <label for="phone">Phone <span class="optional">(optional, if you'd rather we call)</span></label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength={LIMITS.phone} aria-describedby="phone-error" />
+            <p class="field-error" id="phone-error"></p>
           </div>
 
           <fieldset class="field" aria-describedby="services-error">
-            <legend>Services you are interested in <span aria-hidden="true">*</span></legend>
+            <legend>What are you interested in? <span aria-hidden="true">*</span></legend>
             <div class="checks">
               {SERVICE_OPTIONS.map((o) => (
                 <label class="check" for={`svc-${o.value}`}>
@@ -92,19 +74,9 @@ import { site } from '../data/site';
           </fieldset>
 
           <div class="field">
-            <label for="budget">Approximate monthly advertising budget <span aria-hidden="true">*</span></label>
-            <select id="budget" name="budget" required aria-describedby="budget-hint budget-error">
-              <option value="">Choose one</option>
-              {BUDGET_OPTIONS.map((o) => <option value={o.value}>{o.label}</option>)}
-            </select>
-            <p class="hint" id="budget-hint">Ad spend paid to Google or Meta, separate from management fees. A rough idea is fine.</p>
-            <p class="field-error" id="budget-error"></p>
-          </div>
-
-          <div class="field">
-            <label for="message">What would you like help with? <span aria-hidden="true">*</span></label>
-            <textarea id="message" name="message" rows="6" required maxlength="3000" aria-describedby="message-hint message-error"></textarea>
-            <p class="hint" id="message-hint">What you sell, where your customers are, and what you want more of.</p>
+            <label for="message">Tell us about your business <span aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" rows="6" required maxlength={LIMITS.message} aria-describedby="message-hint message-error"></textarea>
+            <p class="hint" id="message-hint">What you do, where your customers are, and what you'd like help with.</p>
             <p class="field-error" id="message-error"></p>
           </div>
 
@@ -113,37 +85,59 @@ import { site } from '../data/site';
             <label for="company-fax">Leave this field empty</label>
             <input id="company-fax" name="trap" type="text" tabindex="-1" autocomplete="off" />
           </div>
-          <input type="hidden" name="startedAt" id="startedAt" value="" />
 
           <div class="field">
             <label class="check consent" for="consent">
               <input type="checkbox" id="consent" name="consent" required aria-describedby="consent-error" />
-              <span>I agree that Pearl River Marketing may use the details I provide to respond to this inquiry, as described in the <a href="/privacy">Privacy Policy</a>. <span aria-hidden="true">*</span></span>
+              <span>I agree that {site.name} may use these details to respond to my inquiry, as described in the <a href="/privacy">Privacy Policy</a>. <span aria-hidden="true">*</span></span>
             </label>
             <p class="field-error" id="consent-error"></p>
           </div>
 
           <div class="submit-row">
-            <button class="btn btn-primary" type="submit" id="submit-btn" data-track="consultation_submit">
-              <span class="btn-label">Request My Free Consultation</span>
+            <button class="btn btn-primary" type="submit" id="submit-btn">
+              <span class="spinner" aria-hidden="true"></span>
+              <span class="btn-label">{cta.primary}</span>
             </button>
-            <p class="small muted">We do not add you to a mailing list.</p>
+            <p class="small muted">We won't add you to a mailing list.</p>
           </div>
 
+          <p class="visually-hidden" id="form-live" role="status" aria-live="polite"></p>
           <div class="status status--error" id="form-error" role="alert" tabindex="-1" hidden></div>
         </form>
 
         <div class="status status--success" id="form-success" tabindex="-1" hidden>
           <h2>Thank you. Your request was sent.</h2>
-          <p>We will review it and get back to you soon to set up a call. If it is urgent, call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a>.</p>
+          <p>We'll read it, look at your business, and reach out to set up a conversation. If you'd like to talk sooner, call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a>.</p>
         </div>
       </div>
+
+      <aside class="side">
+        <div class="card side-card">
+          <h2 class="side-title">Call or text</h2>
+          <p class="phone"><a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
+          {site.email && (
+            <p><a href={`mailto:${site.email}`} data-track="email_click">{site.email}</a></p>
+          )}
+          <p class="muted small">Based in {site.city}, {site.regionName}. Serving {site.serviceArea}.</p>
+        </div>
+        <div class="next">
+          <h2 class="side-title">What happens next</h2>
+          <ol>
+            <li>We read your request and look at your current website, listings and local competition.</li>
+            <li>We reach out to set up a short call at a time that works for you.</li>
+            <li>We give you an honest recommendation. If it's a fit, you get a written quote before any work starts.</li>
+          </ol>
+        </div>
+      </aside>
     </div>
   </section>
 </Base>
 
 <style>
-  .contact-grid { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  .hero-phone { color: #c8d3e2; }
+  .hero-phone a { font-weight: 650; white-space: nowrap; }
+  .contact-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
   .side { display: grid; gap: 2rem; position: sticky; top: 6rem; }
   .side-card { background: var(--paper); gap: .5rem; }
   .side-title { font-size: 1.35rem; margin-bottom: .25rem; }
@@ -158,48 +152,57 @@ import { site } from '../data/site';
   label, legend { font-weight: 600; font-size: .95rem; padding: 0; }
   legend { margin-bottom: .6rem; }
   .optional { font-weight: 400; color: var(--ink-soft); }
-  input[type='text'], input[type='email'], input[type='tel'], select, textarea {
-    width: 100%; font: inherit; font-size: 1rem; color: var(--ink);
-    padding: .8rem .9rem; border: 1.5px solid #c5cedb; border-radius: var(--radius); background: var(--white);
+  input[type='text'], input[type='email'], input[type='tel'], textarea {
+    width: 100%; font: inherit; font-size: 1rem; color: var(--ink); min-height: 3rem;
+    padding: .8rem .9rem; border: 1.5px solid #b9c4d3; border-radius: var(--radius); background: var(--white);
     transition: border-color .15s, box-shadow .15s;
   }
-  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--navy-700); box-shadow: 0 0 0 3px rgb(181 140 50 / 35%); }
+  input:focus, textarea:focus { outline: none; border-color: var(--navy-700); box-shadow: 0 0 0 3px rgb(181 140 50 / 35%); }
   [aria-invalid='true'] { border-color: var(--err) !important; }
   textarea { resize: vertical; min-height: 8rem; }
   .hint { font-size: .87rem; color: var(--ink-soft); }
   .field-error { font-size: .9rem; color: var(--err); font-weight: 550; }
   .field-error:empty { display: none; }
-  .checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem 1rem; }
-  .check { display: flex; gap: .65rem; align-items: flex-start; font-weight: 450; cursor: pointer; line-height: 1.4; }
-  .check input { width: 1.2rem; height: 1.2rem; margin: .1rem 0 0; accent-color: var(--navy-800); flex: none; }
+  .checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25rem 1rem; }
+  .check { display: flex; gap: .65rem; align-items: flex-start; font-weight: 450; cursor: pointer; line-height: 1.4; padding-block: .45rem; }
+  .check input { width: 1.25rem; height: 1.25rem; margin: 0; accent-color: var(--navy-800); flex: none; }
   .consent { font-size: .95rem; }
   .trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
   .submit-row { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
+  .spinner { display: none; width: 1rem; height: 1rem; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin .8s linear infinite; }
+  .btn[aria-busy='true'] .spinner { display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
   .error-summary { border: 2px solid var(--err); border-radius: var(--radius); padding: 1rem 1.25rem; background: var(--err-bg); scroll-margin-top: 6rem; }
   .error-summary h2 { font-family: var(--font-body); font-size: 1rem; font-weight: 700; color: var(--err); }
   .error-summary ul { margin: .5rem 0 0; padding-left: 1.2rem; }
   .error-summary a { color: var(--err); }
-  .status { border-radius: var(--radius); padding: 1.25rem 1.5rem; }
+  .status { border-radius: var(--radius); padding: 1.25rem 1.5rem; scroll-margin-top: 6rem; }
   .status--error { background: var(--err-bg); border: 1px solid var(--err); color: var(--ink); }
   .status--success { background: var(--ok-bg); border: 1px solid var(--ok); display: grid; gap: .6rem; }
   .status--success[hidden], .status--error[hidden] { display: none; }
   .status--success h2 { font-size: 1.6rem; color: var(--ok); }
 
-  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } .side { position: static; order: 2; } }
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } .side { position: static; } }
   @media (max-width: 600px) { .row, .checks { grid-template-columns: 1fr; } }
 </style>
 
 <script>
   import { normalize, validate, type FieldErrors } from '../lib/consultation';
-  import { site } from '../data/site';
+  import { site, cta } from '../data/site';
+  import { track } from '../lib/analytics';
 
   const form = document.getElementById('consult-form') as HTMLFormElement | null;
   if (form) {
-    const started = document.getElementById('startedAt') as HTMLInputElement;
-    started.value = String(Date.now());
+    const startedAt = Date.now();
+    // One id per page view. Resend ignores repeat sends with the same id for 24 hours,
+    // so a retry after a timeout cannot create a second email.
+    const submissionId =
+      typeof crypto !== 'undefined' && 'randomUUID' in crypto
+        ? crypto.randomUUID()
+        : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}-${Math.random().toString(36).slice(2)}`;
 
-    // Preselect a service when arriving from a "Ask about ..." link.
+    // Preselect a service when arriving from a "Request a quote" link.
     const pre = new URLSearchParams(location.search).get('service');
     if (pre) {
       const box = form.querySelector<HTMLInputElement>(`input[name="services"][value="${CSS.escape(pre)}"]`);
@@ -209,17 +212,20 @@ import { site } from '../data/site';
     const summary = document.getElementById('error-summary')!;
     const errorBox = document.getElementById('form-error')!;
     const success = document.getElementById('form-success')!;
+    const live = document.getElementById('form-live')!;
     const btn = document.getElementById('submit-btn') as HTMLButtonElement;
     const btnLabel = btn.querySelector('.btn-label')!;
-    const fieldIds: Record<string, string> = { services: 'svc-google-ads' };
+    const fieldIds: Record<string, string> = { services: 'svc-websites' };
+    let inFlight = false;
+    let sent = false;
 
     const collect = () => {
       const fd = new FormData(form);
       return {
-        name: fd.get('name'), business: fd.get('business'), email: fd.get('email'),
-        phone: fd.get('phone'), website: fd.get('website'), services: fd.getAll('services'),
-        budget: fd.get('budget'), message: fd.get('message'), consent: fd.get('consent') === 'on',
-        trap: fd.get('trap'), startedAt: Number(fd.get('startedAt')),
+        name: fd.get('name'), email: fd.get('email'), business: fd.get('business'),
+        website: fd.get('website'), phone: fd.get('phone'), services: fd.getAll('services'),
+        message: fd.get('message'), consent: fd.get('consent') === 'on',
+        trap: fd.get('trap'), startedAt, submissionId,
       };
     };
 
@@ -237,8 +243,7 @@ import { site } from '../data/site';
         const msgEl = document.getElementById(`${key}-error`);
         if (msgEl) msgEl.textContent = message ?? '';
         const inputId = fieldIds[key] ?? key;
-        const input = document.getElementById(inputId);
-        if (key !== 'services') input?.setAttribute('aria-invalid', 'true');
+        if (key !== 'services') document.getElementById(inputId)?.setAttribute('aria-invalid', 'true');
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = `#${inputId}`;
@@ -252,46 +257,69 @@ import { site } from '../data/site';
       summary.scrollIntoView({ block: 'start', behavior: 'smooth' });
     };
 
+    // Clear a field's error as soon as the visitor fixes it.
+    form.addEventListener('input', (e) => {
+      const el = e.target as HTMLElement;
+      const key = el.getAttribute('name') === 'services' ? 'services' : el.id;
+      const msg = document.getElementById(`${key}-error`);
+      if (msg?.textContent) { msg.textContent = ''; el.removeAttribute('aria-invalid'); }
+    });
+
+    const callLine = `<a href="tel:${site.phone.e164}">call or text ${site.phone.display}</a>`;
     const showFailure = (html: string) => {
       errorBox.innerHTML = html;
       errorBox.hidden = false;
-      errorBox.focus();
+      errorBox.focus({ preventScroll: true });
+      errorBox.scrollIntoView({ block: 'center', behavior: 'smooth' });
     };
-    const callLine = `<a href="tel:${site.phone.e164}">call or text ${site.phone.display}</a>`;
+
+    const setBusy = (busy: boolean) => {
+      inFlight = busy;
+      btn.disabled = busy;
+      btn.setAttribute('aria-busy', String(busy));
+      btnLabel.textContent = busy ? 'Sending…' : cta.primary;
+      live.textContent = busy ? 'Sending your request.' : '';
+    };
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (inFlight || sent) return; // blocks double-clicks and repeat submits
       clearErrors();
       const data = collect();
       const errors = validate(normalize(data));
       if (Object.keys(errors).length) { showErrors(errors); return; }
 
-      btn.disabled = true;
-      btnLabel.textContent = 'Sending…';
+      setBusy(true);
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 20_000);
       try {
         const res = await fetch('/api/consultation', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
+          signal: controller.signal,
         });
         const body = await res.json().catch(() => ({}));
         if (res.ok && body.ok) {
+          sent = true;
+          track('consultation_submit');
           form.hidden = true;
           success.hidden = false;
-          success.focus();
+          success.focus({ preventScroll: true });
+          success.scrollIntoView({ block: 'center', behavior: 'smooth' });
           return;
         }
         if (res.status === 400 && body.fieldErrors) { showErrors(body.fieldErrors); return; }
         if (res.status === 503) {
-          showFailure(`<strong>Online requests are not switched on yet.</strong> Your details were not sent. Please ${callLine} and we will set up your consultation.`);
+          showFailure(`<strong>Online requests aren't switched on yet.</strong> Your details were not sent. Please ${callLine} and we'll set up your consultation.`);
           return;
         }
-        showFailure(`<strong>Your request could not be sent.</strong> Nothing was lost on your side; your details are still in the form. Please try again in a minute, or ${callLine}.`);
+        showFailure(`<strong>Your request couldn't be sent.</strong> Your details are still in the form. Please try again in a minute, or ${callLine}.`);
       } catch {
-        showFailure(`<strong>We could not reach the server.</strong> Check your connection and try again, or ${callLine}. Your details are still in the form.`);
+        showFailure(`<strong>We couldn't reach the server.</strong> Check your connection and try again, or ${callLine}. Your details are still in the form.`);
       } finally {
-        btn.disabled = false;
-        btnLabel.textContent = 'Request My Free Consultation';
+        clearTimeout(timer);
+        if (!sent) setBusy(false);
       }
     });
   }

@@ -3,26 +3,29 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { serviceDetails } from '../data/serviceDetails';
-import { statusLabel } from '../data/site';
+import { site, statusLabel } from '../data/site';
 
 const serviceSchema = serviceDetails.map((s) => ({
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: s.name,
   description: s.summary,
-  provider: { '@type': 'ProfessionalService', name: 'Pearl River Marketing' },
-  areaServed: 'Pearl River County, Mississippi',
+  provider: { '@type': 'ProfessionalService', name: site.name },
+  areaServed: [
+    { '@type': 'City', name: 'Picayune, Mississippi' },
+    { '@type': 'AdministrativeArea', name: 'Pearl River County, Mississippi' },
+  ],
 }));
 ---
 <Base
-  title="Marketing Services: Google Ads, Meta Ads & Landing Pages"
-  description="Google Ads management, Facebook and Instagram ads, landing pages, tracking and reporting for small businesses in Picayune and Pearl River County, MS."
+  title="Website Design, Ads & Local SEO in Picayune, MS"
+  description="Website design, Google Ads, Facebook and Instagram ads, Google Business Profile, landing pages and reporting for small businesses in Picayune, Pearl River County and South Mississippi."
   schema={serviceSchema}
 >
   <PageHero
     eyebrow="Services"
-    title="Advertising that brings in inquiries, and reporting that shows it."
-    lede="Paid advertising is our core work. Landing pages, tracking and website support are there to make those ads pay off. Each service below explains who it is for, what is included, and what we need from you."
+    title="Practical marketing for local businesses."
+    lede="A website that earns trust, ads that reach people nearby, and tracking that shows what came in. Each service below explains the problem it solves, what's included, who it's for, and how to request a quote."
     track="cta_services_hero"
   />
 
@@ -34,7 +37,7 @@ const serviceSchema = serviceDetails.map((s) => ({
 
   <section class="container expectations">
     <div class="notice">
-      <strong>About results:</strong> we do not guarantee leads, sales, rankings or return on ad spend. Results depend on your market, offer, budget, competition and how quickly new inquiries are followed up. We will tell you plainly what we think is realistic before you spend anything.
+      <strong>About results:</strong> we don't guarantee leads, sales, rankings or return on ad spend. Results depend on your market, offer, budget, competition and how quickly new inquiries are followed up. We'll tell you plainly what we think is realistic before you spend anything.
     </div>
   </section>
 
@@ -42,21 +45,28 @@ const serviceSchema = serviceDetails.map((s) => ({
     <section id={s.id} class:list={['section', 'service', { 'section--paper': i % 2 === 1 }]} aria-labelledby={`${s.id}-title`}>
       <div class="container service-grid">
         <div class="service-intro">
-          <span class:list={['badge', `badge--${s.status}`]}>{statusLabel[s.status]}</span>
+          {s.status === 'limited' && <span class="badge badge--limited">{statusLabel.limited}</span>}
           <h2 id={`${s.id}-title`}>{s.name}</h2>
+          <div class="problem">
+            <h3 class="label">The problem</h3>
+            <p>{s.problem}</p>
+          </div>
           <p class="lede">{s.summary}</p>
           <div class="who">
-            <h3 class="label">Who it is for</h3>
+            <h3 class="label">Who it's for</h3>
             <p>{s.whoFor}</p>
           </div>
           {s.status === 'limited' && (
             <p class="muted small">We are taking a limited number of these projects while this service grows. Ask about it in your consultation.</p>
           )}
-          <a class="btn btn-dark arrow" href={`/contact?service=${s.id}`} data-track={`cta_service_${s.id}`}>Ask about {s.name.toLowerCase()}</a>
+          <div class="quote">
+            <a class="btn btn-primary arrow" href={`/contact?service=${s.id}`} data-track={`cta_service_${s.id}`}>{s.ctaLabel}</a>
+            <p class="muted small">Free and no obligation. You get a written quote before any work starts.</p>
+          </div>
         </div>
         <div class="service-body">
           <div>
-            <h3 class="label">What is included</h3>
+            <h3 class="label">What's included</h3>
             <ul class="check-list">{s.included.map((x) => <li>{x}</li>)}</ul>
           </div>
           <div>
@@ -72,7 +82,7 @@ const serviceSchema = serviceDetails.map((s) => ({
     </section>
   ))}
 
-  <CtaBand heading="Not sure which of these you need?" text="That is what the consultation is for. Tell us about your business and goals, and we will recommend where to start, including what not to spend money on yet." track="cta_services_final" />
+  <CtaBand heading="Not sure which of these you need?" text="That's what the free consultation is for. Tell us about your business and goals, and we'll recommend where to start, including what not to spend money on yet." track="cta_services_final" showWebsiteQuote />
 </Base>
 
 <style>
@@ -92,7 +102,10 @@ const serviceSchema = serviceDetails.map((s) => ({
     font-family: var(--font-body); font-size: .78rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase;
     color: var(--gold-700); margin-bottom: .85rem;
   }
-  .who .label { margin-bottom: .4rem; }
+  .who .label, .problem .label { margin-bottom: .4rem; }
+  .problem { border-left: 3px solid var(--gold-600); padding-left: 1rem; }
+  .problem p { color: var(--ink); }
+  .quote { display: grid; gap: .6rem; justify-items: start; }
   .how { margin: 0; padding: 0; list-style: none; counter-reset: how; display: grid; gap: .8rem; }
   .how li { counter-increment: how; display: grid; grid-template-columns: 2rem 1fr; gap: .5rem; }
   .how li::before {

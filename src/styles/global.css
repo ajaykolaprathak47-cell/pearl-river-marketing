@@ -46,6 +46,8 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+/* Components set display: grid/flex; this keeps the hidden attribute authoritative. */
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body {
   margin: 0;

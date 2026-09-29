@@ -1,13 +1,17 @@
 ---
+import { cta, site } from '../data/site';
 interface Props {
   heading?: string;
   text?: string;
   track?: string;
+  /** Show "Request a Website Quote" as a second button. */
+  showWebsiteQuote?: boolean;
 }
 const {
-  heading = 'Ready to see where your next customers can come from?',
-  text = 'Book a free consultation. We will look at your business, your market and what you are doing now, and give you an honest recommendation, even if that means starting small.',
+  heading = 'Ready to get more calls from local customers?',
+  text = "Get a free consultation. We'll look at your business, your website and your local competition, and give you an honest recommendation, even if that means starting small.",
   track = 'cta_band',
+  showWebsiteQuote = false,
 } = Astro.props;
 ---
 <section class="cta-band on-navy" aria-labelledby="cta-band-title">
@@ -16,8 +20,14 @@ const {
       <h2 id="cta-band-title">{heading}</h2>
       <p class="lede">{text}</p>
     </div>
-    <div class="btn-row">
-      <a class="btn btn-primary arrow" href="/contact" data-track={track}>Book a Free Consultation</a>
+    <div class="actions">
+      <div class="btn-row">
+        <a class="btn btn-primary arrow" href="/contact" data-track={track}>{cta.primary}</a>
+        {showWebsiteQuote && (
+          <a class="btn btn-outline" href="/contact?service=websites" data-track={`${track}_website`}>{cta.website}</a>
+        )}
+      </div>
+      <p class="call">Or call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
     </div>
   </div>
 </section>
@@ -29,7 +39,10 @@ const {
     border: 1px solid rgb(201 162 74 / 25%); box-shadow: 0 0 0 3rem rgb(201 162 74 / 4%);
     pointer-events: none;
   }
-  .inner { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: end; position: relative; }
+  .inner { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem 3rem; align-items: end; position: relative; }
   .copy { display: grid; gap: 1rem; max-width: 42rem; }
-  @media (max-width: 760px) { .inner { grid-template-columns: 1fr; align-items: start; } }
+  .actions { display: grid; gap: .9rem; justify-items: start; }
+  .call { color: #c8d3e2; font-size: .95rem; }
+  .call a { font-weight: 650; white-space: nowrap; }
+  @media (max-width: 860px) { .inner { grid-template-columns: 1fr; align-items: start; } }
 </style>
