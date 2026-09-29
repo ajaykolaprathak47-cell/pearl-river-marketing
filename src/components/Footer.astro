@@ -1,78 +1,62 @@
 ---
-import Wordmark from './Wordmark.astro';
-import { nav, services, site, cta } from '../data/site';
+import Logo from './Logo.astro';
+import { nav, site, realEstateLink } from '../data/site';
 const year = new Date().getFullYear();
+const links = [...nav.filter((n) => n.href !== '/'), realEstateLink];
 ---
-<footer class="site-footer on-navy">
+<footer class="site-footer">
   <div class="container top">
     <div class="brand">
-      <Wordmark tone="light" />
-      <p class="tag">{site.tagline}</p>
-      <p class="about">A local digital marketing agency based in {site.city}, {site.regionName}, specializing in digital advertising and social media content for businesses in {site.serviceArea}.</p>
-      <a class="btn btn-primary" href="/contact" data-track="cta_footer">{cta.primary}</a>
+      <a href="/" aria-label={`${site.name}, home`} class="logo-link"><Logo height={40} /></a>
+      <p class="tag accent">{site.tagline}</p>
     </div>
 
-    <nav aria-label="Services">
-      <h2 class="col-title">Services</h2>
-      <ul>
-        {services.map((s) => <li><a href={`/services#${s.id}`}>{s.name}</a></li>)}
+    <nav aria-label="Footer">
+      <ul class="links">
+        {links.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
       </ul>
     </nav>
 
-    <nav aria-label="Company">
-      <h2 class="col-title">Company</h2>
-      <ul>
-        <li><a href="/">Home</a></li>
-        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
-      </ul>
-    </nav>
-
-    <div>
-      <h2 class="col-title">Contact</h2>
-      <ul>
-        <li><a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></li>
-        {site.email && <li><a href={`mailto:${site.email}`} data-track="email_click">{site.email}</a></li>}
-        <li class="plain">{site.city}, {site.region}</li>
-      </ul>
-      <h2 class="col-title area-title">Service area</h2>
-      <p class="plain small">{site.serviceArea}.</p>
+    <div class="contact">
+      <a class="phone" href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a>
+      {site.email && <a href={`mailto:${site.email}`} data-track="email_click">{site.email}</a>}
+      <span>{site.city}, {site.regionName}</span>
     </div>
   </div>
 
   <div class="container bottom">
-    <p>© {year} {site.name}. All rights reserved.</p>
+    <p>© {year} {site.name} · Serving Pearl River County and South Mississippi</p>
     <ul>
-      <li><a href="/privacy">Privacy Policy</a></li>
-      <li><a href="/terms">Terms of Use</a></li>
+      <li><a href="/privacy">Privacy</a></li>
+      <li><a href="/terms">Terms</a></li>
     </ul>
   </div>
 </footer>
 
 <style>
-  .site-footer { background: var(--navy-900); padding-top: clamp(3rem, 7vw, 5rem); }
+  .site-footer { background: var(--canvas); border-top: 1px solid var(--line); }
   .top {
-    display: grid; gap: 2.5rem;
-    grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
-    padding-bottom: 3rem;
+    display: grid; grid-template-columns: auto 1fr auto; gap: 2rem 3rem; align-items: center;
+    padding-block: clamp(2.5rem, 6vw, 3.5rem);
   }
-  .brand { display: grid; gap: 1rem; justify-items: start; max-width: 24rem; }
-  .tag { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; color: var(--gold-500); }
-  .about, .small { color: #b8c4d4; font-size: .95rem; }
-  .col-title {
-    font-family: var(--font-body); font-size: .75rem; font-weight: 650; letter-spacing: .14em;
-    text-transform: uppercase; color: var(--gold-500); margin-bottom: 1rem;
-  }
-  .area-title { margin-top: 1.75rem; }
-  ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
-  .site-footer a:not(.btn) { color: #dfe6ef; text-decoration: none; font-size: .95rem; }
-  .site-footer a:not(.btn):hover { color: var(--gold-500); text-decoration: underline; }
-  .plain { color: #b8c4d4; font-size: .95rem; }
+  .brand { display: grid; gap: .6rem; }
+  .logo-link { display: block; width: 216px; max-width: 100%; }
+  .tag { color: var(--gold-700); font-size: 1.05rem; }
+  .links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem 1.75rem; justify-content: center; }
+  .links a, .contact a { color: var(--ink); text-decoration: none; font-weight: 600; font-size: .95rem; }
+  .links a:hover, .contact a:hover { color: var(--gold-700); }
+  .contact { display: grid; gap: .2rem; justify-items: end; font-size: .92rem; color: var(--ink-soft); }
+  .contact .phone { font-size: 1.05rem; color: var(--navy-800); font-variant-numeric: tabular-nums; }
   .bottom {
-    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;
-    border-top: 1px solid rgb(255 255 255 / 12%); padding-block: 1.5rem; font-size: .85rem; color: #93a2b6;
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 1.5rem;
+    border-top: 1px solid var(--line); padding-block: 1.25rem; font-size: .85rem; color: var(--ink-faint);
   }
-  .bottom ul { display: flex; gap: 1.5rem; }
-  .bottom a:not(.btn) { font-size: .85rem; }
-  @media (max-width: 900px) { .top { grid-template-columns: repeat(2, minmax(0, 1fr)); } .brand { grid-column: 1 / -1; } }
-  @media (max-width: 520px) { .top { grid-template-columns: 1fr; } }
+  .bottom ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.25rem; }
+  .bottom a { color: var(--ink-soft); text-decoration: none; }
+  .bottom a:hover { color: var(--navy-800); text-decoration: underline; }
+  @media (max-width: 860px) {
+    .top { grid-template-columns: 1fr; justify-items: start; }
+    .links { justify-content: flex-start; }
+    .contact { justify-items: start; }
+  }
 </style>

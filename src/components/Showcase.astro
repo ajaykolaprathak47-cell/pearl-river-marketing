@@ -1,0 +1,188 @@
+---
+/**
+ * Demonstration creatives built in code (no stock photos). Every business name is a
+ * placeholder ("Your ___"), and the section is labeled as demonstration work.
+ */
+---
+<div class="bento">
+  <!-- 1. Instagram post: roofing -->
+  <figure class="tile roof">
+    <span class="fmt">Instagram post</span>
+    <div class="cv" aria-hidden="true">
+      <svg class="roof-lines" viewBox="0 0 200 200" preserveAspectRatio="none">
+        <path d="M-10 150 L70 80 L150 150" fill="none" stroke="#cba362" stroke-width="3"/>
+        <path d="M30 150 L110 80 L190 150" fill="none" stroke="rgb(255 255 255 / .18)" stroke-width="3"/>
+        <path d="M70 150 L150 80 L230 150" fill="none" stroke="rgb(255 255 255 / .1)" stroke-width="3"/>
+      </svg>
+      <p class="roof-h">Storm season is&nbsp;here.</p>
+      <p class="roof-s">Free roof inspections this month.</p>
+      <p class="brand">Your Roofing Co.</p>
+    </div>
+    <figcaption class="visually-hidden">Sample Instagram post for a roofing company offering free inspections.</figcaption>
+  </figure>
+
+  <!-- 2. Instagram post: real estate -->
+  <figure class="tile listing">
+    <span class="fmt">Instagram post</span>
+    <div class="cv" aria-hidden="true">
+      <div class="photo">
+        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMax slice">
+          <defs><linearGradient id="sky2" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#bcd3e0"/><stop offset="1" stop-color="#e9eef0"/></linearGradient></defs>
+          <rect width="200" height="120" fill="url(#sky2)"/>
+          <circle cx="160" cy="30" r="12" fill="#f1d9a8"/>
+          <path d="M0 98 Q60 88 120 96 T200 92 V120 H0Z" fill="#8fa38a"/>
+          <rect x="58" y="58" width="84" height="44" fill="#fbfaf6"/>
+          <path d="M50 60 L100 30 L150 60Z" fill="#07283f"/>
+          <rect x="92" y="76" width="16" height="26" fill="#22516e"/>
+          <rect x="66" y="70" width="16" height="12" fill="#cfe0ea"/><rect x="118" y="70" width="16" height="12" fill="#cfe0ea"/>
+        </svg>
+      </div>
+      <div class="band">
+        <span class="tag">Just listed</span>
+        <p class="l-h">3 bed · 2 bath</p>
+        <p class="l-s">Picayune, MS · Your Name, Realtor</p>
+      </div>
+    </div>
+    <figcaption class="visually-hidden">Sample "just listed" post for a real estate agent.</figcaption>
+  </figure>
+
+  <!-- 3. Story -->
+  <figure class="tile story">
+    <span class="fmt">Story</span>
+    <div class="cv" aria-hidden="true">
+      <div class="bars"><i class="done"></i><i class="now"></i><i></i></div>
+      <p class="st-brand">Your Café</p>
+      <div class="sun"></div>
+      <p class="st-k">This weekend only</p>
+      <p class="st-h">Fall menu is&nbsp;here.</p>
+      <span class="sticker">Tap to order</span>
+    </div>
+    <figcaption class="visually-hidden">Sample Instagram story for a local café.</figcaption>
+  </figure>
+
+  <!-- 4. Facebook ad -->
+  <figure class="tile ad">
+    <span class="fmt">Facebook ad</span>
+    <div class="cv" aria-hidden="true">
+      <div class="ad-head">
+        <span class="av">H</span>
+        <span><b>Your HVAC Co.</b><small>Sponsored</small></span>
+      </div>
+      <p class="ad-copy">Beat the South Mississippi heat. Book your AC tune-up before summer.</p>
+      <div class="ad-img">
+        <div class="warm"></div><div class="cool"></div>
+        <div class="dial"><span>72°</span></div>
+      </div>
+      <div class="ad-foot">
+        <span><small>YOURHVAC.COM</small><b>Book a tune-up today</b></span>
+        <span class="book">Book now</span>
+      </div>
+    </div>
+    <figcaption class="visually-hidden">Sample Facebook ad for an HVAC company.</figcaption>
+  </figure>
+
+  <!-- Mobile-only companion tile beside the story -->
+  <div class="tile note">
+    <p>Posts, stories and ads, designed for your business and approved by you.</p>
+    <a class="text-link arrow" href="/services">How it works</a>
+  </div>
+</div>
+
+<style>
+  .bento {
+    display: grid; gap: clamp(.9rem, 2vw, 1.25rem);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+      'roof listing story'
+      'ad   ad      story';
+  }
+  .roof { grid-area: roof; } .listing { grid-area: listing; } .story { grid-area: story; } .ad { grid-area: ad; }
+  .note { display: none; }
+
+  .tile {
+    position: relative; margin: 0; border-radius: 18px; overflow: hidden; container-type: inline-size;
+    box-shadow: var(--shadow); border: 1px solid rgb(7 40 63 / 6%);
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  .tile:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .cv { position: relative; height: 100%; }
+  .roof .cv, .listing .cv { aspect-ratio: 1; }
+  .fmt {
+    position: absolute; z-index: 2; top: .75rem; right: .75rem;
+    font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    padding: .3rem .6rem; border-radius: 999px; background: rgb(255 255 255 / 90%); color: var(--navy-800);
+    backdrop-filter: blur(6px);
+  }
+
+  /* Roofing */
+  .roof .cv { background: linear-gradient(160deg, #0b2f4a, #061f33); color: var(--white); padding: 9cqi 8cqi; display: flex; flex-direction: column; }
+  .roof-lines { position: absolute; inset: auto 0 0 0; width: 100%; height: 55%; }
+  .roof-h { position: relative; font-weight: 800; font-size: 11cqi; line-height: 1; letter-spacing: -.04em; max-width: 9ch; margin-top: 6cqi; }
+  .roof-s { position: relative; margin-top: 4cqi; font-size: 4.6cqi; color: var(--gold-500); font-weight: 600; }
+  .brand { position: relative; margin-top: auto; font-size: 3.6cqi; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgb(255 255 255 / 75%); }
+
+  /* Listing */
+  .listing .cv { background: var(--white); display: grid; grid-template-rows: 1fr auto; }
+  .photo { overflow: hidden; }
+  .photo svg { width: 100%; height: 100%; }
+  .band { padding: 5cqi 7cqi 6cqi; display: grid; gap: 1.2cqi; }
+  .tag { width: fit-content; font-size: 3.4cqi; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--white); background: var(--gold-700); padding: 1cqi 2.6cqi; border-radius: 99px; }
+  .l-h { font-weight: 800; font-size: 7.5cqi; letter-spacing: -.03em; color: var(--navy-800); line-height: 1.1; }
+  .l-s { font-size: 3.8cqi; color: var(--ink-soft); }
+
+  /* Story */
+  .story .cv {
+    min-height: 100%; padding: 8cqi 8cqi 10cqi; display: flex; flex-direction: column; gap: 3cqi;
+    background: linear-gradient(175deg, #f7ecd9 0%, #efd9b0 55%, #cba362 100%); color: var(--navy-800);
+  }
+  .bars { display: flex; gap: 1.5cqi; }
+  .bars i { flex: 1; height: 1cqi; min-height: 3px; border-radius: 4px; background: rgb(7 40 63 / 18%); }
+  .bars i.done { background: var(--navy-800); }
+  .bars i.now { background: linear-gradient(90deg, var(--navy-800) 45%, rgb(7 40 63 / 18%) 45%); }
+  .st-brand { font-weight: 700; font-size: 5.5cqi; margin-top: 2cqi; }
+  .sun { width: 46cqi; aspect-ratio: 1; border-radius: 50%; margin: auto auto 2cqi; background: radial-gradient(circle at 35% 35%, #fff4dc, #e5bf7c 60%, #c99a4d); box-shadow: 0 10cqi 20cqi -8cqi rgb(138 106 36 / 50%); }
+  .st-k { font-size: 5cqi; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-700); }
+  .st-h { font-weight: 800; font-size: 13cqi; line-height: .98; letter-spacing: -.045em; }
+  .sticker { margin-top: 3cqi; width: fit-content; font-size: 5cqi; font-weight: 700; background: var(--navy-800); color: var(--white); padding: 2.5cqi 5cqi; border-radius: 99px; }
+
+  /* Facebook ad */
+  .ad .cv { background: var(--white); display: grid; grid-template-rows: auto auto 1fr auto; }
+  .ad-head { display: flex; align-items: center; gap: 1.4cqi; padding: 2.6cqi 3cqi 1.4cqi; }
+  .ad-head .av { width: 5.2cqi; height: 5.2cqi; min-width: 2rem; min-height: 2rem; border-radius: 50%; background: var(--river); color: var(--white); display: grid; place-items: center; font-weight: 800; font-size: .8rem; }
+  .ad-head b { display: block; font-size: max(.8rem, 2.1cqi); color: var(--ink); line-height: 1.2; }
+  .ad-head small { display: block; font-size: max(.7rem, 1.7cqi); color: var(--ink-faint); }
+  .ad-copy { padding: 0 3cqi 2cqi; font-size: max(.82rem, 2.1cqi); color: var(--ink); line-height: 1.45; }
+  .ad-img { position: relative; display: grid; grid-template-columns: 1fr 1fr; min-height: 11rem; }
+  .warm { background: linear-gradient(135deg, #f3b26b, #e07b4f); }
+  .cool { background: linear-gradient(135deg, #7fb5d1, #22516e); }
+  .dial {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: min(34cqi, 11rem); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+    background: var(--white); box-shadow: 0 0 0 1.4cqi rgb(255 255 255 / 45%), var(--shadow-lg);
+  }
+  .dial span { font-weight: 800; font-size: min(10cqi, 3.2rem); letter-spacing: -.04em; color: var(--navy-800); }
+  .ad-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 2cqi 3cqi; background: var(--canvas); }
+  .ad-foot small { display: block; font-size: max(.65rem, 1.5cqi); color: var(--ink-faint); letter-spacing: .04em; }
+  .ad-foot b { display: block; font-size: max(.85rem, 2.1cqi); color: var(--ink); }
+  .book { flex: none; font-size: max(.78rem, 1.8cqi); font-weight: 700; padding: .5rem .9rem; border-radius: 8px; background: var(--mist); color: var(--navy-800); }
+
+  /* Note (mobile) */
+  .note { background: var(--navy-800); color: var(--white); padding: 1.25rem; flex-direction: column; justify-content: space-between; gap: 1rem; box-shadow: none; border: 0; }
+  .note p { font-weight: 650; font-size: 1.05rem; line-height: 1.35; letter-spacing: -.01em; }
+  .note .text-link { color: var(--gold-500); font-size: .92rem; }
+
+  @media (max-width: 760px) {
+    .bento {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-areas:
+        'roof listing'
+        'ad   ad'
+        'story note';
+    }
+    .note { display: flex; grid-area: note; }
+    .story .cv { aspect-ratio: 9 / 16; min-height: 0; }
+    .fmt { display: none; }
+    .note p { font-size: .95rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .tile:hover { transform: none; } }
+</style>

@@ -2,179 +2,73 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
-import Faq from '../components/Faq.astro';
-import { cta, site } from '../data/site';
-
-const reFaq = [
-  {
-    q: 'Is real estate marketing a separate service?',
-    a: 'No. This page shows how our two services, digital advertising and social media content creation and posting, work for real estate agents and brokerages. You can use either one or both.',
-  },
-  {
-    q: 'Can you target ads to specific neighborhoods or types of buyers?',
-    a: "Only within the housing ad rules. On Facebook and Instagram, housing ads run in a Special Ad Category that removes targeting by age, gender and ZIP code and requires a broader location radius. We never try to include or exclude people based on race, color, religion, sex, disability, familial status or national origin, directly or through workarounds.",
-  },
-  {
-    q: 'How many leads will I get?',
-    a: "We can't promise a number. Results depend on your market, listings, price points, ad budget, competition and how quickly you respond. We'll share what we think is realistic after looking at your market, and report exactly what the ads did.",
-  },
-  {
-    q: 'Who approves the ads and posts?',
-    a: 'You, or your broker if your brokerage requires it, approve every ad and post before it goes out. Ads include the brokerage information your license rules require, and listing details come from you.',
-  },
-  {
-    q: 'Is ad spend included?',
-    a: 'No. Ad spend is paid directly by you to Meta and is separate from our management fee.',
-  },
-];
+import ServiceIcon from '../components/ServiceIcon.astro';
 ---
 <Base
   title="Real Estate Advertising & Social Media"
-  description="How Pearl River Marketing's Facebook and Instagram advertising and social media content services work for real estate agents and brokerages in Picayune and South Mississippi, within Fair Housing and platform housing-ad rules."
+  description="How Pearl River Marketing's Facebook and Instagram advertising and social media content help real estate agents in Picayune and South Mississippi, within Fair Housing and housing-ad rules."
 >
   <PageHero
     eyebrow="For real estate agents"
-    title="Advertising and social media content for South Mississippi real estate agents."
-    lede="Our two services, digital advertising and social media content, fit real estate especially well. Here's how we'd use them to promote your listings and keep your name in front of local buyers and sellers in Picayune, Pearl River County and the surrounding area."
-    track="cta_re_hero"
-  >
-    <p class="hero-phone">Call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
-  </PageHero>
+    title="Your listings, seen by more local buyers."
+    lede="Our two services, applied to real estate: ads that promote your listings, and posts that keep your name in front of buyers and sellers."
+  />
 
   <section class="section">
     <div class="container">
-      <p class="notice scope">This page is an example of how our two core services apply to real estate. It isn't a separate service, and the same pricing and approval process applies.</p>
       <div class="grid grid-2 two">
         <article class="card">
-          <span class="svc-n">01</span>
-          <h2>Digital Advertising</h2>
-          <p class="muted">Facebook and Instagram ads that put your listings and your name in front of people in your market.</p>
+          <ServiceIcon name="advertising" />
+          <h2>Listing ads</h2>
           <ul class="check-list">
-            <li>"Just listed" and price-change ads for individual listings</li>
-            <li>Open house promotion ahead of the date</li>
-            <li>Seller-focused ads, such as a home value offer using a Facebook lead form</li>
-            <li>Ads introducing you as the local agent to know</li>
-            <li>All run in Meta's required housing category, with reports on what the ads did</li>
+            <li>"Just listed" and price-change ads</li>
+            <li>Open house promotion</li>
+            <li>Home-value ads for seller inquiries</li>
           </ul>
-          <a class="btn btn-dark arrow" href="/contact?service=advertising" data-track="cta_re_ads">Request an Advertising Quote</a>
+          <a class="text-link arrow" href="/contact?service=advertising" data-track="cta_re_ads">Request an advertising quote</a>
         </article>
         <article class="card">
-          <span class="svc-n">02</span>
-          <h2>Social Media Content & Posting</h2>
-          <p class="muted">Consistent, professional posts that make your page look active and keep you top of mind.</p>
+          <ServiceIcon name="social-media" />
+          <h2>Agent content</h2>
           <ul class="check-list">
-            <li>"Just listed", "under contract" and "just sold" graphics</li>
-            <li>Open house announcements and reminders</li>
-            <li>Posts about the communities you serve</li>
-            <li>Helpful tips for buyers and sellers, written in your voice</li>
-            <li>A monthly calendar, with approved posts scheduled for you</li>
+            <li>Just listed, under contract and sold graphics</li>
+            <li>Community and market posts</li>
+            <li>A steady posting schedule, in your voice</li>
           </ul>
-          <a class="btn btn-dark arrow" href="/contact?service=social-media" data-track="cta_re_social">Request a Social Media Quote</a>
+          <a class="text-link arrow" href="/contact?service=social-media" data-track="cta_re_social">Request a social media quote</a>
         </article>
       </div>
+      <p class="scope">Same two services, same process. Real estate isn't a separate service.</p>
     </div>
   </section>
 
-  <!-- Demonstration listing plan -->
-  <section class="section section--paper">
-    <div class="container">
-      <div class="section-head">
-        <span class="badge badge--sample">Demonstration</span>
-        <h2>Sample plan: promoting a new listing</h2>
-        <p class="lede">This shows how both services could work together on a listing launch. It is an example, not a client project, and it shows no results.</p>
-      </div>
-      <ol class="timeline">
-        <li>
-          <h3>Before it goes live</h3>
-          <p class="muted">Gather approved photos and details. Create a "coming soon" post and the listing ad creative for your approval.</p>
-        </li>
-        <li>
-          <h3>Listing week</h3>
-          <p class="muted">Publish the "just listed" post and launch a Facebook and Instagram housing-category ad around the property's area.</p>
-        </li>
-        <li>
-          <h3>Open house</h3>
-          <p class="muted">Post the open house details, promote the date with an ad, and send any inquiries straight to you.</p>
-        </li>
-        <li>
-          <h3>After</h3>
-          <p class="muted">Post "under contract" or "just sold" when it happens, and report the ad results to you and your seller.</p>
-        </li>
-      </ol>
-      <div class="btn-row mid-cta">
-        <a class="btn btn-primary arrow" href="/contact" data-track="cta_re_mid">{cta.primary}</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Fair Housing -->
-  <section class="section">
+  <section class="section section--canvas fh-wrap">
     <div class="container fh">
-      <div class="section-head">
+      <div>
         <span class="eyebrow">Fair Housing</span>
-        <h2>Every ad and post follows Fair Housing and platform housing-ad rules.</h2>
-        <p class="lede">Property advertising has legal requirements that general business advertising doesn't. We build them into how we work from the start.</p>
-      </div>
-      <ul class="check-list rules">
-        <li>Ads and posts comply with the federal Fair Housing Act and applicable state and local rules. They never state or imply a preference, limitation or exclusion based on race, color, religion, sex, disability, familial status or national origin.</li>
-        <li>Facebook and Instagram housing ads run in Meta's required housing Special Ad Category, which limits targeting options such as age, gender and ZIP code.</li>
-        <li>We don't use targeting, exclusions or audience workarounds to reach or avoid any protected group.</li>
-        <li>Property details, prices and claims come from you and are checked before anything is published. No misleading claims.</li>
-        <li>You or your broker approve each ad and post, and ads include the brokerage information your license rules require.</li>
-      </ul>
-      <p class="muted small">This is a summary of how we work, not legal advice. Platform policies change, and we follow the current version of each platform's housing ad rules.</p>
-    </div>
-  </section>
-
-  <!-- What we need -->
-  <section class="section section--paper">
-    <div class="container need">
-      <div class="section-head">
-        <span class="eyebrow">Getting started</span>
-        <h2>What we'll need from you</h2>
+        <h2>Every ad follows Fair Housing and housing-ad rules.</h2>
       </div>
       <ul class="check-list">
-        <li>The areas you work and the kind of clients you want more of</li>
-        <li>Your brokerage's advertising requirements and who approves ads and posts</li>
-        <li>Approved listing photos and details</li>
-        <li>Access to your Facebook Page, Instagram account and Meta ad account, or permission to set them up in your name</li>
-        <li>Where inquiries should go: your phone, email or messages</li>
+        <li>No ad states or implies a preference or limitation based on race, color, religion, sex, disability, familial status or national origin.</li>
+        <li>Housing ads run in Meta's required housing category, which limits targeting by age, gender and ZIP code.</li>
+        <li>No targeting, exclusions or workarounds aimed at any protected group.</li>
+        <li>Listing details come from you, and you or your broker approve every ad and post.</li>
       </ul>
+      <p class="small">A summary of how we work, not legal advice.</p>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container faq-grid">
-      <div class="section-head">
-        <span class="eyebrow">Questions</span>
-        <h2>Real estate questions</h2>
-      </div>
-      <Faq items={reFaq} id="re-faq" />
-    </div>
-  </section>
-
-  <CtaBand heading="Talk through marketing for your listings." text="Tell us about your market, listings and goals. We'll recommend a realistic starting point for ads, social media content or both." track="cta_re_final" showQuote />
+  <CtaBand heading="Let's talk about your listings." text="Ad spend is paid directly to Meta and is separate from our fee." track="cta_re_final" />
 </Base>
 
 <style>
-  .hero-phone { color: #c8d3e2; }
-  .hero-phone a { font-weight: 650; white-space: nowrap; }
-  .scope { margin-bottom: var(--space-4); max-width: 48rem; }
-  .two .card { gap: 1rem; border-top: 3px solid var(--gold-600); }
-  .two .card h2 { font-size: clamp(1.5rem, 1.2rem + 1vw, 1.9rem); }
-  .two .btn { margin-top: auto; align-self: flex-start; }
-  .svc-n { font-family: var(--font-display); color: var(--gold-700); font-size: 1.1rem; }
-  .timeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; counter-reset: tl; }
-  .timeline li { counter-increment: tl; display: grid; gap: .5rem; align-content: start; padding-top: 1.1rem; border-top: 2px solid var(--gold-600); }
-  .timeline h3 { font-size: 1.2rem; font-family: var(--font-body); font-weight: 650; }
-  .timeline h3::before { content: counter(tl) '. '; color: var(--gold-700); }
-  .mid-cta { margin-top: var(--space-4); }
-  .fh { display: grid; gap: 1.5rem; }
-  .rules { max-width: 48rem; gap: 1rem; }
-  .need .check-list { max-width: 48rem; }
-  .small { font-size: .9rem; max-width: 48rem; }
-  .faq-grid { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
-  @media (max-width: 1000px) { .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 560px) { .timeline { grid-template-columns: 1fr; } }
-  @media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; } }
+  .two .card { gap: 1.1rem; }
+  .two h2 { font-size: clamp(1.5rem, 1.2rem + 1vw, 1.9rem); }
+  .two .text-link { margin-top: auto; padding-top: .5rem; }
+  .scope { margin-top: 1.5rem; font-size: .9rem; color: var(--ink-faint); }
+  .fh { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 1.5rem clamp(2rem, 6vw, 5rem); align-items: start; }
+  .fh > div { display: grid; gap: 1rem; }
+  .fh h2 { font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.2rem); }
+  .fh .small { grid-column: 2; font-size: .85rem; color: var(--ink-faint); }
+  @media (max-width: 800px) { .fh { grid-template-columns: 1fr; } .fh .small { grid-column: auto; } }
 </style>

@@ -1,0 +1,31 @@
+---
+/**
+ * The Pearl River Marketing logo, from the owner's artwork (public/brand/).
+ *  - horizontal: mark beside the wordmark, for the header
+ *  - stacked:    the original layout (mark above the wordmark)
+ * Both files are transparent and sized for sharp display on high-density screens.
+ */
+interface Props { variant?: 'horizontal' | 'stacked'; height?: number; eager?: boolean }
+const { variant = 'horizontal', height = 44, eager = false } = Astro.props;
+const src = variant === 'horizontal'
+  ? { name: 'logo-horizontal', w: 1100, h: 204 }
+  : { name: 'logo', w: 900, h: 493 };
+const width = Math.round((src.w / src.h) * height);
+---
+<picture class="logo">
+  <source srcset={`/brand/${src.name}.webp`} type="image/webp" />
+  <img
+    src={`/brand/${src.name}.png`}
+    alt="Pearl River Marketing"
+    width={width}
+    height={height}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding="async"
+    fetchpriority={eager ? 'high' : undefined}
+  />
+</picture>
+
+<style>
+  .logo { display: block; line-height: 0; }
+  .logo img { height: auto; max-width: 100%; }
+</style>

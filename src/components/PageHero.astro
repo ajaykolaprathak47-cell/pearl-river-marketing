@@ -1,9 +1,9 @@
 ---
 import { cta } from '../data/site';
 interface Props { eyebrow: string; title: string; lede: string; showCta?: boolean; track?: string }
-const { eyebrow, title, lede, showCta = true, track = 'cta_page_hero' } = Astro.props;
+const { eyebrow, title, lede, showCta = false, track = 'cta_page_hero' } = Astro.props;
 ---
-<section class="page-hero on-navy">
+<section class="page-hero">
   <div class="container inner">
     <span class="eyebrow reveal">{eyebrow}</span>
     <h1 class="reveal reveal-2">{title}</h1>
@@ -19,11 +19,14 @@ const { eyebrow, title, lede, showCta = true, track = 'cta_page_hero' } = Astro.
 
 <style>
   .page-hero {
-    padding-block: clamp(3rem, 7vw, 5rem);
+    position: relative; overflow: hidden;
+    padding-block: clamp(3.5rem, 9vw, 6rem) clamp(3rem, 7vw, 4.5rem);
     background:
-      radial-gradient(50rem 24rem at 100% 120%, rgb(201 162 74 / 12%), transparent 60%),
-      linear-gradient(180deg, var(--navy-900), var(--navy-800));
+      radial-gradient(40rem 22rem at 92% -10%, rgb(203 163 98 / 16%), transparent 70%),
+      radial-gradient(36rem 20rem at -5% 110%, rgb(34 81 110 / 8%), transparent 70%),
+      var(--canvas);
+    border-bottom: 1px solid var(--line);
   }
-  .inner { display: grid; gap: 1.25rem; justify-items: start; }
-  h1 { max-width: 20ch; }
+  .inner { display: grid; gap: 1.25rem; justify-items: start; position: relative; }
+  h1 { font-size: clamp(2.3rem, 1.5rem + 3.4vw, 3.9rem); max-width: 16ch; }
 </style>

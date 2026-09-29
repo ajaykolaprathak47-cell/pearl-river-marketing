@@ -2,14 +2,17 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
+import ServiceIcon from '../components/ServiceIcon.astro';
+import AdMock from '../components/AdMock.astro';
+import CalendarMock from '../components/CalendarMock.astro';
 import { serviceDetails } from '../data/serviceDetails';
-import { site, statusLabel } from '../data/site';
+import { site, realEstateLink } from '../data/site';
 
 const serviceSchema = serviceDetails.map((s) => ({
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: s.name,
-  description: s.summary,
+  description: s.lead,
   provider: { '@type': 'ProfessionalService', name: site.name },
   areaServed: [
     { '@type': 'City', name: 'Picayune, Mississippi' },
@@ -24,121 +27,56 @@ const serviceSchema = serviceDetails.map((s) => ({
 >
   <PageHero
     eyebrow="Services"
-    title="Two services. Both built to get your business noticed."
-    lede="We specialize in digital advertising and social media content for local businesses. Below you'll find what each service includes, who it's for, how it works and how to request a quote."
-    track="cta_services_hero"
+    title="Two services, built to get you noticed."
+    lede="We focus on Facebook and Instagram, and do two things there really well. Use one, or pair them."
   />
 
-  <nav class="jump container" aria-label="Services on this page">
-    <ul>
-      {serviceDetails.map((s) => <li><a href={`#${s.id}`}>{s.name}</a></li>)}
-    </ul>
-  </nav>
-
-  <section class="container expectations">
-    <div class="notice">
-      <strong>Our focus:</strong> we offer these two services only. We don't offer website design, search engine optimization or other marketing services, so our full attention goes to your ads and your social media.
-    </div>
-  </section>
-
   {serviceDetails.map((s, i) => (
-    <section id={s.id} class:list={['section', 'service', { 'section--paper': i % 2 === 1 }]} aria-labelledby={`${s.id}-title`}>
-      <div class="container service-grid">
-        <div class="service-intro">
-          {s.status === 'limited' && <span class="badge badge--limited">{statusLabel.limited}</span>}
-          <h2 id={`${s.id}-title`}>{s.name}</h2>
-          <div class="problem">
-            <h3 class="label">The problem</h3>
-            <p>{s.problem}</p>
-          </div>
-          <p class="lede">{s.summary}</p>
-          <div class="who">
-            <h3 class="label">Who it's for</h3>
-            <p>{s.whoFor}</p>
-          </div>
-          {s.status === 'limited' && (
-            <p class="muted small">We are taking a limited number of these projects while this service grows. Ask about it in your consultation.</p>
-          )}
-          <div class="quote">
-            <a class="btn btn-primary arrow" href={`/contact?service=${s.id}`} data-track={`cta_service_${s.id}`}>{s.ctaLabel}</a>
-            <p class="muted small">Free and no obligation. You get a written quote before any work starts.</p>
-          </div>
+    <section id={s.id} class:list={['section', 'svc', { flip: i % 2 === 1 }]} aria-labelledby={`${s.id}-title`}>
+      <div class="container svc-grid">
+        <div class="copy">
+          <div class="kicker"><ServiceIcon name={s.id} /><span>0{i + 1}</span></div>
+          <h2 id={`${s.id}-title`}>{s.title}</h2>
+          <p class="lede">{s.lead}</p>
+          <ul class="check-list">{s.items.map((x) => <li>{x}</li>)}</ul>
+          <p class="note">{s.note}</p>
+          <a class="text-link arrow" href={`/contact?service=${s.id}`} data-track={`cta_service_${s.id}`}>{s.ctaLabel}</a>
         </div>
-        <div class="service-body">
-          <div>
-            <h3 class="label">What's included</h3>
-            <ul class="check-list">{s.included.map((x) => <li>{x}</li>)}</ul>
-          </div>
-          <div>
-            <h3 class="label">How it works</h3>
-            <ol class="how">{s.howItWorks.map((x) => <li>{x}</li>)}</ol>
-          </div>
-          <div>
-            <h3 class="label">What we need from you</h3>
-            <ul class="check-list">{s.youProvide.map((x) => <li>{x}</li>)}</ul>
-          </div>
-          <div class="notes">
-            <h3 class="label">Good to know</h3>
-            {s.notes.map((n) => <p>{n}</p>)}
-          </div>
+        <div class="visual">
+          {s.id === 'advertising' ? <AdMock /> : <CalendarMock />}
         </div>
       </div>
     </section>
   ))}
 
-  <section class="section together">
+  <section class="together">
     <div class="container together-inner">
-      <div class="section-head">
-        <span class="eyebrow">Better together</span>
-        <h2>Why many businesses use both</h2>
-      </div>
-      <div class="together-body">
-        <p>Ads reach new people. Regular posts give those people a reason to trust you when they click through to your page. When the two run together, your ads point to a page that looks active and professional.</p>
-        <p class="muted">You can start with either service and add the other later. We'll recommend what makes sense for your business in the consultation.</p>
-      </div>
+      <p><strong>Better together.</strong> Ads bring new people to your page. Regular posts show them you're active and worth calling.</p>
+      <a class="text-link arrow" href={realEstateLink.href}>Real estate agent? See how this works for listings</a>
     </div>
   </section>
 
-  <CtaBand heading="Not sure where to start?" text="That's what the free consultation is for. Tell us about your business and goals, and we'll recommend whether advertising, social media content or both makes sense, including what not to spend money on yet." track="cta_services_final" showQuote />
+  <CtaBand heading="Not sure where to start?" text="Tell us about your business. We'll recommend ads, content or both." track="cta_services_final" />
 </Base>
 
 <style>
-  .jump { padding-block: 1.5rem .5rem; }
-  .jump ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
-  .jump a {
-    display: inline-block; padding: .45rem .9rem; border: 1px solid var(--line); border-radius: 999px;
-    font-size: .9rem; text-decoration: none; color: var(--ink); transition: border-color .2s, color .2s;
-  }
-  .jump a:hover { border-color: var(--gold-600); color: var(--gold-700); }
-  .expectations { padding-block: 1rem 0; }
-  .service { scroll-margin-top: 5rem; }
-  .service-grid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
-  .service-intro { display: grid; gap: 1.25rem; justify-items: start; position: sticky; top: 6rem; }
-  .service-body { display: grid; gap: 2.25rem; }
-  .label {
-    font-family: var(--font-body); font-size: .78rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--gold-700); margin-bottom: .85rem;
-  }
-  .who .label, .problem .label { margin-bottom: .4rem; }
-  .problem { border-left: 3px solid var(--gold-600); padding-left: 1rem; }
-  .problem p { color: var(--ink); }
-  .quote { display: grid; gap: .6rem; justify-items: start; }
-  .how { margin: 0; padding: 0; list-style: none; counter-reset: how; display: grid; gap: .8rem; }
-  .how li { counter-increment: how; display: grid; grid-template-columns: 2rem 1fr; gap: .5rem; }
-  .how li::before {
-    content: counter(how); width: 1.6rem; height: 1.6rem; border-radius: 50%; display: grid; place-items: center;
-    font-size: .8rem; font-weight: 700; background: var(--navy-800); color: var(--white); margin-top: .1rem;
-  }
-  .small { font-size: .9rem; }
-  .notes { display: grid; gap: .6rem; background: var(--gold-100); border-radius: var(--radius); padding: 1.1rem 1.25rem; font-size: .95rem; }
-  .notes .label { margin-bottom: .2rem; }
-  .together { border-top: 1px solid var(--line); }
-  .together-inner { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(1rem, 5vw, 4rem); align-items: start; }
-  .together-inner .section-head { margin-bottom: 0; }
-  .together-body { display: grid; gap: 1rem; font-size: 1.08rem; max-width: 40rem; }
-  @media (max-width: 800px) { .together-inner { grid-template-columns: 1fr; } }
-  @media (max-width: 900px) {
-    .service-grid { grid-template-columns: 1fr; }
-    .service-intro { position: static; }
+  .svc { scroll-margin-top: 5rem; }
+  .svc + .svc { background: var(--canvas); }
+  .svc-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2.5rem, 7vw, 6rem); align-items: center; }
+  .flip .copy { order: 2; }
+  .copy { display: grid; gap: 1.25rem; justify-items: start; max-width: 32rem; }
+  .kicker { display: flex; align-items: center; gap: .9rem; }
+  .kicker span:last-child { font-weight: 700; color: var(--gold-700); letter-spacing: .1em; font-size: .85rem; }
+  .copy h2 { font-size: clamp(1.9rem, 1.4rem + 2vw, 2.6rem); }
+  .copy .check-list { margin-block: .25rem; }
+  .note { font-size: .88rem; color: var(--ink-faint); max-width: 28rem; padding-left: .9rem; border-left: 2px solid var(--gold-100); }
+  .visual { display: grid; }
+  .together { border-block: 1px solid var(--line); }
+  .together-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; padding-block: 2rem; }
+  .together-inner p { max-width: 38rem; color: var(--ink-soft); }
+  .together-inner strong { color: var(--navy-800); }
+  @media (max-width: 860px) {
+    .svc-grid { grid-template-columns: 1fr; }
+    .flip .copy { order: 0; }
   }
 </style>

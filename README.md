@@ -28,6 +28,11 @@ npm run check    # Astro + TypeScript type-check
 npm run build    # production build (outputs .vercel/output for Vercel)
 ```
 
+## Logo and brand files
+
+The logo lives in `public/brand/` (transparent PNG + WebP), made from the owner's artwork:
+`logo` (stacked, original layout), `logo-horizontal` (mark beside wordmark, used in the header and footer) and `mark` (icon only). Favicons are `public/favicon-32.png` and `public/apple-touch-icon.png`. To swap the logo, replace these files with the same names and sizes.
+
 ## Business facts
 
 All business details live in `src/data/site.ts`. Only verified facts go there; `null` fields are left off the site and out of the structured data. See **LAUNCH.md** for the full list of what to fill in.

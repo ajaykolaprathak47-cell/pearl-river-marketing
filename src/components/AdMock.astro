@@ -1,0 +1,63 @@
+---
+/** Visual for Digital Advertising: an ad preview with its audience settings. Illustration only. */
+---
+<figure class="admock" aria-label="Illustration: a Facebook ad preview and its audience settings">
+  <div class="ad">
+    <div class="head">
+      <span class="av">YB</span>
+      <span><b>Your Business</b><small>Sponsored</small></span>
+    </div>
+    <p class="copy">Spring cleanups are booking now. Get on the schedule this week.</p>
+    <div class="img" aria-hidden="true">
+      <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice">
+        <defs><linearGradient id="amSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe1ea"/><stop offset="1" stop-color="#f3efe4"/></linearGradient></defs>
+        <rect width="400" height="210" fill="url(#amSky)"/>
+        <circle cx="320" cy="58" r="26" fill="#cba362" opacity=".9"/>
+        <path d="M0 150 Q100 110 200 140 T400 130 V210 H0Z" fill="#6f8a67"/>
+        <path d="M0 175 Q120 150 230 170 T400 165 V210 H0Z" fill="#526252"/>
+        <g fill="#07283f"><circle cx="90" cy="118" r="22"/><rect x="87" y="118" width="6" height="30"/><circle cx="140" cy="126" r="16"/><rect x="138" y="126" width="4" height="24"/></g>
+      </svg>
+    </div>
+    <div class="foot">
+      <span><small>YOURBUSINESS.COM</small><b>Free estimates</b></span>
+      <span class="btn-m">Send message</span>
+    </div>
+  </div>
+
+  <div class="aud">
+    <p class="aud-t">Audience</p>
+    <ul>
+      <li><span class="ico loc" aria-hidden="true"></span>Your service area</li>
+      <li><span class="ico int" aria-hidden="true"></span>Homeowners &amp; local interests</li>
+      <li><span class="ico re" aria-hidden="true"></span>People who visited your page</li>
+    </ul>
+  </div>
+  <figcaption class="visually-hidden">Illustration, not a client campaign.</figcaption>
+</figure>
+
+<style>
+  .admock { position: relative; margin: 0; padding: 0 0 3rem 0; max-width: 30rem; width: 100%; justify-self: center; }
+  .ad { background: var(--white); border-radius: 18px; box-shadow: var(--shadow-lg); overflow: hidden; border: 1px solid rgb(7 40 63 / 6%); width: 88%; }
+  .head { display: flex; align-items: center; gap: .6rem; padding: .9rem 1rem .5rem; }
+  .av { width: 2.1rem; height: 2.1rem; border-radius: 50%; display: grid; place-items: center; background: var(--navy-800); color: var(--gold-500); font-size: .68rem; font-weight: 800; flex: none; }
+  .head b { display: block; font-size: .85rem; color: var(--ink); line-height: 1.2; }
+  .head small { display: block; font-size: .72rem; color: var(--ink-faint); }
+  .copy { padding: 0 1rem .75rem; font-size: .85rem; line-height: 1.45; color: var(--ink); }
+  .img svg { width: 100%; height: auto; aspect-ratio: 400 / 210; }
+  .foot { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .75rem 1rem; background: var(--canvas); }
+  .foot small { display: block; font-size: .65rem; letter-spacing: .04em; color: var(--ink-faint); }
+  .foot b { display: block; font-size: .88rem; color: var(--ink); }
+  .btn-m { font-size: .75rem; font-weight: 700; padding: .45rem .8rem; border-radius: 8px; background: var(--mist); color: var(--navy-800); white-space: nowrap; }
+  .aud {
+    position: absolute; right: 0; bottom: 0; width: 62%; min-width: 15rem;
+    background: var(--white); border-radius: 16px; padding: 1rem 1.1rem; box-shadow: var(--shadow); border: 1px solid rgb(7 40 63 / 6%);
+  }
+  .aud-t { font-size: .7rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-700); margin-bottom: .55rem; }
+  .aud ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .45rem; }
+  .aud li { display: flex; align-items: center; gap: .55rem; font-size: .82rem; font-weight: 600; color: var(--navy-800); }
+  .ico { width: 1.5rem; height: 1.5rem; border-radius: 8px; background: var(--navy-100); flex: none; position: relative; }
+  .ico::after { content: ''; position: absolute; inset: .45rem; border-radius: 50%; background: var(--river); }
+  .ico.int::after { border-radius: 2px; background: var(--gold-600); }
+  .ico.re::after { inset: .4rem; border: 2px solid var(--hill); background: none; }
+  @media (max-width: 480px) { .ad { width: 100%; } .aud { position: relative; width: 100%; min-width: 0; margin-top: .75rem; } .admock { padding-bottom: 0; } }
+</style>

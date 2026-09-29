@@ -14,68 +14,56 @@ const personSchema = owner.name
       worksFor: { '@type': 'ProfessionalService', name: site.name },
     }]
   : [];
+
+const values = [
+  { t: 'You work with the owner', d: 'No hand-offs. The person you talk to is the person doing the work.' },
+  { t: 'You approve everything', d: 'No post or ad goes live until you’ve seen it and said yes.' },
+  { t: 'You own your accounts', d: 'Your pages, ad account and content stay in your business’s name.' },
+];
 ---
 <Base
   title="About Pearl River Marketing | Picayune, MS"
-  description="Pearl River Marketing is a locally owned digital marketing agency in Picayune, Mississippi, specializing in Facebook and Instagram advertising and social media content for small businesses."
+  description="Pearl River Marketing is a locally owned digital marketing agency in Picayune, Mississippi, focused on Facebook and Instagram advertising and social media content."
   schema={personSchema}
 >
   <PageHero
     eyebrow="About"
-    title="A local digital marketing partner, based in Picayune."
-    lede="Pearl River Marketing is a new, locally owned agency that does two things: digital advertising and social media content. We help small businesses in Pearl River County and South Mississippi get noticed and stay visible online."
-    showCta={false}
+    title="Local, hands-on and focused."
+    lede="A new digital marketing agency in Picayune, Mississippi, helping local businesses get noticed online."
   />
 
   <section class="section">
-    <div class="container about-grid">
-      <div class="main">
-        <OwnerCard />
+    <div class="container about">
+      <OwnerCard />
 
-        <div class="prose">
-          <h2>Why Pearl River Marketing</h2>
-          <p>Most local business owners know social media matters. The hard part is finding time to post consistently, and knowing whether money spent on "boosted" posts actually did anything.</p>
-          <p>Pearl River Marketing was started to take that off their plate for businesses close to home. We focus on just two services, advertising and social media content, so we can do them well, keep things simple, and be straight about what's working and what isn't.</p>
-
-          <h2>How we work</h2>
-          <ul>
-            <li><strong>Clear communication.</strong> Answers in plain English, from the person doing the work.</li>
-            <li><strong>You approve everything.</strong> No ad or post goes out on your pages without your OK.</li>
-            <li><strong>Transparent reporting.</strong> Clear reports on what was spent, what the ads did, and what we're changing.</li>
-            <li><strong>Your accounts, your content.</strong> Your pages and ad account stay in your business's name.</li>
-            <li><strong>Honest recommendations.</strong> If something isn't worth your money yet, we'll say so.</li>
-          </ul>
-
-          <h2>A new agency, and upfront about it</h2>
-          <p>We're just getting started, so you won't find borrowed client logos or inflated numbers here. What you will get is careful work, direct attention and honest reporting. As we complete projects, we'll share real examples with our clients' permission.</p>
-        </div>
+      <div class="why">
+        <h2>Why we do just two things</h2>
+        <p class="lede">Most local owners know social media matters. The hard part is posting consistently and knowing whether ad money did anything. So we focus on ads and content, and do them well.</p>
       </div>
 
-      <aside class="facts card" aria-label="At a glance">
-        <h2 class="facts-title">At a glance</h2>
-        <dl>
-          <div><dt>Based in</dt><dd>{site.city}, {site.regionName}</dd></div>
-          <div><dt>Service area</dt><dd>{site.serviceArea}; remote work available</dd></div>
-          <div><dt>Services</dt><dd>Digital advertising (Facebook & Instagram) and social media content creation & posting</dd></div>
-          <div><dt>Who we serve</dt><dd>Contractors and home-service businesses, real estate agents, and other local small businesses</dd></div>
-          <div><dt>Phone</dt><dd><a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></dd></div>
-          {site.email && <div><dt>Email</dt><dd><a href={`mailto:${site.email}`} data-track="email_click">{site.email}</a></dd></div>}
-        </dl>
-      </aside>
+      <ul class="values">
+        {values.map((v) => (
+          <li>
+            <h3>{v.t}</h3>
+            <p class="muted">{v.d}</p>
+          </li>
+        ))}
+      </ul>
+
+      <p class="honest">We’re new, and upfront about it: no borrowed logos or made-up numbers. Real client work will be shared here, with permission, as it’s completed.</p>
     </div>
   </section>
 
-  <CtaBand track="cta_about_final" showQuote />
+  <CtaBand track="cta_about_final" />
 </Base>
 
 <style>
-  .about-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, .8fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; }
-  .main { display: grid; gap: var(--space-4); }
-  .facts { position: sticky; top: 6rem; background: var(--paper); }
-  .facts-title { font-size: 1.4rem; }
-  dl { margin: 0; display: grid; gap: 0; }
-  dl div { padding-block: .85rem; border-top: 1px solid var(--line); display: grid; gap: .2rem; }
-  dt { font-size: .75rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-700); }
-  dd { margin: 0; }
-  @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } .facts { position: static; } }
+  .about { display: grid; gap: clamp(3rem, 7vw, 4.5rem); max-width: 60rem; }
+  .why { display: grid; gap: 1rem; max-width: 40rem; }
+  .why h2 { font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.3rem); }
+  .values { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+  .values li { display: grid; gap: .5rem; align-content: start; padding: 1.5rem; border-radius: 18px; background: var(--canvas); }
+  .values h3 { font-size: 1.15rem; }
+  .honest { font-size: .95rem; color: var(--ink-soft); max-width: 40rem; padding-left: 1rem; border-left: 2px solid var(--gold-600); }
+  @media (max-width: 800px) { .values { grid-template-columns: 1fr; } }
 </style>

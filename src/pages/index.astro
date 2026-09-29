@@ -1,275 +1,158 @@
 ---
 import Base from '../layouts/Base.astro';
-import HeroIllustration from '../components/HeroIllustration.astro';
-import SampleCampaign from '../components/SampleCampaign.astro';
-import Faq from '../components/Faq.astro';
+import HeroVisual from '../components/HeroVisual.astro';
+import ServiceIcon from '../components/ServiceIcon.astro';
+import Showcase from '../components/Showcase.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { services, statusLabel, site, cta } from '../data/site';
-import { homeFaq } from '../data/faq';
+import { services, cta } from '../data/site';
+
+const steps = [
+  { t: "Let's Talk", d: 'A free, no-pressure conversation about your business and goals.' },
+  { t: 'Create Your Strategy', d: 'We plan your ads and content. You approve everything first.' },
+  { t: 'Launch & Grow', d: 'We publish, monitor and keep improving, with clear updates.' },
+];
 ---
 <Base
   title="Facebook Ads & Social Media in Picayune, MS"
-  description="Pearl River Marketing runs Facebook and Instagram ads and creates and posts social media content for small businesses in Picayune, Pearl River County and South Mississippi."
+  description="Pearl River Marketing helps local businesses in Picayune and South Mississippi grow with Facebook and Instagram advertising and professional social media content."
 >
-  <!-- 1. What we do, for whom, where -->
-  <section class="hero on-navy">
+  <!-- 1. Hero -->
+  <section class="hero">
+    <svg class="hero-river" viewBox="0 0 1440 700" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M-40 560 C 240 470, 420 640, 720 540 S 1180 380, 1480 460" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M-40 610 C 260 520, 460 690, 760 590 S 1200 430, 1480 510" fill="none" stroke="currentColor" stroke-width="1"/>
+    </svg>
     <div class="container hero-grid">
       <div class="hero-copy">
-        <p class="brandline reveal"><span>{site.tagline}</span></p>
-        <h1 class="reveal reveal-2">Facebook & Instagram ads and social media content for <em>South Mississippi businesses.</em></h1>
-        <p class="lede reveal reveal-3">We help local businesses in Picayune and Pearl River County get noticed online, with targeted digital advertising and consistent, professional posts that keep your business in front of the people nearby.</p>
-        <div class="btn-row reveal reveal-3">
+        <span class="eyebrow reveal">Digital marketing · Picayune, MS</span>
+        <h1 class="reveal reveal-2">Turn attention into <span class="accent">growth.</span></h1>
+        <p class="lede reveal reveal-3">We help local businesses in South Mississippi grow their online presence with Facebook &amp; Instagram advertising and professional social media content.</p>
+        <div class="btn-row reveal reveal-4">
           <a class="btn btn-primary arrow" href="/contact" data-track="cta_hero">{cta.primary}</a>
-          <a class="btn btn-outline" href="/services" data-track="cta_hero_services">See Our Two Services</a>
+          <a class="btn btn-outline" href="/services" data-track="cta_hero_services">{cta.secondary}</a>
         </div>
-        <p class="hero-note">Free, no-obligation consultation · Or call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
+        <p class="for reveal reveal-4">For contractors, home services, real estate agents and local shops.</p>
       </div>
-      <HeroIllustration />
-    </div>
-    <div class="container">
-      <p class="area-strip">
-        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 18s6-5.2 6-10A6 6 0 0 0 4 8c0 4.8 6 10 6 10Z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="8" r="2.2" fill="currentColor"/></svg>
-        Based in {site.city}, {site.region}. Serving {site.serviceArea}.
-      </p>
+      <HeroVisual />
     </div>
   </section>
 
-  <!-- 2. The problems we solve -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Sound familiar?</span>
-        <h2>Great at the work. Quiet online.</h2>
-        <p class="lede">Most local business owners we talk to run into at least one of these.</p>
-      </div>
-      <ul class="problems">
-        <li>
-          <h3>Your page looks inactive</h3>
-          <p class="muted">The last post was months ago, so new customers can't tell if you're still open or busy.</p>
-        </li>
-        <li>
-          <h3>No time to post</h3>
-          <p class="muted">You know you should be posting regularly, but running the business comes first.</p>
-        </li>
-        <li>
-          <h3>Boosted posts, little to show</h3>
-          <p class="muted">You've tried "boosting" a post or two and couldn't tell what it brought in.</p>
-        </li>
-        <li>
-          <h3>Customers nearby don't know you</h3>
-          <p class="muted">Word of mouth is great, but it only reaches so far. You want to reach new people in your area.</p>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 3. Services -->
-  <section class="section section--paper">
+  <!-- 2. Services -->
+  <section class="section" aria-labelledby="services-title">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">What we do</span>
-        <h2>Two services, done well.</h2>
-        <p class="lede">We specialize in the two things that keep a local business visible on social media. Choose one or combine them.</p>
+        <h2 id="services-title">Two services. Done right.</h2>
       </div>
-      <div class="grid grid-2 svc-grid">
-        {services.map((s, i) => (
-          <article class="card svc">
-            {s.status === 'limited' && <span class="badge badge--limited">{statusLabel.limited}</span>}
-            <span class="svc-n">{String(i + 1).padStart(2, '0')}</span>
-            <h3>{s.name}</h3>
+      <div class="svc-grid">
+        {services.map((s) => (
+          <a class="card svc" href={`/services#${s.id}`}>
+            <ServiceIcon name={s.id} />
+            <h3>{s.id === 'social-media' ? 'Social Media Content' : s.name}</h3>
             <p class="muted">{s.short}</p>
-            <ul class="check-list">{s.highlights.map((h) => <li>{h}</li>)}</ul>
-            <div class="svc-actions">
-              <a class="btn btn-dark arrow" href={`/contact?service=${s.id}`} data-track={`cta_home_${s.id}`}>{s.ctaLabel}</a>
-              <a class="text-link arrow" href={`/services#${s.id}`}>What's included</a>
-            </div>
-          </article>
+            <span class="text-link arrow">Learn more</span>
+          </a>
         ))}
       </div>
-      <p class="spend-note">Ad spend is paid directly by you to Meta and is separate from our management fees.</p>
     </div>
   </section>
 
-  <!-- 4. Who we help -->
-  <section class="section">
+  <!-- 3. Showcase -->
+  <section class="section section--canvas" aria-labelledby="work-title">
     <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Who we help</span>
-        <h2>Built for businesses that depend on local customers.</h2>
+      <div class="section-head showcase-head">
+        <span class="eyebrow">Sample work</span>
+        <h2 id="work-title">Content made to stop the scroll.</h2>
+        <p class="muted">Demonstration concepts that show our style. Not real clients or results.</p>
       </div>
-      <div class="grid grid-3 audiences">
-        <div class="audience">
-          <h3>Contractors & home services</h3>
-          <p class="muted">Roofing, HVAC, plumbing, landscaping, remodeling and other trades that want steady calls and a page that shows off their work.</p>
-        </div>
-        <div class="audience">
-          <h3>Real estate agents</h3>
-          <p class="muted">Listing ads, open house promotion and regular posts that keep your name in front of local buyers and sellers.</p>
-          <a class="arrow text-link" href="/real-estate-marketing">How this works for real estate</a>
-        </div>
-        <div class="audience">
-          <h3>Other small businesses</h3>
-          <p class="muted">Shops, salons, restaurants, clinics and professional offices in Picayune, Pearl River County and nearby communities.</p>
-        </div>
-      </div>
+      <Showcase />
     </div>
   </section>
 
-  <!-- 5. Why us -->
-  <section class="section on-navy local">
-    <div class="container local-grid">
-      <div class="section-head">
-        <span class="eyebrow">Why work with us</span>
-        <h2>A local partner. You work with the person doing the work.</h2>
-        <p class="lede">We're a small, focused agency in {site.city}. That shapes how we work with you.</p>
-      </div>
-      <ul class="benefits">
-        <li>
-          <h3>Direct communication</h3>
-          <p>No hand-offs. You talk to the person creating your content and running your ads.</p>
-        </li>
-        <li>
-          <h3>We know the area</h3>
-          <p>We're based in Pearl River County, so your posts and ads sound local, and we can meet in person.</p>
-        </li>
-        <li>
-          <h3>You approve everything</h3>
-          <p>Nothing goes out on your pages until you've seen it and said yes.</p>
-        </li>
-        <li>
-          <h3>You own everything</h3>
-          <p>Your pages, ad account and content stay in your business's name.</p>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 6. How to get started -->
-  <section class="section">
+  <!-- 4. Process -->
+  <section class="section" aria-labelledby="how-title">
     <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">How to get started</span>
-        <h2>Three steps, starting with a free conversation.</h2>
+      <div class="section-head section-head--center">
+        <span class="eyebrow">How it works</span>
+        <h2 id="how-title">Three simple steps.</h2>
       </div>
       <ol class="steps">
-        <li>
-          <span class="step-n">1</span>
-          <h3>Discover</h3>
-          <p class="muted">A free consultation. We learn your business, your customers and your goals, look at your current pages, and recommend where to start.</p>
-        </li>
-        <li>
-          <span class="step-n">2</span>
-          <h3>Create</h3>
-          <p class="muted">After you approve a written quote, we plan your content calendar and ad campaigns and create the posts and ads for your approval.</p>
-        </li>
-        <li>
-          <span class="step-n">3</span>
-          <h3>Post & optimize</h3>
-          <p class="muted">We publish on schedule, monitor your ads, improve what's working, and report back in plain English.</p>
-        </li>
+        {steps.map((s, i) => (
+          <li>
+            <span class="n">{i + 1}</span>
+            <h3>{s.t}</h3>
+            <p class="muted">{s.d}</p>
+          </li>
+        ))}
       </ol>
-      <div class="btn-row center">
-        <a class="btn btn-primary arrow" href="/contact" data-track="cta_steps">{cta.primary}</a>
-      </div>
     </div>
   </section>
 
-  <!-- Transparent sample work -->
-  <section class="section section--paper">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Our work</span>
-        <h2>How we plan the work</h2>
-        <p class="lede">Pearl River Marketing is a new agency, so instead of borrowed logos or made-up numbers, here is a demonstration of how we'd plan ads and content for a local business. Real client examples will be added here, with permission, as they're completed.</p>
-      </div>
-      <SampleCampaign />
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="section">
-    <div class="container faq-grid">
-      <div class="section-head">
-        <span class="eyebrow">Questions</span>
-        <h2>Common questions</h2>
-        <p class="muted">Something else on your mind? Call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a>.</p>
-      </div>
-      <Faq items={homeFaq} />
-    </div>
-  </section>
-
-  <CtaBand track="cta_home_final" showQuote />
+  <!-- 5. Final CTA -->
+  <CtaBand track="cta_home_final" />
 </Base>
 
 <style>
-  .hero { padding-block: clamp(3rem, 7vw, 5.5rem) 0; position: relative; overflow: hidden; }
-  .hero::before {
-    content: ''; position: absolute; inset: 0;
+  /* Hero */
+  .hero {
+    position: relative; overflow: hidden;
+    padding-block: clamp(3rem, 8vw, 6.5rem) clamp(3.5rem, 8vw, 6rem);
     background:
-      radial-gradient(60rem 30rem at 85% 110%, rgb(201 162 74 / 14%), transparent 60%),
-      linear-gradient(180deg, var(--navy-900), var(--navy-800));
-    pointer-events: none;
+      radial-gradient(46rem 30rem at 88% 20%, rgb(203 163 98 / 14%), transparent 70%),
+      radial-gradient(40rem 26rem at 0% 100%, rgb(34 81 110 / 9%), transparent 70%),
+      linear-gradient(180deg, var(--canvas), var(--white));
   }
-  .hero > * { position: relative; }
-  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(2.5rem, 6vw, 5rem); align-items: center; padding-bottom: clamp(2.5rem, 6vw, 4rem); }
-  .hero-copy { display: grid; gap: 1.4rem; justify-items: start; }
-  .brandline {
-    font-family: var(--font-display); font-style: italic; font-size: 1.05rem; color: var(--gold-500);
-    display: flex; align-items: center; gap: .75rem;
+  .hero-river { position: absolute; inset: 0; width: 100%; height: 100%; color: rgb(184 140 69 / 28%); pointer-events: none; }
+  .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(2.5rem, 6vw, 4rem); align-items: center; }
+  .hero-copy { display: grid; gap: 1.5rem; justify-items: start; }
+  .hero h1 { max-width: 11ch; }
+  .hero h1 .accent { color: var(--gold-700); letter-spacing: -.02em; }
+  .for { font-size: .92rem; color: var(--ink-faint); }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-copy { justify-items: stretch; }
+    .hero-copy .eyebrow, .hero-copy h1, .hero-copy .lede, .for { justify-self: start; }
   }
-  .brandline::before { content: ''; width: 2rem; height: 1px; background: var(--gold-500); }
-  .hero h1 { font-size: clamp(2.1rem, 1.4rem + 3vw, 3.4rem); max-width: 19ch; }
-  .hero h1 em { font-style: italic; color: var(--gold-500); }
-  .hero-note { font-size: .92rem; color: #aebcce; }
-  .hero-note a { font-weight: 650; white-space: nowrap; }
-  .area-strip {
-    display: flex; align-items: flex-start; gap: .6rem; padding-block: 1.1rem;
-    border-top: 1px solid rgb(255 255 255 / 12%); color: #c8d3e2; font-size: .95rem;
-  }
-  .area-strip svg { width: 1.1rem; height: 1.1rem; color: var(--gold-500); flex: none; margin-top: .2rem; }
-  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
-
-  .problems { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; }
-  .problems li { display: grid; gap: .6rem; align-content: start; padding-top: 1.1rem; border-top: 2px solid var(--gold-600); }
-  .problems h3 { font-size: 1.3rem; }
-  @media (max-width: 1000px) { .problems { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 560px) { .problems { grid-template-columns: 1fr; } }
-
-  .svc-grid { gap: var(--space-3); }
-  .svc { gap: 1rem; padding: clamp(1.5rem, 4vw, 2.5rem); border-top: 3px solid var(--gold-600); }
-  .svc-n { font-family: var(--font-display); color: var(--gold-700); font-size: 1.1rem; }
-  .svc h3 { font-size: clamp(1.5rem, 1.2rem + 1vw, 1.9rem); }
-  .svc .check-list { margin-block: .25rem .5rem; }
-  .svc-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: auto; }
-  .spend-note { margin-top: 1.5rem; font-size: .92rem; color: var(--ink-soft); }
-
-  .audiences { gap: 0; border-top: 2px solid var(--navy-800); }
-  .audience { padding: 1.75rem 1.5rem 0 0; display: grid; gap: .75rem; align-content: start; }
-  .audience + .audience { padding-left: 1.5rem; border-left: 1px solid var(--line); }
-  .audience h3 { font-size: 1.4rem; }
-  @media (max-width: 860px) {
-    .audience, .audience + .audience { padding: 1.5rem 0; border-left: 0; border-bottom: 1px solid var(--line); }
+  @media (max-width: 520px) {
+    .hero-copy .btn-row { flex-direction: column; }
+    .hero-copy .btn { width: 100%; }
   }
 
-  .text-link { color: var(--gold-700); font-weight: 600; font-size: .95rem; text-decoration: none; display: inline-flex; gap: .4rem; }
-  .center { justify-content: center; margin-top: var(--space-4); }
-
-  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); }
-  .steps li { display: grid; gap: .8rem; align-content: start; padding-top: 1.5rem; border-top: 1px solid var(--line); }
-  .step-n {
-    width: 2.6rem; height: 2.6rem; border-radius: 50%; display: grid; place-items: center;
-    font-family: var(--font-display); font-size: 1.2rem; color: var(--navy-800); border: 1.5px solid var(--gold-600);
+  /* Services */
+  .svc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 1.5rem); }
+  .svc { gap: 1.1rem; padding: clamp(1.75rem, 4vw, 2.75rem); position: relative; overflow: hidden; }
+  .svc::after {
+    content: ''; position: absolute; right: -4rem; top: -4rem; width: 12rem; height: 12rem; border-radius: 50%;
+    border: 1.5px solid rgb(203 163 98 / 35%); transition: transform .5s var(--ease);
   }
-  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } }
+  .svc:hover::after { transform: scale(1.12); }
+  .svc h3 { font-size: clamp(1.5rem, 1.2rem + 1vw, 1.9rem); margin-top: .5rem; }
+  .svc p { max-width: 30rem; }
+  .svc .text-link { margin-top: auto; padding-top: .5rem; }
+  @media (max-width: 760px) { .svc-grid { grid-template-columns: 1fr; } }
 
-  .local-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
-  .benefits { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 2.5rem; }
-  .benefits li { display: grid; gap: .5rem; padding-top: 1.1rem; border-top: 1px solid rgb(201 162 74 / 45%); }
-  .benefits h3 { font-size: 1.3rem; }
-  .benefits p { color: #c8d3e2; font-size: .98rem; }
-  @media (max-width: 900px) { .local-grid { grid-template-columns: 1fr; } }
-  @media (max-width: 560px) { .benefits { grid-template-columns: 1fr; } }
+  /* Showcase */
+  .showcase-head { max-width: 34rem; }
 
-  .faq-grid { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
-  @media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; } }
+  /* Process */
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 3rem); position: relative; }
+  .steps::before {
+    content: ''; position: absolute; top: 1.5rem; left: 16%; right: 16%; height: 1px;
+    background: repeating-linear-gradient(90deg, var(--gold-600) 0 6px, transparent 6px 12px); opacity: .6;
+  }
+  .steps li { position: relative; display: grid; gap: .6rem; justify-items: center; text-align: center; }
+  .n {
+    width: 3rem; height: 3rem; border-radius: 50%; display: grid; place-items: center; margin-bottom: .6rem;
+    font-weight: 750; color: var(--navy-800); background: var(--white); border: 1.5px solid var(--gold-600);
+    box-shadow: 0 0 0 6px var(--white);
+  }
+  .steps h3 { font-size: 1.3rem; }
+  .steps p { max-width: 17rem; }
+  @media (max-width: 760px) {
+    .steps { grid-template-columns: 1fr; gap: 0; }
+    .steps::before { top: 1.5rem; bottom: 1.5rem; left: 1.5rem; right: auto; width: 1px; height: auto; background: repeating-linear-gradient(180deg, var(--gold-600) 0 6px, transparent 6px 12px); }
+    .steps li { grid-template-columns: 3rem 1fr; justify-items: start; text-align: left; column-gap: 1.1rem; row-gap: .2rem; padding-bottom: 1.75rem; }
+    .n { grid-row: span 2; margin: 0; }
+    .steps h3 { align-self: end; }
+  }
 </style>

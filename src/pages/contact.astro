@@ -5,23 +5,22 @@ import { SERVICE_OPTIONS, LIMITS } from '../lib/consultation';
 import { site, cta } from '../data/site';
 ---
 <Base
-  title="Get a Free Marketing Consultation"
+  title="Get a Free Consultation"
   description={`Request a free marketing consultation or an advertising or social media quote from ${site.name} in Picayune, MS. Or call or text ${site.phone.display}.`}
 >
   <PageHero
     eyebrow="Contact"
-    title="Get a free marketing consultation."
-    lede="Tell us about your business and whether you're interested in advertising, social media content or both. We'll review it and reach out to set up a short conversation, or send a quote if you already know what you need. No cost, no obligation."
-    showCta={false}
+    title="Let's talk."
+    lede="Tell us a little about your business. We'll reach out to set up a free, no-obligation consultation."
   >
-    <p class="hero-phone">Prefer to talk? Call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
+    <p class="hero-phone">Prefer to talk now? Call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
   </PageHero>
 
-  <section class="section">
+  <section class="section section--canvas">
     <div class="container contact-grid">
       <div class="form-wrap">
         <form id="consult-form" novalidate aria-describedby="form-intro">
-          <p id="form-intro" class="muted small">Fields marked <span aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required. It takes about two minutes.</p>
+          <p id="form-intro" class="muted small">Takes about two minutes. Fields marked <span aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
 
           <div class="error-summary" id="error-summary" tabindex="-1" hidden>
             <h2>Please fix the following</h2>
@@ -55,7 +54,7 @@ import { site, cta } from '../data/site';
           </div>
 
           <div class="field">
-            <label for="phone">Phone <span class="optional">(optional, if you'd rather we call)</span></label>
+            <label for="phone">Phone <span class="optional">(optional)</span></label>
             <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength={LIMITS.phone} aria-describedby="phone-error" />
             <p class="field-error" id="phone-error"></p>
           </div>
@@ -75,8 +74,8 @@ import { site, cta } from '../data/site';
 
           <div class="field">
             <label for="message">Tell us about your business <span aria-hidden="true">*</span></label>
-            <textarea id="message" name="message" rows="6" required maxlength={LIMITS.message} aria-describedby="message-hint message-error"></textarea>
-            <p class="hint" id="message-hint">What you do, where your customers are, and what you'd like help with.</p>
+            <textarea id="message" name="message" rows="5" required maxlength={LIMITS.message} aria-describedby="message-hint message-error"></textarea>
+            <p class="hint" id="message-hint">What you do and what you'd like help with.</p>
             <p class="field-error" id="message-error"></p>
           </div>
 
@@ -113,21 +112,21 @@ import { site, cta } from '../data/site';
       </div>
 
       <aside class="side">
-        <div class="card side-card">
-          <h2 class="side-title">Call or text</h2>
+        <div class="next">
+          <h2 class="side-title">What happens next</h2>
+          <ol>
+            <li><span>1</span>We look at your business and your current pages.</li>
+            <li><span>2</span>We reach out to set up a short call.</li>
+            <li><span>3</span>If it's a fit, you get a written quote. No pressure.</li>
+          </ol>
+        </div>
+        <div class="side-card">
+          <p class="side-k">Call or text</p>
           <p class="phone"><a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
           {site.email && (
             <p><a href={`mailto:${site.email}`} data-track="email_click">{site.email}</a></p>
           )}
-          <p class="muted small">Based in {site.city}, {site.regionName}. Serving {site.serviceArea}.</p>
-        </div>
-        <div class="next">
-          <h2 class="side-title">What happens next</h2>
-          <ol>
-            <li>We read your request and look at your current Facebook and Instagram pages and your local competition.</li>
-            <li>We reach out to set up a short call at a time that works for you.</li>
-            <li>We give you an honest recommendation. If it's a fit, you get a written quote before any work starts.</li>
-          </ol>
+          <p class="muted small">{site.city}, {site.regionName}</p>
         </div>
       </aside>
     </div>
@@ -135,15 +134,21 @@ import { site, cta } from '../data/site';
 </Base>
 
 <style>
-  .hero-phone { color: #c8d3e2; }
-  .hero-phone a { font-weight: 650; white-space: nowrap; }
-  .contact-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
-  .side { display: grid; gap: 2rem; position: sticky; top: 6rem; }
-  .side-card { background: var(--paper); gap: .5rem; }
-  .side-title { font-size: 1.35rem; margin-bottom: .25rem; }
-  .phone { font-size: 1.6rem; font-family: var(--font-display); }
-  .phone a { text-decoration: none; color: var(--navy-800); }
-  .next ol { margin: .75rem 0 0; padding-left: 1.2rem; display: grid; gap: .6rem; color: var(--ink-soft); }
+  .hero-phone { color: var(--ink-soft); }
+  .hero-phone a { font-weight: 700; white-space: nowrap; color: var(--navy-800); }
+  .contact-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr); gap: clamp(2rem, 5vw, 3.5rem); align-items: start; }
+  .form-wrap { background: var(--white); border-radius: 22px; padding: clamp(1.5rem, 4vw, 2.5rem); box-shadow: var(--shadow); border: 1px solid rgb(7 40 63 / 6%); }
+  .side { display: grid; gap: 1.5rem; position: sticky; top: 6.5rem; }
+  .side-card { display: grid; gap: .25rem; padding: 1.5rem; border-radius: 18px; background: var(--navy-800); color: #c6d1de; }
+  .side-card .muted { color: #9fb0c3; }
+  .side-card a { color: var(--white); }
+  .side-k { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-500); }
+  .side-title { font-size: 1.2rem; margin-bottom: .25rem; }
+  .phone { font-size: 1.6rem; font-weight: 750; letter-spacing: -.02em; }
+  .phone a { text-decoration: none; }
+  .next ol { list-style: none; margin: .75rem 0 0; padding: 0; display: grid; gap: .8rem; color: var(--ink-soft); font-size: .97rem; }
+  .next li { display: grid; grid-template-columns: 1.75rem 1fr; gap: .6rem; }
+  .next li span { width: 1.75rem; height: 1.75rem; border-radius: 50%; display: grid; place-items: center; font-size: .8rem; font-weight: 750; color: var(--navy-800); border: 1.5px solid var(--gold-600); }
   .small { font-size: .9rem; }
 
   form { display: grid; gap: 1.4rem; }
@@ -154,7 +159,7 @@ import { site, cta } from '../data/site';
   .optional { font-weight: 400; color: var(--ink-soft); }
   input[type='text'], input[type='email'], input[type='tel'], textarea {
     width: 100%; font: inherit; font-size: 1rem; color: var(--ink); min-height: 3rem;
-    padding: .8rem .9rem; border: 1.5px solid #b9c4d3; border-radius: var(--radius); background: var(--white);
+    padding: .8rem .9rem; border: 1.5px solid #cfd6df; border-radius: 12px; background: var(--white);
     transition: border-color .15s, box-shadow .15s;
   }
   input:focus, textarea:focus { outline: none; border-color: var(--navy-700); box-shadow: 0 0 0 3px rgb(181 140 50 / 35%); }
@@ -184,6 +189,7 @@ import { site, cta } from '../data/site';
   .status--success h2 { font-size: 1.6rem; color: var(--ok); }
 
   @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } .side { position: static; } }
+  @media (max-width: 560px) { .form-wrap { margin-inline: -.5rem; } .submit-row .btn { width: 100%; } }
   @media (max-width: 600px) { .row { grid-template-columns: 1fr; } }
 </style>
 

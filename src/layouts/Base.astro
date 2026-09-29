@@ -1,7 +1,6 @@
 ---
-import '@fontsource/libre-caslon-text/400.css';
-import '@fontsource/libre-caslon-text/400-italic.css';
-import '@fontsource-variable/public-sans';
+import '@fontsource-variable/plus-jakarta-sans/wght.css';
+import '@fontsource/libre-caslon-text/latin-400-italic.css';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -57,7 +56,9 @@ const jsonLd = [business, ...schema];
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.href} />
     {noindex && <meta name="robots" content="noindex, follow" />}
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href="/brand/logo-horizontal.webp" as="image" type="image/webp" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="theme-color" content="#10223a" />
 

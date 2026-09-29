@@ -1,13 +1,13 @@
 ---
-import Wordmark from './Wordmark.astro';
+import Logo from './Logo.astro';
 import { nav, site, cta } from '../data/site';
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
-const isCurrent = (href: string) => path === href || path.startsWith(href + '/');
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path === href || path.startsWith(href + '/'));
 ---
 <header class="site-header">
   <div class="container bar">
-    <a href="/" class="home" aria-label={`${site.name} home`}><Wordmark /></a>
+    <a href="/" class="home" aria-label={`${site.name}, home`}><Logo height={48} eager /></a>
 
     <nav class="primary" aria-label="Main">
       <ul>
@@ -18,8 +18,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + '/')
     </nav>
 
     <div class="actions">
-      <a class="phone" href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a>
-      <a class="btn btn-primary cta" href="/contact" data-track="cta_header" aria-label={cta.primary}><span class="cta-full" aria-hidden="true">{cta.primary}</span><span class="cta-short" aria-hidden="true">{cta.short}</span></a>
+      <a class="btn btn-primary cta" href="/contact" data-track="cta_header">{cta.primary}</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
         <span class="visually-hidden">Open menu</span>
         <span class="bars" aria-hidden="true"></span>
@@ -30,7 +29,6 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + '/')
   <div class="mobile-menu" id="mobile-menu" hidden>
     <nav class="container" aria-label="Mobile">
       <ul>
-        <li><a href="/">Home</a></li>
         {nav.map((item) => (
           <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
         ))}
@@ -44,35 +42,30 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + '/')
 <style>
   .site-header {
     position: sticky; top: 0; z-index: 50;
-    background: rgb(255 255 255 / 94%);
-    backdrop-filter: saturate(1.4) blur(10px);
-    border-bottom: 1px solid var(--line);
+    background: rgb(255 255 255 / 88%);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-bottom: 1px solid rgb(7 40 63 / 8%);
   }
-  .bar { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.5rem; }
-  .home { text-decoration: none; flex: none; }
-  .primary ul { display: flex; gap: 1.75rem; list-style: none; margin: 0; padding: 0; }
-  .primary a, .mobile-menu li a {
-    text-decoration: none; color: var(--ink); font-weight: 550; font-size: .97rem; position: relative;
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.75rem; }
+  .home { display: block; flex: none; width: min(259px, 60vw); }
+  .primary ul { display: flex; gap: .25rem; list-style: none; margin: 0; padding: 0; }
+  .primary a {
+    display: block; padding: .5rem .9rem; border-radius: 999px;
+    text-decoration: none; color: var(--ink-soft); font-weight: 600; font-size: .95rem;
+    transition: color .2s var(--ease), background-color .2s var(--ease);
   }
-  .primary a::after {
-    content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px;
-    background: var(--gold-600); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease);
-  }
-  .primary a:hover::after, .primary a[aria-current='page']::after { transform: scaleX(1); }
-  .primary a:hover { color: var(--ink); }
-  .actions { display: flex; align-items: center; gap: 1rem; }
-  .phone { font-weight: 600; font-size: .95rem; text-decoration: none; color: var(--navy-800); white-space: nowrap; font-variant-numeric: tabular-nums; }
-  .cta { min-height: 2.75rem; padding: .6rem 1.1rem; font-size: .95rem; }
-  .cta { white-space: nowrap; }
-  .cta-short { display: none; }
-  @media (max-width: 1180px) { .cta-full { display: none; } .cta-short { display: inline; } }
+  .primary a:hover { color: var(--navy-800); background: var(--mist); }
+  .primary a[aria-current='page'] { color: var(--navy-800); background: var(--mist); }
+  .actions { display: flex; align-items: center; gap: .75rem; }
+  .cta { min-height: 2.75rem; padding: .6rem 1.2rem; font-size: .93rem; white-space: nowrap; }
 
   .menu-toggle {
-    display: none; width: 2.75rem; height: 2.75rem; border: 1px solid var(--line); border-radius: var(--radius);
-    background: var(--white); cursor: pointer; align-items: center; justify-content: center;
+    display: none; width: 2.9rem; height: 2.9rem; border: 1px solid var(--line); border-radius: 999px;
+    background: var(--white); cursor: pointer; align-items: center; justify-content: center; flex: none;
   }
   .bars, .bars::before, .bars::after {
-    display: block; width: 1.2rem; height: 2px; background: var(--navy-800); border-radius: 2px;
+    display: block; width: 1.1rem; height: 2px; background: var(--navy-800); border-radius: 2px;
     transition: transform .2s var(--ease), background-color .2s;
   }
   .bars { position: relative; }
@@ -83,19 +76,23 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + '/')
   .menu-toggle[aria-expanded='true'] .bars::before { transform: translateY(6px) rotate(45deg); }
   .menu-toggle[aria-expanded='true'] .bars::after { transform: translateY(-6px) rotate(-45deg); }
 
-  .mobile-menu { border-top: 1px solid var(--line); background: var(--white); }
-  .mobile-menu nav { padding-block: 1rem 1.5rem; display: grid; gap: 1rem; }
+  .mobile-menu { border-top: 1px solid var(--line); background: var(--white); box-shadow: 0 24px 40px -24px rgb(7 40 63 / 35%); }
+  .mobile-menu nav { padding-block: .75rem 1.5rem; display: grid; gap: 1rem; }
   .mobile-menu ul { list-style: none; margin: 0; padding: 0; display: grid; }
-  .mobile-menu li a { display: block; padding: .8rem 0; border-bottom: 1px solid var(--line); font-size: 1.05rem; }
+  .mobile-menu li a {
+    display: block; padding: .95rem .25rem; border-bottom: 1px solid var(--line);
+    font-size: 1.15rem; font-weight: 650; color: var(--navy-800); text-decoration: none; letter-spacing: -.01em;
+  }
   .mobile-menu li a[aria-current='page'] { color: var(--gold-700); }
-  .mobile-phone { text-align: center; font-weight: 600; }
+  .mobile-menu .btn { width: 100%; margin-top: .5rem; }
+  .mobile-phone { text-align: center; font-weight: 600; text-decoration: none; color: var(--navy-700); }
 
-  @media (max-width: 980px) { .phone { display: none; } }
-  @media (max-width: 860px) {
+  @media (max-width: 900px) {
     .primary, .cta { display: none; }
     .menu-toggle { display: inline-flex; }
+    .bar { min-height: 4.25rem; }
   }
-  @media (min-width: 861px) { .mobile-menu { display: none !important; } }
+  @media (min-width: 901px) { .mobile-menu { display: none !important; } }
 </style>
 
 <script>

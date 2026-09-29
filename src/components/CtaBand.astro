@@ -1,48 +1,50 @@
 ---
 import { cta, site } from '../data/site';
-interface Props {
-  heading?: string;
-  text?: string;
-  track?: string;
-  /** Show "Request a Quote" as a second button. */
-  showQuote?: boolean;
-}
+interface Props { heading?: string; text?: string; track?: string }
 const {
-  heading = 'Ready to get your business noticed?',
-  text = "Get a free marketing consultation. We'll look at your business, your current Facebook and Instagram presence and your local competition, and give you an honest recommendation, even if that means starting small.",
+  heading = 'Ready to turn attention into growth?',
+  text = 'Start with a free, no-pressure consultation.',
   track = 'cta_band',
-  showQuote = false,
 } = Astro.props;
 ---
-<section class="cta-band on-navy" aria-labelledby="cta-band-title">
-  <div class="container inner">
-    <div class="copy">
-      <h2 id="cta-band-title">{heading}</h2>
-      <p class="lede">{text}</p>
-    </div>
-    <div class="actions">
-      <div class="btn-row">
-        <a class="btn btn-primary arrow" href="/contact" data-track={track}>{cta.primary}</a>
-        {showQuote && (
-          <a class="btn btn-outline" href="/contact" data-track={`${track}_quote`}>{cta.quote}</a>
-        )}
+<section class="cta-wrap" aria-labelledby="cta-band-title">
+  <div class="container">
+    <div class="cta-band on-navy">
+      <svg class="river" viewBox="0 0 800 300" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-20 250 C 160 180, 260 290, 420 210 S 700 120, 840 170" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M-20 280 C 180 210, 300 310, 460 240 S 720 160, 840 205" fill="none" stroke="currentColor" stroke-width="1"/>
+      </svg>
+      <div class="copy">
+        <h2 id="cta-band-title">{heading}</h2>
+        <p class="lede">{text}</p>
       </div>
-      <p class="call">Or call or text <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
+      <div class="actions">
+        <a class="btn btn-gold arrow" href="/contact" data-track={track}>{cta.primary}</a>
+        <p class="call">or call <a href={`tel:${site.phone.e164}`} data-track="phone_click">{site.phone.display}</a></p>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .cta-band { padding-block: clamp(3.5rem, 8vw, 5.5rem); position: relative; overflow: hidden; }
-  .cta-band::before {
-    content: ''; position: absolute; inset: auto -10% -60% auto; width: 36rem; height: 36rem; border-radius: 50%;
-    border: 1px solid rgb(201 162 74 / 25%); box-shadow: 0 0 0 3rem rgb(201 162 74 / 4%);
-    pointer-events: none;
+  .cta-wrap { padding-block: clamp(3rem, 7vw, 5rem); }
+  .cta-band {
+    position: relative; overflow: hidden; border-radius: 28px;
+    padding: clamp(2.25rem, 6vw, 4.5rem);
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem 3rem; align-items: end;
+    background:
+      radial-gradient(32rem 18rem at 100% 0%, rgb(203 163 98 / 22%), transparent 70%),
+      linear-gradient(160deg, var(--navy-700), var(--navy-900));
   }
-  .inner { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem 3rem; align-items: end; position: relative; }
-  .copy { display: grid; gap: 1rem; max-width: 42rem; }
-  .actions { display: grid; gap: .9rem; justify-items: start; }
-  .call { color: #c8d3e2; font-size: .95rem; }
+  .river { position: absolute; inset: auto 0 0 0; width: 100%; height: 70%; color: rgb(203 163 98 / 30%); pointer-events: none; }
+  .copy { position: relative; display: grid; gap: .9rem; max-width: 36rem; }
+  .copy h2 { font-size: clamp(1.9rem, 1.3rem + 2.4vw, 3rem); }
+  .actions { position: relative; display: grid; gap: .8rem; justify-items: start; }
+  .call { color: #b9c6d6; font-size: .95rem; }
   .call a { font-weight: 650; white-space: nowrap; }
-  @media (max-width: 860px) { .inner { grid-template-columns: 1fr; align-items: start; } }
+  @media (max-width: 760px) {
+    .cta-band { grid-template-columns: 1fr; align-items: start; border-radius: 22px; }
+    .actions, .actions .btn { width: 100%; }
+    .call { justify-self: center; }
+  }
 </style>

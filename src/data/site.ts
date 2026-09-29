@@ -51,9 +51,9 @@ export const owner = {
 
 /** Calls to action. Change the wording here and it updates everywhere. */
 export const cta = {
-  primary: 'Get a Free Marketing Consultation',
+  primary: 'Get a Free Consultation',
   short: 'Free Consultation',
-  quote: 'Request a Quote',
+  secondary: 'Explore Our Services',
 } as const;
 
 export type ServiceStatus = 'available' | 'limited';
@@ -108,8 +108,11 @@ export const statusLabel: Record<ServiceStatus, string> = {
 };
 
 export const nav = [
+  { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
-  { href: '/real-estate-marketing', label: 'For Real Estate' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ];
+
+/** The real estate page applies the two services to agents. Linked from Services and the footer, not the main menu. */
+export const realEstateLink = { href: '/real-estate-marketing', label: 'For Real Estate Agents' };
