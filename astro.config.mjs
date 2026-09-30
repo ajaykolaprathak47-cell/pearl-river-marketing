@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 // The production domain is not confirmed yet. Set PUBLIC_SITE_URL in Vercel
 // (e.g. https://www.yourdomain.com) so canonical URLs, Open Graph URLs and the
 // sitemap point at the real domain.
-const site = process.env.PUBLIC_SITE_URL || 'https://pearl-river-marketing.vercel.app';
+const site = process.env.PUBLIC_SITE_URL || 'https://www.pearlrivermarketing.com';
 
 export default defineConfig({
   site,
