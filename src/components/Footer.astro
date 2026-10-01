@@ -34,26 +34,27 @@ const links = [...nav.filter((n) => n.href !== '/'), realEstateLink];
 </footer>
 
 <style>
-  .site-footer { background: var(--canvas); border-top: 1px solid var(--line); }
+  .site-footer { background: var(--navy-800); color: #b9c6d6; }
   .top {
     display: grid; grid-template-columns: auto 1fr auto; gap: 2rem 3rem; align-items: center;
     padding-block: clamp(2.5rem, 6vw, 3.5rem);
   }
   .brand { display: grid; gap: .6rem; }
-  .logo-link { display: block; width: 216px; max-width: 100%; }
-  .tag { color: var(--gold-700); font-size: 1.05rem; }
+  /* The logo's wordmark is navy, so it sits on an ivory plate rather than being recolored. */
+  .logo-link { display: block; width: 248px; max-width: 100%; padding: .8rem 1rem; border-radius: 14px; background: var(--bg); }
+  .tag { color: var(--gold-500); font-size: 1.05rem; }
   .links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem 1.75rem; justify-content: center; }
-  .links a, .contact a { color: var(--ink); text-decoration: none; font-weight: 600; font-size: .95rem; }
-  .links a:hover, .contact a:hover { color: var(--gold-700); }
-  .contact { display: grid; gap: .2rem; justify-items: end; font-size: .92rem; color: var(--ink-soft); }
-  .contact .phone { font-size: 1.05rem; color: var(--navy-800); font-variant-numeric: tabular-nums; }
+  .links a, .contact a { color: var(--bg); text-decoration: none; font-weight: 600; font-size: .95rem; }
+  .links a:hover, .contact a:hover { color: var(--gold-500); }
+  .contact { display: grid; gap: .2rem; justify-items: end; font-size: .92rem; color: #b9c6d6; }
+  .contact .phone { font-size: 1.05rem; color: var(--bg); font-variant-numeric: tabular-nums; }
   .bottom {
     display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 1.5rem;
-    border-top: 1px solid var(--line); padding-block: 1.25rem; font-size: .85rem; color: var(--ink-faint);
+    border-top: 1px solid rgb(245 241 232 / 14%); padding-block: 1.25rem; font-size: .85rem; color: #a9b8c9;
   }
   .bottom ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.25rem; }
-  .bottom a { color: var(--ink-soft); text-decoration: none; }
-  .bottom a:hover { color: var(--navy-800); text-decoration: underline; }
+  .bottom a { color: #b9c6d6; text-decoration: none; }
+  .bottom a:hover { color: var(--bg); text-decoration: underline; }
   @media (max-width: 860px) {
     .top { grid-template-columns: 1fr; justify-items: start; }
     .links { justify-content: flex-start; }
