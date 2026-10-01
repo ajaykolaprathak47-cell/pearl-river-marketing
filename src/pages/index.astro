@@ -100,7 +100,7 @@ const steps = [
     background:
       radial-gradient(46rem 30rem at 88% 20%, rgb(203 163 98 / 14%), transparent 70%),
       radial-gradient(40rem 26rem at 0% 100%, rgb(34 81 110 / 9%), transparent 70%),
-      linear-gradient(180deg, var(--canvas), var(--white));
+      linear-gradient(180deg, var(--canvas), var(--bg));
   }
   .hero-river { position: absolute; inset: 0; width: 100%; height: 100%; color: rgb(184 140 69 / 28%); pointer-events: none; }
   .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(2.5rem, 6vw, 4rem); align-items: center; }
@@ -144,7 +144,7 @@ const steps = [
   .n {
     width: 3rem; height: 3rem; border-radius: 50%; display: grid; place-items: center; margin-bottom: .6rem;
     font-weight: 750; color: var(--navy-800); background: var(--white); border: 1.5px solid var(--gold-600);
-    box-shadow: 0 0 0 6px var(--white);
+    box-shadow: 0 0 0 6px var(--bg);
   }
   .steps h3 { font-size: 1.3rem; }
   .steps p { max-width: 17rem; }
