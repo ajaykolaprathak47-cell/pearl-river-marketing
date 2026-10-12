@@ -1,0 +1,73 @@
+---
+/** Visual for Website Design: a business homepage in a browser window, with a "built in" checklist. Illustration only. */
+---
+<figure class="webmock" aria-label="Illustration: a small business website in a browser window, with a list of built-in features">
+  <div class="browser">
+    <div class="bar" aria-hidden="true">
+      <span class="dots"><i></i><i></i><i></i></span>
+      <span class="url">yourbusiness.com</span>
+    </div>
+    <div class="page" aria-hidden="true">
+      <div class="nav">
+        <span class="brand"><span class="mark"></span>Your Roofing Co.</span>
+        <span class="links"><i></i><i></i><i></i></span>
+        <span class="call">Call now</span>
+      </div>
+      <div class="hero">
+        <svg viewBox="0 0 400 170" preserveAspectRatio="xMidYMid slice">
+          <defs><linearGradient id="wmSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b2f4a"/><stop offset="1" stop-color="#22516e"/></linearGradient></defs>
+          <rect width="400" height="170" fill="url(#wmSky)"/>
+          <path d="M210 170 L300 92 L390 170Z" fill="#526252" opacity=".9"/>
+          <path d="M250 170 L330 105 L410 170Z" fill="#3f4f40"/>
+          <path d="M196 120 L300 40 L404 120" fill="none" stroke="#cba362" stroke-width="5" stroke-linejoin="round"/>
+        </svg>
+        <div class="hero-copy">
+          <b>Roof repair &amp; replacement in Picayune.</b>
+          <span class="quote">Get a free quote</span>
+        </div>
+      </div>
+      <div class="tiles"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+
+  <div class="built">
+    <p class="built-t">Built in</p>
+    <ul>
+      <li><span class="tick" aria-hidden="true"></span>Looks right on phones</li>
+      <li><span class="tick" aria-hidden="true"></span>Click-to-call &amp; quote form</li>
+      <li><span class="tick" aria-hidden="true"></span>Set up so Google can find you</li>
+    </ul>
+  </div>
+  <figcaption class="visually-hidden">Illustration, not a client website.</figcaption>
+</figure>
+
+<style>
+  .webmock { position: relative; margin: 0; padding: 0 0 3rem 0; max-width: 30rem; width: 100%; justify-self: center; }
+  .browser { background: var(--white); border-radius: 16px; box-shadow: var(--shadow-lg); overflow: hidden; border: 1px solid rgb(7 40 63 / 6%); width: 92%; }
+  .bar { display: flex; align-items: center; gap: .75rem; padding: .6rem .8rem; background: var(--canvas); border-bottom: 1px solid var(--line); }
+  .dots { display: flex; gap: .3rem; }
+  .dots i { width: .5rem; height: .5rem; border-radius: 50%; background: var(--line); }
+  .url { flex: 1; font-size: .7rem; color: var(--ink-faint); background: var(--white); border-radius: 99px; padding: .2rem .7rem; }
+  .nav { display: flex; align-items: center; gap: .75rem; padding: .65rem .9rem; }
+  .brand { display: flex; align-items: center; gap: .4rem; font-size: .72rem; font-weight: 800; color: var(--navy-800); white-space: nowrap; }
+  .mark { width: .9rem; height: .9rem; border-radius: 4px; background: var(--gold-600); }
+  .links { flex: 1; display: flex; gap: .4rem; justify-content: flex-end; }
+  .links i { width: 1.6rem; height: .35rem; border-radius: 4px; background: var(--line); }
+  .call { font-size: .62rem; font-weight: 700; color: var(--white); background: var(--navy-800); padding: .3rem .6rem; border-radius: 99px; white-space: nowrap; }
+  .hero { position: relative; }
+  .hero svg { width: 100%; height: auto; aspect-ratio: 400 / 170; }
+  .hero-copy { position: absolute; inset: 0; display: grid; align-content: center; justify-items: start; gap: .6rem; padding: 0 1rem; max-width: 62%; }
+  .hero-copy b { color: var(--white); font-size: clamp(.85rem, .7rem + .6vw, 1.05rem); line-height: 1.15; letter-spacing: -.02em; }
+  .quote { font-size: .62rem; font-weight: 700; color: var(--navy-900); background: var(--gold-500); padding: .3rem .65rem; border-radius: 99px; }
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; padding: .75rem .9rem 1rem; }
+  .tiles span { height: 2.6rem; border-radius: 8px; background: var(--canvas); }
+  .built {
+    position: absolute; right: 0; bottom: 0; width: 60%; min-width: 15rem;
+    background: var(--white); border-radius: 16px; padding: 1rem 1.1rem; box-shadow: var(--shadow); border: 1px solid rgb(7 40 63 / 6%);
+  }
+  .built-t { font-size: .7rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-700); margin-bottom: .55rem; }
+  .built ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .45rem; }
+  .built li { display: flex; align-items: center; gap: .55rem; font-size: .82rem; font-weight: 600; color: var(--navy-800); }
+  .tick { width: 1.25rem; height: 1.25rem; border-radius: 50%; flex: none; background: var(--navy-100) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.5 2.5L14 7.5' fill='none' stroke='%2307283f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% no-repeat; }
+  @media (max-width: 480px) { .browser { width: 100%; } .built { position: relative; width: 100%; min-width: 0; margin-top: .75rem; } .webmock { padding-bottom: 0; } }
+</style>

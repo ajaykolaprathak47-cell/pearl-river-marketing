@@ -36,6 +36,17 @@ const details: Record<string, DetailFields> = {
     ],
     note: 'Covers Facebook and Instagram. Replying to comments and messages stays with you unless we agree otherwise.',
   },
+  websites: {
+    title: 'Website Design',
+    lead: 'Your website is often the first thing people check before they call. We design and build a clean, fast site that makes it easy for them to reach you.',
+    items: [
+      'A custom design that fits your brand',
+      'Mobile-friendly and fast-loading',
+      'Click-to-call, quote forms and directions',
+      'Set up so Google can find you',
+    ],
+    note: 'Your domain and website stay in your business’s name. You get a written quote before any work starts.',
+  },
 };
 
 export const serviceDetails: ServiceDetail[] = services.map((s) => {

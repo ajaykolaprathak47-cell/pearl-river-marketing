@@ -1,6 +1,6 @@
 # Pearl River Marketing website
 
-Marketing site for Pearl River Marketing (Picayune, MS), a digital marketing agency with exactly two services: digital advertising (Facebook & Instagram) and social media content creation & posting. Built with [Astro](https://astro.build): every page is static HTML, and one serverless function (`/api/consultation`) handles the consultation form on Vercel.
+Marketing site for Pearl River Marketing (Picayune, MS), a digital marketing agency with three services: digital advertising (Facebook & Instagram), social media content creation & posting, and website design. Built with [Astro](https://astro.build): every page is static HTML, and one serverless function (`/api/consultation`) handles the consultation form on Vercel.
 
 ## Pages
 
@@ -41,7 +41,7 @@ All business details live in `src/data/site.ts`. Only verified facts go there; `
 - `owner`: name, photo, bio for the About page
 - `site.sameAs`: social profile URLs
 - `cta`: button wording, changed once for the whole site
-- `services`: the two core services. Their ids also drive the contact form options (see `SERVICE_OPTIONS` in `src/lib/consultation.ts`; a test checks the two stay in sync)
+- `services`: the three core services. Their ids also drive the contact form options (see `SERVICE_OPTIONS` in `src/lib/consultation.ts`; a test checks they stay in sync)
 
 Never add a street address, hours, ratings or coordinates unless they are real.
 

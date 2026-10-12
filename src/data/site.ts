@@ -9,7 +9,7 @@ export const site = {
   name: 'Pearl River Marketing',
   tagline: 'Turn Attention Into Growth.',
   description:
-    'Pearl River Marketing is a local digital marketing agency in Picayune, Mississippi. We run Facebook and Instagram advertising and create and post social media content for small businesses in Pearl River County and South Mississippi.',
+    'Pearl River Marketing is a local digital marketing agency in Picayune, Mississippi. We run Facebook and Instagram advertising, create and post social media content, and design websites for small businesses in Pearl River County and South Mississippi.',
   city: 'Picayune',
   county: 'Pearl River County',
   region: 'MS',
@@ -70,7 +70,7 @@ export interface Service {
 }
 
 /**
- * The agency's two core services. These drive the home page, services page,
+ * The agency's three core services. These drive the home page, services page,
  * footer, structured data and the contact form's options.
  */
 export const services: Service[] = [
@@ -100,6 +100,19 @@ export const services: Service[] = [
     status: 'available',
     ctaLabel: 'Request a Social Media Quote',
   },
+  {
+    id: 'websites',
+    name: 'Website Design',
+    short: 'Clean, modern websites that look right on phones and make it easy for customers to call or request a quote.',
+    highlights: [
+      'A custom design that fits your brand',
+      'Mobile-friendly and fast-loading',
+      'Click-to-call and quote request forms',
+      'Set up so Google can find you',
+    ],
+    status: 'available',
+    ctaLabel: 'Request a Website Quote',
+  },
 ];
 
 export const statusLabel: Record<ServiceStatus, string> = {
@@ -114,5 +127,5 @@ export const nav = [
   { href: '/contact', label: 'Contact' },
 ];
 
-/** The real estate page applies the two services to agents. Linked from Services and the footer, not the main menu. */
+/** The real estate page applies the advertising and social media services to agents. Linked from Services and the footer, not the main menu. */
 export const realEstateLink = { href: '/real-estate-marketing', label: 'For Real Estate Agents' };

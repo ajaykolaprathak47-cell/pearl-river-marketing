@@ -65,7 +65,7 @@ describe('validate', () => {
   });
 
   it('rejects services the agency no longer offers', () => {
-    for (const old of ['websites', 'google-ads', 'local-seo', 'landing-pages', 'reporting', 'real-estate']) {
+    for (const old of ['google-ads', 'local-seo', 'landing-pages', 'reporting', 'real-estate']) {
       expect(validate(normalize({ ...good, services: [old] })).services).toBeTruthy();
     }
   });
@@ -76,9 +76,9 @@ describe('validate', () => {
 });
 
 describe('service options', () => {
-  it('offer exactly the two core services plus "not sure"', () => {
+  it('offer exactly the three core services plus "not sure"', () => {
     expect(SERVICE_OPTIONS.map((o) => o.value)).toEqual([...services.map((s) => s.id), 'not-sure']);
-    expect(services.map((s) => s.id)).toEqual(['advertising', 'social-media']);
+    expect(services.map((s) => s.id)).toEqual(['advertising', 'social-media', 'websites']);
   });
 });
 

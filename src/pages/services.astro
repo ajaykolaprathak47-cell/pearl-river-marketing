@@ -5,6 +5,7 @@ import CtaBand from '../components/CtaBand.astro';
 import ServiceIcon from '../components/ServiceIcon.astro';
 import AdMock from '../components/AdMock.astro';
 import CalendarMock from '../components/CalendarMock.astro';
+import WebsiteMock from '../components/WebsiteMock.astro';
 import { serviceDetails } from '../data/serviceDetails';
 import { site, realEstateLink } from '../data/site';
 
@@ -21,14 +22,14 @@ const serviceSchema = serviceDetails.map((s) => ({
 }));
 ---
 <Base
-  title="Advertising & Social Media Services"
-  description="Two services for local businesses in Picayune and South Mississippi: Facebook and Instagram advertising, and social media content creation and posting."
+  title="Advertising, Social Media & Website Services"
+  description="Three services for local businesses in Picayune and South Mississippi: Facebook and Instagram advertising, social media content creation and posting, and website design."
   schema={serviceSchema}
 >
   <PageHero
     eyebrow="Services"
-    title="Two services, built to get you noticed."
-    lede="We focus on Facebook and Instagram, and do two things there really well. Use one, or pair them."
+    title="Three services, built to get you noticed."
+    lede="Ads and posts on Facebook and Instagram, plus a website to send people to. Use one, or put them together."
   />
 
   {serviceDetails.map((s, i) => (
@@ -43,7 +44,7 @@ const serviceSchema = serviceDetails.map((s) => ({
           <a class="text-link arrow" href={`/contact?service=${s.id}`} data-track={`cta_service_${s.id}`}>{s.ctaLabel}</a>
         </div>
         <div class="visual">
-          {s.id === 'advertising' ? <AdMock /> : <CalendarMock />}
+          {s.id === 'advertising' ? <AdMock /> : s.id === 'websites' ? <WebsiteMock /> : <CalendarMock />}
         </div>
       </div>
     </section>
@@ -51,17 +52,17 @@ const serviceSchema = serviceDetails.map((s) => ({
 
   <section class="together">
     <div class="container together-inner">
-      <p><strong>Better together.</strong> Ads bring new people to your page. Regular posts show them you're active and worth calling.</p>
+      <p><strong>Better together.</strong> Ads bring new people to your page. Regular posts show them you're active. Your website makes it easy to call.</p>
       <a class="text-link arrow" href={realEstateLink.href}>Real estate agent? See how this works for listings</a>
     </div>
   </section>
 
-  <CtaBand heading="Not sure where to start?" text="Tell us about your business. We'll recommend ads, content or both." track="cta_services_final" />
+  <CtaBand heading="Not sure where to start?" text="Tell us about your business. We'll recommend where to start." track="cta_services_final" />
 </Base>
 
 <style>
   .svc { scroll-margin-top: 5rem; }
-  .svc + .svc { background: var(--canvas); }
+  .svc.flip { background: var(--canvas); }
   .svc-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2.5rem, 7vw, 6rem); align-items: center; }
   .flip .copy { order: 2; }
   .copy { display: grid; gap: 1.25rem; justify-items: start; max-width: 32rem; }

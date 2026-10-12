@@ -7,6 +7,7 @@
 export const SERVICE_OPTIONS = [
   { value: 'advertising', label: 'Digital Advertising (Facebook & Instagram ads)' },
   { value: 'social-media', label: 'Social Media Content Creation & Posting' },
+  { value: 'websites', label: 'Website Design' },
   { value: 'not-sure', label: 'Not sure yet' },
 ] as const;
 
